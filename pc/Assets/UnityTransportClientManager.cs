@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
+using System.Text;
 using Unity.Collections;
 using Unity.Networking.Transport;
 using UnityEngine;
@@ -46,15 +48,20 @@ public class ClientManager : MonoBehaviour
             {
                 Debug.Log("We are now connected to the server");
 
-                uint value = 1;
+                string stringMessage = "Hello Server!";
+
+                NativeArray<byte> data = new NativeArray<byte>(Encoding.UTF8.GetBytes(stringMessage), Allocator.Temp);
                 m_Driver.BeginSend(m_Connection, out var writer);
-                writer.WriteUInt(value);
+                writer.WriteBytes(data);
                 m_Driver.EndSend(writer);
+                data.Dispose();
             }
             else if (cmd == NetworkEvent.Type.Data)
             {
-                uint value = stream.ReadUInt();
-                Debug.Log("Got the value = " + value + " back from the server");
+                NativeArray<byte> buffer = new NativeArray<byte>(stream.Length, Allocator.Temp, NativeArrayOptions.ClearMemory);
+                stream.ReadBytes(buffer);
+                HandleMessages(buffer.ToArray());
+                buffer.Dispose();
                 Done = true;
                 m_Connection.Disconnect(m_Driver);
                 m_Connection = default(NetworkConnection);
@@ -65,6 +72,11 @@ public class ClientManager : MonoBehaviour
                 m_Connection = default(NetworkConnection);
             }
         }
+    }
+
+    void HandleMessages(byte[] message)
+    {
+        Debug.Log(Encoding.UTF8.GetString(message));
     }
 
 }

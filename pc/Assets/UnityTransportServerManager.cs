@@ -3,11 +3,15 @@ using UnityEngine.Assertions;
 
 using Unity.Collections;
 using Unity.Networking.Transport;
+using System.Text;
+using System.IO;
+using Unity.VisualScripting;
 
 public class ServerManager : MonoBehaviour
 {
     public NetworkDriver m_Driver;
     private NativeList<NetworkConnection> m_Connections;
+
 
     void Start()
     {
@@ -63,13 +67,13 @@ public class ServerManager : MonoBehaviour
             {
                 if (cmd == NetworkEvent.Type.Data)
                 {
-                    uint number = stream.ReadUInt();
-                    Debug.Log("Got " + number + " from the Client adding + 2 to it.");
-                    number += 2;
-
-                    m_Driver.BeginSend(NetworkPipeline.Null, m_Connections[i], out var writer);
-                    writer.WriteUInt(number);
-                    m_Driver.EndSend(writer);
+                    NativeArray<byte> buffer = new NativeArray<byte>(stream.Length, Allocator.Temp, NativeArrayOptions.ClearMemory);
+                    stream.ReadBytes(buffer);
+                    HandleMessages(buffer.ToArray());
+                    buffer.Dispose();
+                    //m_Driver.BeginSend(NetworkPipeline.Null, m_Connections[i], out var writer);
+                    //writer.WriteUInt(number);
+                    //m_Driver.EndSend(writer);
                 }
                 else if (cmd == NetworkEvent.Type.Disconnect)
                 {
@@ -78,5 +82,21 @@ public class ServerManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    void HandleMessages(byte[] message)
+    {
+        Debug.Log(Encoding.UTF8.GetString(message));
+        SendMessage(Encoding.UTF8.GetBytes("Hello Client!"), 0);
+    }
+
+    //TO DO: lepsza translacja playerId do connection
+    void SendMessage(byte[] message, int playerId)
+    {
+        NativeArray<byte> buffer = new NativeArray<byte>(message, Allocator.Temp);
+        m_Driver.BeginSend(NetworkPipeline.Null, m_Connections[playerId], out var writer);
+        writer.WriteBytes(buffer);
+        m_Driver.EndSend(writer);
+        buffer.Dispose();
     }
 }
