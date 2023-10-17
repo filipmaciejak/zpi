@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -41,5 +42,12 @@ public class TouchHelper : MonoBehaviour
         resultPos.y /= scaleFactor;
         
         return resultPos;
+    }
+
+    public Boolean FingerInsideRectTransform(RectTransform rectTransform, Finger finger)
+    {
+        var rect = GetRectTransformCanvasPos(rectTransform);
+        var fingerPos = ScaleScreenToCanvas(finger.screenPosition);
+        return rect.Contains(fingerPos);
     }
 }
