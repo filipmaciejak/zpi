@@ -21,9 +21,9 @@ enum MessageEvent
 
 public class ClientManager : MonoBehaviour
 {
-    public NetworkDriver m_Driver;
-    public NetworkConnection m_Connection;
-    public bool Done;
+    NetworkDriver m_Driver;
+    NetworkConnection m_Connection;
+    bool Done;
     int playerId = -1;
 
 
@@ -31,9 +31,9 @@ public class ClientManager : MonoBehaviour
     {
         m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface());
         m_Connection = default(NetworkConnection);
+        Done = true;
 
-        var endpoint = NetworkEndpoint.Parse("192.168.209.21", 9000);
-        m_Connection = m_Driver.Connect(endpoint);
+        //ConnectToIp("192.168.209.21");//temporary, this is meant to be called when ip is read from qr code
     }
 
     public void OnDestroy() 
@@ -60,13 +60,11 @@ public class ClientManager : MonoBehaviour
             {
                 Debug.Log("We are now connected to the server");
 
-                if(playerId == -1)
-                {
-                    Dictionary<string, string> dict_message = new Dictionary<string, string>();
-                    dict_message.Add("event", MessageEvent.GET_PLAYER_ID.ToString());
-                    Debug.Log(JsonConvert.SerializeObject(dict_message));
-                    SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_message)));
-                }
+                Dictionary<string, string> dict_message = new Dictionary<string, string>();
+                dict_message.Add("event", MessageEvent.GET_PLAYER_ID.ToString());
+                Debug.Log(JsonConvert.SerializeObject(dict_message));
+                SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_message)));
+
                 //uint value = 1;
                 //m_Driver.BeginSend(m_Connection, out var writer);
                 //writer.WriteUInt(value);
@@ -128,5 +126,12 @@ public class ClientManager : MonoBehaviour
         writer.WriteBytes(buffer);
         m_Driver.EndSend(writer);
         buffer.Dispose();
+    }
+
+    public void ConnectToIp(string ipAddress)
+    {
+        var endpoint = NetworkEndpoint.Parse(ipAddress, 9000);
+        m_Connection = m_Driver.Connect(endpoint);
+        Done = false;
     }
 }

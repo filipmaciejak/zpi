@@ -220,7 +220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bfdd5f85ed659149bd502c724ee6dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Done: 0
 --- !u!4 &296400702
 Transform:
   m_ObjectHideFlags: 0
@@ -265,6 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0be40d1fafff474e9b97f7ede05d4e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clientManagerObject: {fileID: 296400700}
   rawimage: {fileID: 1525872231}
 --- !u!4 &373943553
 Transform:
