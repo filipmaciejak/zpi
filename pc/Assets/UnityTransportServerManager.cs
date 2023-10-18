@@ -8,6 +8,7 @@ using System.IO;
 using Unity.VisualScripting;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 
 enum MessageEvent
 {
@@ -112,30 +113,43 @@ public class ServerManager : MonoBehaviour
     {
         Debug.Log(Encoding.UTF8.GetString(message));
         
-        Dictionary<string, string> dict_message = JsonConvert.DeserializeObject<Dictionary<string, string>>(Encoding.UTF8.GetString(message));
-        if (dict_message["event"].Equals(MessageEvent.GET_PLAYER_ID.ToString()))
+        try
         {
-            Dictionary<string, string> dict_response = new Dictionary<string, string>();
-            dict_response.Add("event", MessageEvent.SET_PLAYER_ID.ToString());
-            dict_response.Add("player", connectionId.ToString());
-            SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_response)), connectionId);
+            Dictionary<string, string> dict_message = JsonConvert.DeserializeObject<Dictionary<string, string>>(Encoding.UTF8.GetString(message));
+            if (dict_message["event"].Equals(MessageEvent.GET_PLAYER_ID.ToString()))
+            {
+                Dictionary<string, string> dict_response = new Dictionary<string, string>();
+                dict_response.Add("event", MessageEvent.SET_PLAYER_ID.ToString());
+                dict_response.Add("player", connectionId.ToString());
+                SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_response)), connectionId);
+            }
+            else if (dict_message["event"].Equals(MessageEvent.BUTTON_PUSHED))
+            {
+                //handle using dict_response["parameter"]
+            }
+            else if (dict_message["event"].Equals(MessageEvent.JOYSTICK_POSITION))
+            {
+                //handle using dict_response["parameter_x"] i dict_response["parameter_y"]
+            }
+            else
+            {
+                Debug.Log("Unrecognised message event: " + dict_message["event"]);
+            }
         }
-        else if (dict_message["event"].Equals(MessageEvent.BUTTON_PUSHED))
+        catch (Exception)
         {
-            //handle using dict_response["parameter"]
-        }
-        else if (dict_message["event"].Equals(MessageEvent.JOYSTICK_POSITION))
-        {
-            //handle using dict_response["parameter_x"] i dict_response["parameter_y"]
-        }
-        else
-        {
-            //handle invalid message
+            Debug.Log("Got invalid message: " + Encoding.UTF8.GetString(message));
         }
     }
 
     void SendMessage(byte[] message, int playerId)
     {
+        if (!m_Connections[playerId].IsCreated)
+        {
+            Debug.Log("Connection not established. Unable to send message");
+            return;
+        }
+
         Debug.Log("Sending data...");
         NativeArray<byte> buffer = new NativeArray<byte>(message, Allocator.Temp);
         m_Driver.BeginSend(NetworkPipeline.Null, m_Connections[playerId], out var writer);

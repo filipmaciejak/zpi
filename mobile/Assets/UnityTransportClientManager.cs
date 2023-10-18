@@ -95,21 +95,33 @@ public class ClientManager : MonoBehaviour
     {
         Debug.Log(Encoding.UTF8.GetString(message));
 
-        Dictionary<string, string> dict_message = JsonConvert.DeserializeObject<Dictionary<string, string>>(Encoding.UTF8.GetString(message));
-        if (dict_message["event"].Equals(MessageEvent.SET_PLAYER_ID.ToString()))
+        try
         {
-            playerId = Int32.Parse(dict_message["player"]);
-            Debug.Log($"Player ID: {playerId}");
+            Dictionary<string, string> dict_message = JsonConvert.DeserializeObject<Dictionary<string, string>>(Encoding.UTF8.GetString(message));
+            if (dict_message["event"].Equals(MessageEvent.SET_PLAYER_ID.ToString()))
+            {
+                playerId = Int32.Parse(dict_message["player"]);
+                Debug.Log($"Player ID: {playerId}");
+            }
+            else
+            {
+                Debug.Log("Unrecognised message event: " + dict_message["event"]);
+            }
         }
-        else
+        catch (Exception)
         {
-            //handle invalid message
+            Debug.Log("Got invalid message: " + Encoding.UTF8.GetString(message));
         }
-        
     }
 
     void SendMessage(byte[] message)
     {
+        if (!m_Connection.IsCreated)
+        {
+            Debug.Log("Connection not established. Unable to send message");
+            return;
+        }
+
         Debug.Log("Sending data...");
         NativeArray<byte> buffer = new NativeArray<byte>(message, Allocator.Temp);
         m_Driver.BeginSend(NetworkPipeline.Null, m_Connection, out var writer);
