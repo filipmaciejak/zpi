@@ -24,7 +24,6 @@ public class ServerManager : MonoBehaviour
 {
     public NetworkDriver m_Driver;
     private NativeList<NetworkConnection> m_Connections;
-    int maxPlayerId = 0;
 
     void Start()
     {
@@ -37,7 +36,11 @@ public class ServerManager : MonoBehaviour
         else
             m_Driver.Listen();
 
-        m_Connections = new NativeList<NetworkConnection>(16, Allocator.Persistent);
+        m_Connections = new NativeList<NetworkConnection>(4, Allocator.Persistent);
+        for (int i = 0; i < m_Connections.Capacity; i++)
+        {
+            m_Connections.Add(default(NetworkConnection));
+        }
     }
 
     void OnDestroy()
@@ -53,6 +56,7 @@ public class ServerManager : MonoBehaviour
     {
         m_Driver.ScheduleUpdate().Complete();
 
+        /* kod z dokumentacji, raczej nieprzydatny
         // Clean up connections
         for (int i = 0; i < m_Connections.Length; i++)
         {
@@ -62,12 +66,20 @@ public class ServerManager : MonoBehaviour
                 --i;
             }
         }
+        */
 
         NetworkConnection c;
         while ((c = m_Driver.Accept()) != default(NetworkConnection))
         {
-            m_Connections.Add(c);
-            Debug.Log("Accepted a connection");
+            for(int i=0; i < m_Connections.Length; i++)
+            {
+                if (m_Connections[i] == default(NetworkConnection))
+                {
+                    m_Connections[i] = c;
+                    Debug.Log("Accepted a connection");
+                    break;
+                }
+            }
         }
 
         DataStreamReader stream;
@@ -83,11 +95,12 @@ public class ServerManager : MonoBehaviour
                     Debug.Log("Reading data...");
                     NativeArray<byte> buffer = new NativeArray<byte>(stream.Length, Allocator.Temp, NativeArrayOptions.ClearMemory);
                     stream.ReadBytes(buffer);
-                    HandleMessage(buffer.ToArray());
+                    HandleMessage(buffer.ToArray(), i);
                     buffer.Dispose();
                 }
                 else if (cmd == NetworkEvent.Type.Disconnect)
                 {
+                    //TO DO: zatrzymaj grę i czekaj na połączenie
                     Debug.Log("Client disconnected from server");
                     m_Connections[i] = default(NetworkConnection);
                 }
@@ -95,7 +108,7 @@ public class ServerManager : MonoBehaviour
         }
     }
 
-    void HandleMessage(byte[] message)
+    void HandleMessage(byte[] message, int connectionId)
     {
         Debug.Log(Encoding.UTF8.GetString(message));
         
@@ -104,8 +117,8 @@ public class ServerManager : MonoBehaviour
         {
             Dictionary<string, string> dict_response = new Dictionary<string, string>();
             dict_response.Add("event", MessageEvent.SET_PLAYER_ID.ToString());
-            dict_response.Add("player", maxPlayerId++.ToString());
-            SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_response)), maxPlayerId - 1);
+            dict_response.Add("player", connectionId.ToString());
+            SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_response)), connectionId);
         }
         else if (dict_message["event"].Equals(MessageEvent.BUTTON_PUSHED))
         {
@@ -121,7 +134,6 @@ public class ServerManager : MonoBehaviour
         }
     }
 
-    //TO DO: lepsza translacja playerId do connection, bo obecna może się rozjechać przy problemach z połączeniem
     void SendMessage(byte[] message, int playerId)
     {
         Debug.Log("Sending data...");
