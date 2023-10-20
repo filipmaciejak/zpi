@@ -8,10 +8,13 @@ public class MapGenerator : MonoBehaviour
     public GameObject floor;
     public GameObject barrel;
     public GameObject lava;
+    public GameObject mech1;
+    public GameObject mech2;
     public float lavaChance;
     public float barrelChance;
     public int obstaclesArea; //Przeszkody będą losowo generowane w kwadracie o zadanym boku. Musi to być liczba parzysta
-    public int mapSize;
+    public int mapWidth;
+    public int mapHeight;
     private float tileSize;
     // Start is called before the first frame update
     void Start()
@@ -20,41 +23,42 @@ public class MapGenerator : MonoBehaviour
         GenerateWalls();
         GenerateFloor();
         GenerateObstacles(barrelChance, lavaChance);
+        PlaceMechs();
     }
 
     void GenerateWalls()
     {
-        float y = tileSize * ((mapSize/2)) + tileSize;
-        float x = -tileSize * (mapSize/2) - tileSize;
-        for (int i = 0; i < mapSize + 2; i++)
+        float y = tileSize * ((mapWidth/2)) + tileSize;
+        float x = -tileSize * (mapHeight/2) - tileSize; 
+        for (int i = 0; i < mapHeight + 2; i++)
         {
-            Instantiate(wall, new Vector2(x, y), Quaternion.identity);
+            Instantiate(wall, new Vector2(x, y), Quaternion.identity, gameObject.transform);
             x += tileSize;
         }
-        for(int i = 0;i < mapSize; i++) 
+        for(int i = 0;i < mapWidth; i++) 
         {
             y -= tileSize;
-            Instantiate(wall, new Vector2(-tileSize * (mapSize / 2) - tileSize, y), Quaternion.identity);
-            Instantiate(wall, new Vector2(tileSize * (mapSize / 2), y), Quaternion.identity);
+            Instantiate(wall, new Vector2(-tileSize * (mapHeight / 2) - tileSize, y), Quaternion.identity, gameObject.transform);
+            Instantiate(wall, new Vector2(tileSize * (mapHeight / 2), y), Quaternion.identity, gameObject.transform);
         }
-        y = -tileSize * (mapSize / 2);
-        x = -tileSize * (mapSize / 2) - tileSize;
-        for (int i = 0; i < mapSize + 2; i++)
+        y = -tileSize * (mapWidth / 2);
+        x = -tileSize * (mapHeight / 2) - tileSize;
+        for (int i = 0; i < mapHeight + 2; i++)
         {
-            Instantiate(wall, new Vector2(x, y), Quaternion.identity);
+            Instantiate(wall, new Vector2(x, y), Quaternion.identity, gameObject.transform);
             x += tileSize;
         }
     }
 
     void GenerateFloor()
     {
-        float y = tileSize * (mapSize / 2);
-        for (int i = 0; i < mapSize; i++)
+        float y = tileSize * (mapHeight / 2) - tileSize;
+        for (int i = 0; i < mapWidth; i++)
         {
-            float x = -tileSize * (mapSize / 2);
-            for (int j = 0; j < mapSize; j++)
+            float x = -tileSize * (mapWidth / 2) - tileSize;
+            for (int j = 0; j < mapHeight; j++)
             {
-                Instantiate(floor, new Vector2(x, y), Quaternion.identity);
+                Instantiate(floor, new Vector2(x, y), Quaternion.identity, gameObject.transform);
                 x += tileSize;
             }
             y -= tileSize;
@@ -73,15 +77,23 @@ public class MapGenerator : MonoBehaviour
                 float randNumber = Random.Range(0.0f, 1);
                 if (randNumber <= barrelChance)
                 {
-                    Instantiate(barrel, new Vector2(x, y), Quaternion.identity);
+                    Instantiate(barrel, new Vector2(x, y), Quaternion.identity, gameObject.transform);
                 }
                 else if (randNumber >= lavaChance)
                 {
-                    Instantiate(lava, new Vector2(x, y), Quaternion.identity);
+                    Instantiate(lava, new Vector2(x, y), Quaternion.identity, gameObject.transform);
                 }
                 x += tileSize;
             }
             y-= tileSize;
         }
     }
- }
+    void PlaceMechs()
+    {
+        mech1.transform.position = new Vector2(mapWidth /2, mapHeight /2 - tileSize);
+        mech2.transform.position = new Vector2(mapWidth /-2, mapHeight /-2 + tileSize);
+        Debug.Log("Position 1" + new Vector2(mapWidth / 2, mapHeight / 2 - tileSize));
+        Debug.Log("Position 2" + new Vector2(mapWidth / -2, mapHeight / -2 + tileSize));
+
+    }
+}

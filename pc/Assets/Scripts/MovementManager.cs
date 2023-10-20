@@ -6,39 +6,86 @@ public class MovementManager : MonoBehaviour
 {
     [SerializeField]
     GameObject mech1;
-    MechMovement mechMovement;
+    [SerializeField]
+    GameObject mech2;
+    MechMovement mechMovement1;
+    MechShooting mechShooting1;
+    MechMovement mechMovement2;
+    MechShooting mechShooting2;
+
     void Start()
     {
-        mechMovement = mech1.GetComponent<MechMovement>();
+        mechMovement1 = mech1.GetComponent<MechMovement>();
+        mechShooting1 = mech1.GetComponentInChildren<MechShooting>();
+        mechMovement2 = mech2.GetComponent<MechMovement>();
+        mechShooting2 = mech2.GetComponentInChildren<MechShooting>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+       CheckForMech1Movement();
+       CheckForMech2Movement();
+    }
+    void CheckForMech1Movement()
+    {
+        if (Input.GetKey(KeyCode.D))
         {
-            mechMovement.Rotate(-1);
+            mechMovement1.Rotate(1);
         }
-        else if (Input.GetMouseButton(1))
+        else if (Input.GetKey(KeyCode.A))
         {
-            mechMovement.Rotate(1);
+            mechMovement1.Rotate(-1);
         }
         else
         {
-           mechMovement.StopRotation();
-
+            mechMovement1.StopRotation();
         }
         if (Input.GetKey(KeyCode.W))
         {
-            mechMovement.Move(1);
+            mechMovement1.Move(1);
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            mechMovement.Move(-1);
+            mechMovement1.Move(-1);
+        }
+        else { 
+            mechMovement1.StopMovement();
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            mechShooting1.ShootBullet();
+        }
+    }
+    void CheckForMech2Movement()
+    {
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            mechMovement2.Rotate(1);
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            mechMovement2.Rotate(-1);
         }
         else
         {
-            mechMovement.StopMovement();
+            mechMovement2.StopRotation();
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            mechMovement2.Move(1);
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            mechMovement2.Move(-1);
+        }
+        else
+        {
+            mechMovement2.StopMovement();
+        }
+        if (Input.GetKey(KeyCode.Slash))
+        {
+            mechShooting2.ShootBullet();
         }
     }
 }
