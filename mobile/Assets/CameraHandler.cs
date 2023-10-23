@@ -41,6 +41,7 @@ public class CameraHandler : MonoBehaviour
             clientManager.ConnectToIp(result.Text);
             //change to next scene
             Destroy(this);
+            SceneManager.LoadScene("MovementScene");
         }
     }
 
