@@ -27,13 +27,16 @@ public class ClientManager : MonoBehaviour
     bool Done;
     int playerId = -1;
 
+    const int DISCONNECT_TIMEOUT = 3000;
+    const ushort SERVER_PORT = 9000;
+
     public event Action<Dictionary<string, string>> StartMinigame; 
     public event Action<Dictionary<string, string>> UpdateMinigame; 
 
     void Start()
     {
         var settings = new NetworkSettings();
-        settings.WithNetworkConfigParameters(disconnectTimeoutMS: 3000);
+        settings.WithNetworkConfigParameters(disconnectTimeoutMS: DISCONNECT_TIMEOUT);
         m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface(), settings);
         m_Connection = default(NetworkConnection);
         Done = true;
@@ -52,7 +55,7 @@ public class ClientManager : MonoBehaviour
         if (!m_Connection.IsCreated)
         {
             if (!Done)
-                Debug.Log("Something went wrong during connect, it is certainly not a network problem");
+                Debug.Log("Something went wrong during connect");
             return;
         }
         DataStreamReader stream;
@@ -147,7 +150,7 @@ public class ClientManager : MonoBehaviour
 
     public void ConnectToIp(string ipAddress)
     {
-        var endpoint = NetworkEndpoint.Parse(ipAddress, 9000);
+        var endpoint = NetworkEndpoint.Parse(ipAddress, SERVER_PORT);
         m_Connection = m_Driver.Connect(endpoint);
         Done = false;
     }

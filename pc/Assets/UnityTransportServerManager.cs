@@ -26,20 +26,24 @@ public class ServerManager : MonoBehaviour
     public NetworkDriver m_Driver;
     private NativeList<NetworkConnection> m_Connections;
 
+    const int DISCONNECT_TIMEOUT = 3000;
+    const ushort SERVER_PORT = 9000;
+    const int MAX_CONNECTIONS = 4;
+
     void Start()
     {
         var settings = new NetworkSettings();
-        settings.WithNetworkConfigParameters(disconnectTimeoutMS: 3000);
+        settings.WithNetworkConfigParameters(disconnectTimeoutMS: DISCONNECT_TIMEOUT);
         m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface(), settings);
         var endpoint = NetworkEndpoint.AnyIpv4;
         Debug.Log("Ip: " + endpoint.Address);
-        endpoint.Port = 9000;
+        endpoint.Port = SERVER_PORT;
         if (m_Driver.Bind(endpoint) != 0)
             Debug.Log("Failed to bind to port 9000");
         else
             m_Driver.Listen();
 
-        m_Connections = new NativeList<NetworkConnection>(4, Allocator.Persistent);
+        m_Connections = new NativeList<NetworkConnection>(MAX_CONNECTIONS, Allocator.Persistent);
         for (int i = 0; i < m_Connections.Capacity; i++)
         {
             m_Connections.Add(default(NetworkConnection));
