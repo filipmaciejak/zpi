@@ -32,11 +32,11 @@ public class ClientManager : MonoBehaviour
 
     void Start()
     {
-        m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface());
+        var settings = new NetworkSettings();
+        settings.WithNetworkConfigParameters(disconnectTimeoutMS: 3000);
+        m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface(), settings);
         m_Connection = default(NetworkConnection);
         Done = true;
-
-        //ConnectToIp("192.168.209.21");//temporary, this is meant to be called when ip is read from qr code
     }
 
     public void OnDestroy() 
@@ -52,7 +52,7 @@ public class ClientManager : MonoBehaviour
         if (!m_Connection.IsCreated)
         {
             if (!Done)
-                Debug.Log("Something went wrong during connect");
+                Debug.Log("Something went wrong during connect, it is certainly not a network problem");
             return;
         }
         DataStreamReader stream;
@@ -67,11 +67,6 @@ public class ClientManager : MonoBehaviour
                 dict_message.Add("event", MessageEvent.GET_PLAYER_ID.ToString());
                 Debug.Log(JsonConvert.SerializeObject(dict_message));
                 SendClientMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_message)));
-
-                //uint value = 1;
-                //m_Driver.BeginSend(m_Connection, out var writer);
-                //writer.WriteUInt(value);
-                //m_Driver.EndSend(writer);
             }
             else if (cmd == NetworkEvent.Type.Data)
             {
@@ -81,12 +76,10 @@ public class ClientManager : MonoBehaviour
                 HandleMessage(buffer.ToArray());
                 buffer.Dispose();
                 Done = true;
-                //m_Connection.Disconnect(m_Driver);
-                //m_Connection = default(NetworkConnection);
             }
             else if (cmd == NetworkEvent.Type.Disconnect)
             {
-                Debug.Log("Client got disconnected from server");
+                Debug.Log("Client failed to connect or got disconnected from server");
                 m_Connection = default(NetworkConnection);
             }
         }

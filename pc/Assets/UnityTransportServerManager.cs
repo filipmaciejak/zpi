@@ -18,7 +18,7 @@ enum MessageEvent
     JOYSTICK_POSITION,
     START_MINIGAME,
     ABORT_MINIGAME,
-    FINISH_MINIGAME_PART,
+    UPDATE_MINIGAME,
 }
 
 public class ServerManager : MonoBehaviour
@@ -28,7 +28,9 @@ public class ServerManager : MonoBehaviour
 
     void Start()
     {
-        m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface());
+        var settings = new NetworkSettings();
+        settings.WithNetworkConfigParameters(disconnectTimeoutMS: 3000);
+        m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface(), settings);
         var endpoint = NetworkEndpoint.AnyIpv4;
         Debug.Log("Ip: " + endpoint.Address);
         endpoint.Port = 9000;
