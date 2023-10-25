@@ -124,6 +124,13 @@ public class ServerManager : MonoBehaviour
             Dictionary<string, string> dict_message = JsonConvert.DeserializeObject<Dictionary<string, string>>(Encoding.UTF8.GetString(message));
             if (dict_message["event"].Equals(MessageEvent.GET_PLAYER_ID.ToString()))
             {
+                int playerId = Int32.Parse(dict_message["player"]);
+                if (playerId >= 0 && playerId < MAX_CONNECTIONS && m_Connections[playerId] == default(NetworkConnection)) {
+                    m_Connections[playerId] = m_Connections[connectionId];
+                    m_Connections[connectionId] = default(NetworkConnection);
+                    connectionId = playerId;
+                }
+
                 Dictionary<string, string> dict_response = new Dictionary<string, string>();
                 dict_response.Add("event", MessageEvent.SET_PLAYER_ID.ToString());
                 dict_response.Add("player", connectionId.ToString());

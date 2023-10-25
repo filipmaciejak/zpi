@@ -68,6 +68,7 @@ public class ClientManager : MonoBehaviour
 
                 Dictionary<string, string> dict_message = new Dictionary<string, string>();
                 dict_message.Add("event", MessageEvent.GET_PLAYER_ID.ToString());
+                dict_message.Add("player", playerId.ToString());
                 Debug.Log(JsonConvert.SerializeObject(dict_message));
                 SendClientMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_message)));
             }
