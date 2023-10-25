@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private int _id = 0;
     [SerializeField] private float moveForce = 5f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private LayerMask groundLayer;
@@ -15,13 +16,41 @@ public class Player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        return Physics2D.OverlapBox(groundCheck.position, new Vector2(0.74f, 0.1f), 0f, groundLayer);
     }
 
     void Start()
     {
         groundCheck = transform.Find("GroundCheck");
         rb = GetComponent<Rigidbody2D>();
+
+        CrewmateEventManager.instance.onCrewmateJump.AddListener(
+            (id) => {
+                if (id != _id) return;
+                Jump();
+            }
+        );
+        
+        CrewmateEventManager.instance.onCrewmateMoveInputUpdate.AddListener(
+            (id, inputX, inputY) => {
+                if (id != _id) return;
+                UpdateMoveInput(inputX);
+            }
+        );
+
+        CrewmateEventManager.instance.onCrewmateInteractionStart.AddListener(
+            (id) => {
+                if (id != _id) return;
+                Interact();
+            }
+        );
+
+        CrewmateEventManager.instance.onCrewmateInteractionEnd.AddListener(
+            (id) => {
+                if (id != _id) return;
+                FinishInteraction();
+            }
+        );
     }
 
     void FixedUpdate()
