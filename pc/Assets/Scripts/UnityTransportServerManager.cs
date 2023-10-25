@@ -26,6 +26,11 @@ public class ServerManager : MonoBehaviour
     public NetworkDriver m_Driver;
     private NativeList<NetworkConnection> m_Connections;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     void Start()
     {
         m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface());
@@ -42,6 +47,8 @@ public class ServerManager : MonoBehaviour
         {
             m_Connections.Add(default(NetworkConnection));
         }
+
+        System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
     }
 
     void OnDestroy()
@@ -123,13 +130,18 @@ public class ServerManager : MonoBehaviour
                 dict_response.Add("player", connectionId.ToString());
                 SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_response)), connectionId);
             }
-            else if (dict_message["event"].Equals(MessageEvent.BUTTON_PUSHED))
+            else if (dict_message["event"].Equals(MessageEvent.BUTTON_PUSHED.ToString()))
             {
-                //handle using dict_response["parameter"]
+                int id = int.Parse(dict_message["player"]);
+                if (dict_message["button_event"].Equals("started"))
+                    CrewmateEventManager.instance.onCrewmateJump.Invoke(id);
             }
-            else if (dict_message["event"].Equals(MessageEvent.JOYSTICK_POSITION))
+            else if (dict_message["event"].Equals(MessageEvent.JOYSTICK_POSITION.ToString()))
             {
-                //handle using dict_response["parameter_x"] i dict_response["parameter_y"]
+                int id = int.Parse(dict_message["player"]);
+                float inputX = float.Parse(dict_message["x"]);
+                float inputY = float.Parse(dict_message["y"]);
+                CrewmateEventManager.instance.onCrewmateMoveInputUpdate.Invoke(id, inputX, inputY);
             }
             else
             {

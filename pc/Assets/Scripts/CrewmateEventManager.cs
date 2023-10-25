@@ -12,7 +12,11 @@ public class CrewmateEventManager : MonoBehaviour
     public UnityEvent<int> onCrewmateInteractionStart;
     public UnityEvent<int> onCrewmateInteractionEnd;
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     void Start()
     {
         instance = this;
