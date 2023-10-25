@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 5503412413432035866}
   - component: {fileID: 5127363282660176813}
   - component: {fileID: 1520043580283365510}
-  - component: {fileID: 5366100259488725122}
   - component: {fileID: 2147776701796635448}
   m_Layer: 0
   m_Name: Crewmate
@@ -192,19 +191,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7651123, y: 0.94360465}
   m_EdgeRadius: 0
---- !u!114 &5366100259488725122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8180824593716559679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 921df8ffd3289dc4c9030d1d32e9c82b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 2147776701796635448}
 --- !u!114 &2147776701796635448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109c30852af3f254f805ebae525ccb91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
   moveForce: 15
   jumpForce: 12.5
   groundLayer:
