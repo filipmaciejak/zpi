@@ -12,9 +12,15 @@ TagManager:
   - Player
   - Water
   - UI
+<<<<<<< HEAD
   - Ground
   - Module
   - 
+=======
+  - Mech
+  - Body
+  - Legs
+>>>>>>> 8912937 (Dodanie spritow)
   - 
   - 
   - 

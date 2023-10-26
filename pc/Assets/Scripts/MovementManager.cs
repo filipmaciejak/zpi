@@ -10,19 +10,23 @@ public class MovementManager : MonoBehaviour
     GameObject mech2;
     MechMovement mechMovement1;
     MechShooting mechShooting1;
+    BodyMovement mechBody1;
     MechMovement mechMovement2;
     MechShooting mechShooting2;
+    BodyMovement mechBody2;
 
     void Start()
     {
         mechMovement1 = mech1.GetComponent<MechMovement>();
+        mechBody1 = mech1.GetComponentInChildren<BodyMovement>();
         mechShooting1 = mech1.GetComponentInChildren<MechShooting>();
         mechMovement2 = mech2.GetComponent<MechMovement>();
         mechShooting2 = mech2.GetComponentInChildren<MechShooting>();
+        mechBody2 = mech2.GetComponentInChildren<BodyMovement>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
        CheckForMech1Movement();
        CheckForMech2Movement();
@@ -56,6 +60,19 @@ public class MovementManager : MonoBehaviour
         {
             mechShooting1.ShootBullet();
         }
+        if (Input.GetKey(KeyCode.I))
+        {
+            mechBody1.Rotate(-1);
+        }
+        else if (Input.GetKey(KeyCode.O))
+        {
+            mechBody1.Rotate(1);
+        }
+        else
+        {
+            mechBody1.StopRotationNow();
+        }
+
     }
     void CheckForMech2Movement()
     {
@@ -86,6 +103,18 @@ public class MovementManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Slash))
         {
             mechShooting2.ShootBullet();
+        }
+        if (Input.GetKey(KeyCode.Semicolon))
+        {
+            mechBody2.Rotate(-1);
+        }
+        else if (Input.GetKey(KeyCode.Quote))
+        {
+            mechBody2.Rotate(1);
+        }
+        else
+        {
+            mechBody2.StopRotationNow();
         }
     }
 }
