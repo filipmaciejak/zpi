@@ -18,7 +18,7 @@ enum MessageEvent
     JOYSTICK_POSITION,
     START_MINIGAME,
     ABORT_MINIGAME,
-    FINISH_MINIGAME_PART,
+    UPDATE_MINIGAME,
 }
 
 public class ServerManager : MonoBehaviour
@@ -26,23 +26,29 @@ public class ServerManager : MonoBehaviour
     public NetworkDriver m_Driver;
     private NativeList<NetworkConnection> m_Connections;
 
+    const int DISCONNECT_TIMEOUT = 3000;
+    const ushort SERVER_PORT = 9000;
+    const int MAX_CONNECTIONS = 4;
+
     void Awake()
     {
         DontDestroyOnLoad(this);
     }
-
+	
     void Start()
     {
-        m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface());
+        var settings = new NetworkSettings();
+        settings.WithNetworkConfigParameters(disconnectTimeoutMS: DISCONNECT_TIMEOUT);
+        m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface(), settings);
         var endpoint = NetworkEndpoint.AnyIpv4;
         Debug.Log("Ip: " + endpoint.Address);
-        endpoint.Port = 9000;
+        endpoint.Port = SERVER_PORT;
         if (m_Driver.Bind(endpoint) != 0)
             Debug.Log("Failed to bind to port 9000");
         else
             m_Driver.Listen();
 
-        m_Connections = new NativeList<NetworkConnection>(4, Allocator.Persistent);
+        m_Connections = new NativeList<NetworkConnection>(MAX_CONNECTIONS, Allocator.Persistent);
         for (int i = 0; i < m_Connections.Capacity; i++)
         {
             m_Connections.Add(default(NetworkConnection));
@@ -125,6 +131,13 @@ public class ServerManager : MonoBehaviour
             Dictionary<string, string> dict_message = JsonConvert.DeserializeObject<Dictionary<string, string>>(Encoding.UTF8.GetString(message));
             if (dict_message["event"].Equals(MessageEvent.GET_PLAYER_ID.ToString()))
             {
+                int playerId = Int32.Parse(dict_message["player"]);
+                if (playerId >= 0 && playerId < MAX_CONNECTIONS && m_Connections[playerId] == default(NetworkConnection)) {
+                    m_Connections[playerId] = m_Connections[connectionId];
+                    m_Connections[connectionId] = default(NetworkConnection);
+                    connectionId = playerId;
+                }
+
                 Dictionary<string, string> dict_response = new Dictionary<string, string>();
                 dict_response.Add("event", MessageEvent.SET_PLAYER_ID.ToString());
                 dict_response.Add("player", connectionId.ToString());

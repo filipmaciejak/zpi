@@ -27,16 +27,19 @@ public class ClientManager : MonoBehaviour
     bool Done;
     int playerId = -1;
 
+    const int DISCONNECT_TIMEOUT = 3000;
+    const ushort SERVER_PORT = 9000;
+
     public event Action<Dictionary<string, string>> StartMinigame; 
     public event Action<Dictionary<string, string>> UpdateMinigame; 
 
     void Start()
     {
-        m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface());
+        var settings = new NetworkSettings();
+        settings.WithNetworkConfigParameters(disconnectTimeoutMS: DISCONNECT_TIMEOUT);
+        m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface(), settings);
         m_Connection = default(NetworkConnection);
         Done = true;
-
-        //ConnectToIp("192.168.209.21");//temporary, this is meant to be called when ip is read from qr code
     }
 
     public void OnDestroy() 
@@ -65,13 +68,9 @@ public class ClientManager : MonoBehaviour
 
                 Dictionary<string, string> dict_message = new Dictionary<string, string>();
                 dict_message.Add("event", MessageEvent.GET_PLAYER_ID.ToString());
+                dict_message.Add("player", playerId.ToString());
                 Debug.Log(JsonConvert.SerializeObject(dict_message));
                 SendClientMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_message)));
-
-                //uint value = 1;
-                //m_Driver.BeginSend(m_Connection, out var writer);
-                //writer.WriteUInt(value);
-                //m_Driver.EndSend(writer);
             }
             else if (cmd == NetworkEvent.Type.Data)
             {
@@ -81,12 +80,10 @@ public class ClientManager : MonoBehaviour
                 HandleMessage(buffer.ToArray());
                 buffer.Dispose();
                 Done = true;
-                //m_Connection.Disconnect(m_Driver);
-                //m_Connection = default(NetworkConnection);
             }
             else if (cmd == NetworkEvent.Type.Disconnect)
             {
-                Debug.Log("Client got disconnected from server");
+                Debug.Log("Client failed to connect or got disconnected from server");
                 m_Connection = default(NetworkConnection);
             }
         }
@@ -154,7 +151,7 @@ public class ClientManager : MonoBehaviour
 
     public void ConnectToIp(string ipAddress)
     {
-        var endpoint = NetworkEndpoint.Parse(ipAddress, 9000);
+        var endpoint = NetworkEndpoint.Parse(ipAddress, SERVER_PORT);
         m_Connection = m_Driver.Connect(endpoint);
         Done = false;
     }
