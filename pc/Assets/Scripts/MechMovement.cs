@@ -24,7 +24,6 @@ public class MechMovement : MonoBehaviour
         float rotationAngle = -1 * rotationInput * rotationSpeed * Time.deltaTime; //-1 is needed -> when we click right, we rotate to right
 
         rb.AddTorque(rotationAngle);
-        Debug.Log(rb.angularVelocity);
     }
 
     public void Move(int movementDirection)

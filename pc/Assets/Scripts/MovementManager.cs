@@ -25,7 +25,7 @@ public class MovementManager : MonoBehaviour
         }
         else
         {
-           // mechMovement.StopRotation();
+           mechMovement.StopRotation();
 
         }
         if (Input.GetKey(KeyCode.W))
