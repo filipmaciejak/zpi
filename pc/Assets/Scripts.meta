@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 04a449ccbc5b58e43898f17d8e5c2045
+=======
+guid: 85509f4ec2f865d4ab0c50b5f250a982
+>>>>>>> 04c223f (Dodano poruszanie postaci)
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
