@@ -26,7 +26,8 @@ public class ServerManager : MonoBehaviour
     public NetworkDriver m_Driver;
     private NativeList<NetworkConnection> m_Connections;
 
-    const int DISCONNECT_TIMEOUT = 3000;
+    const int DISCONNECT_TIMEOUT = 5000;
+    const int HEARTBEAT_TIMEOUT_MS = 500;
     const ushort SERVER_PORT = 9000;
     const int MAX_CONNECTIONS = 4;
 
@@ -38,7 +39,7 @@ public class ServerManager : MonoBehaviour
     void Start()
     {
         var settings = new NetworkSettings();
-        settings.WithNetworkConfigParameters(disconnectTimeoutMS: DISCONNECT_TIMEOUT);
+        settings.WithNetworkConfigParameters(disconnectTimeoutMS: DISCONNECT_TIMEOUT, heartbeatTimeoutMS: HEARTBEAT_TIMEOUT_MS);
         m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface(), settings);
         var endpoint = NetworkEndpoint.AnyIpv4;
         Debug.Log("Ip: " + endpoint.Address);
