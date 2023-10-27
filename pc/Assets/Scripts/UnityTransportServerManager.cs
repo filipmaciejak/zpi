@@ -146,8 +146,12 @@ public class ServerManager : MonoBehaviour
             else if (dict_message["event"].Equals(MessageEvent.BUTTON_PUSHED.ToString()))
             {
                 int id = int.Parse(dict_message["player"]);
-                if (dict_message["button_event"].Equals("started"))
+                if (dict_message["button_event"].Equals("started") && dict_message["button_name"].Equals("Button A"))
                     CrewmateEventManager.instance.onCrewmateJump.Invoke(id);
+                else if (dict_message["button_event"].Equals("started") && dict_message["button_name"].Equals("Button B"))
+                    CrewmateEventManager.instance.onCrewmateInteractionStart.Invoke(id);
+                else if (dict_message["button_event"].Equals("ended") && dict_message["button_name"].Equals("Button B"))
+                    CrewmateEventManager.instance.onCrewmateInteractionEnd.Invoke(id);
             }
             else if (dict_message["event"].Equals(MessageEvent.JOYSTICK_POSITION.ToString()))
             {

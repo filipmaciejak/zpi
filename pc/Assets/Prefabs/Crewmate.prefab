@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7438870993603571298}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5127363282660176813}
   - component: {fileID: 1520043580283365510}
   - component: {fileID: 2147776701796635448}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Crewmate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ MonoBehaviour:
   jumpForce: 12.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   moduleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128

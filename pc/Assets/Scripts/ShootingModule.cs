@@ -8,13 +8,14 @@ public class ShootingModule : Module
 
     void Start()
     {
-        shooting = mech.GetComponent<MechShooting>();
+        shooting = mech.GetComponentInChildren<MechShooting>();
     }
 
     void Update()
     {
         if (isBeingUsed)
         {
+            Debug.Log("Strzelam");
             shooting.ShootBullet();
         }
     }
