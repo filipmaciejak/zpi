@@ -3,24 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Cannon
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-<<<<<<< HEAD
-  - Ground
-  - Module
   - 
-=======
-  - Mech
-  - Body
-  - Legs
->>>>>>> 8912937 (Dodanie spritow)
+  - 
+  - 
   - 
   - 
   - 

@@ -208,7 +208,7 @@ MonoBehaviour:
   jumpForce: 12.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   moduleLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0

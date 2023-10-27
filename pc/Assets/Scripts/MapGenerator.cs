@@ -32,33 +32,38 @@ public class MapGenerator : MonoBehaviour
         float x = -tileSize * (mapHeight/2) - tileSize; 
         for (int i = 0; i < mapHeight + 2; i++)
         {
-            Instantiate(wall, new Vector2(x, y), Quaternion.identity, gameObject.transform);
+            GameObject wallObject = Instantiate(wall, gameObject.transform);
+            wallObject.transform.localPosition = new Vector2(x, y);
             x += tileSize;
         }
         for(int i = 0;i < mapWidth; i++) 
         {
             y -= tileSize;
-            Instantiate(wall, new Vector2(-tileSize * (mapHeight / 2) - tileSize, y), Quaternion.identity, gameObject.transform);
-            Instantiate(wall, new Vector2(tileSize * (mapHeight / 2), y), Quaternion.identity, gameObject.transform);
+            GameObject leftWall = Instantiate(wall, gameObject.transform);
+            GameObject rightWall = Instantiate(wall, gameObject.transform);
+            leftWall.transform.localPosition = new Vector2(-tileSize * (mapHeight / 2) - tileSize, y);
+            rightWall.transform.localPosition = new Vector2(tileSize * (mapHeight / 2), y);
         }
         y = -tileSize * (mapWidth / 2);
         x = -tileSize * (mapHeight / 2) - tileSize;
         for (int i = 0; i < mapHeight + 2; i++)
         {
-            Instantiate(wall, new Vector2(x, y), Quaternion.identity, gameObject.transform);
+            GameObject wallObject = Instantiate(wall, gameObject.transform);
+            wallObject.transform.localPosition = new Vector2(x, y);
             x += tileSize;
         }
     }
 
     void GenerateFloor()
     {
-        float y = tileSize * (mapHeight / 2) - tileSize;
+        float y = tileSize * (mapHeight / 2);
         for (int i = 0; i < mapWidth; i++)
         {
-            float x = -tileSize * (mapWidth / 2) - tileSize;
+            float x = -tileSize * (mapWidth / 2) ;
             for (int j = 0; j < mapHeight; j++)
             {
-                Instantiate(floor, new Vector2(x, y), Quaternion.identity, gameObject.transform);
+                GameObject floorObject = Instantiate(floor, gameObject.transform);
+                floorObject.transform.localPosition = new Vector2(x, y);
                 x += tileSize;
             }
             y -= tileSize;
@@ -77,11 +82,13 @@ public class MapGenerator : MonoBehaviour
                 float randNumber = Random.Range(0.0f, 1);
                 if (randNumber <= barrelChance)
                 {
-                    Instantiate(barrel, new Vector2(x, y), Quaternion.identity, gameObject.transform);
+                    GameObject obstacleObject = Instantiate(barrel, gameObject.transform);
+                    obstacleObject.transform.localPosition = new Vector2(x, y);
                 }
                 else if (randNumber >= lavaChance)
                 {
-                    Instantiate(lava, new Vector2(x, y), Quaternion.identity, gameObject.transform);
+                    GameObject obstacleObject = Instantiate(lava, gameObject.transform);
+                    obstacleObject.transform.localPosition = new Vector2(x, y);
                 }
                 x += tileSize;
             }
