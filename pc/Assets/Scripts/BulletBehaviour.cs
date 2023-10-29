@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    public int damage = 5;
+    void OnCollisionEnter2D(Collision2D collision)
     {
-       Destroy(gameObject);
+        Debug.Log("HIT");
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Damage");
+            collision.gameObject.GetComponentInParent<MechState>().GetDamaged(damage);
+        }
+        Destroy(gameObject);
     }
 }

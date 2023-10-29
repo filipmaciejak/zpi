@@ -185,7 +185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &430552485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,9 +328,17 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 029b421bcf86c5b4598fdc5def76c0cc, type: 3}
+    - target: {fileID: 2410823645522728631, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: cooldown
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_Name
       value: Mech (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.x
@@ -387,6 +395,25 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
   m_PrefabInstance: {fileID: 2628643361467248052}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1907179429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907179428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3fbe01f3da743940b4874d280870b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  lives: 3
+  shield: 0
+  maxHealth: 100
+  maxShield: 0
+  hullBreakTime: 10
+  hullBreakDamage: 30
 --- !u!1001 &2628643361467248052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -395,6 +422,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 534248535845332062, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3087194192637260132, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: maxSpeed
       value: 6
@@ -422,6 +453,14 @@ PrefabInstance:
     - target: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_Name
       value: Mech
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662817498916255913, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.x
@@ -466,7 +505,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1907179429}
   m_SourcePrefab: {fileID: 100100000, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
