@@ -15,12 +15,12 @@ public class MechHealth : MonoBehaviour
     int maxHealth;
 
     [SerializeField]
-    private HealthBarBehaviour healthSlider;
+    private StatBarBehaviour healthSlider;
 
     public void SetHealth(int health)
     {
         currentHealth = health;
-        healthSlider.SetHealthBarValue(health);
+        healthSlider.SetStatBarLevel(health);
     }
     public int GetHealth() { return currentHealth; }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarBehaviour : MonoBehaviour
+public class StatBarBehaviour : MonoBehaviour
 {
     private Slider healthBarSlider;
     // Start is called before the first frame update
@@ -12,12 +12,12 @@ public class HealthBarBehaviour : MonoBehaviour
         healthBarSlider = GetComponent<Slider>();
     }
 
-    public void SetHealthBarValue(float value)
+    public void SetStatBarLevel(float value)
     {
         healthBarSlider.value = value;
     }
 
-    public float GetHealthBarValue()
+    public float GetStatBarLevel()
     {
         return healthBarSlider.value;
     }
