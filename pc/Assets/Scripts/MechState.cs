@@ -5,20 +5,6 @@ using UnityEngine;
 
 public class MechState : MonoBehaviour
 {
-    [SerializeField]
-    int currentHealth;
-
-    [SerializeField]
-    int lives;
-
-    [SerializeField]
-    int shield;
-
-    [SerializeField]
-    int maxHealth;
-
-    [SerializeField]
-    int maxShield;
 
     ArrayList damageTracker;
 
@@ -27,21 +13,28 @@ public class MechState : MonoBehaviour
 
     [SerializeField]
     private int hullBreakDamage;
-    private Vector3 spawnPoint;
+
+    private MechHealth mechHealth;
+    private MechShield mechShield;
+    private MechRespawn mechRespawn;
 
     private void Start()
     {
-        spawnPoint = transform.position;
+        mechRespawn = GetComponent<MechRespawn>();
+        mechShield = GetComponent<MechShield>();
+        mechHealth = GetComponent<MechHealth>();
         damageTracker = new ArrayList();
     }
 
     public void GetDamaged(int damage)
     {
-        int shieldPrediction = shield - damage;
+        int currentShield = mechShield.GetShield();
+        int currentHealth = mechHealth.GetHealth();
+        int shieldPrediction = currentShield - damage;
         if(shieldPrediction < 0)
         {
-            damage = damage - shield;
-            shield = 0;         //TODO: przetestowac ladowanie tarczy i dostawanie damage jednoczesnie czy nie wchodzi w konflikt
+            damage = damage - currentShield;
+            mechShield.SetShield(0);       //TODO: przetestowac ladowanie tarczy i dostawanie damage jednoczesnie czy nie wchodzi w konflikt
             currentHealth -= damage;
             if(currentHealth <= 0)
             {
@@ -50,14 +43,29 @@ public class MechState : MonoBehaviour
             else
             {
                 TrackRecentDamage(damage);
+                mechHealth.SetHealth(currentHealth);
             }
 
         }
         else
         {
-            shield = shieldPrediction;
+             mechShield.SetShield(shieldPrediction);
         }
-        Debug.Log(currentHealth);
+        Debug.Log("Health " + mechHealth.GetHealth());
+        Debug.Log("Shield " + mechShield.GetShield());
+    }
+    public void Die()
+    {
+        if (mechHealth.GetLives() > 1)
+        {
+            mechRespawn.Respawn();
+        }
+        else
+        {
+            Debug.Log("Przegrales");
+            Destroy(gameObject);
+            //TODO: GameOver
+        }
     }
     public void TrackRecentDamage(int damage)
     {
@@ -78,32 +86,5 @@ public class MechState : MonoBehaviour
             //TODO: Stworzenie wyrwy w mechu
         }
     }
-    public void Die()
-    {
-        if(lives > 1)
-        {
-            lives--;
-            //TODO: stworzenie wraku mecha w miejsce smierci
-            shield = maxShield/2;
-            currentHealth = maxHealth;
-            gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            gameObject.GetComponentInChildren<Rigidbody2D>().angularVelocity = 0;
-            gameObject.transform.rotation = Quaternion.identity;
-            gameObject.transform.position = spawnPoint;
-        }
-        else
-        {
-            Debug.Log("Przegrales");
-            Destroy(gameObject);
-            //TODO: GameOver
-        }
-    }
-    public void SetShield(int shield) { this.shield = shield; }
-    public int GetShield() { return shield; }
-    public int GetHealth() { return currentHealth; }
-    public void SetSpawnPoint(Vector3 spawnPoint) { this.spawnPoint = spawnPoint; }
-
-    public Vector3 GetSpawnPoint() { return spawnPoint; }
-
-    public int GetCurrentHealth() { return currentHealth; }
+    
 }
