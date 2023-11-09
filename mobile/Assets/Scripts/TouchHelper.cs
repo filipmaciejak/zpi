@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
 public class TouchHelper : MonoBehaviour
 {
-    public Canvas canvas;
+    private Canvas _canvas;
+    private RectTransform _rectTransform;
     private void Awake()
     {
-        canvas = GetComponent<Canvas>();
+        _canvas = GetComponent<Canvas>();
+        _rectTransform = GetComponent<RectTransform>();
     }
 
     private void OnEnable()
@@ -17,8 +20,7 @@ public class TouchHelper : MonoBehaviour
     public Rect GetRectTransformCanvasPos(RectTransform rectTransform)
     {
         var relativePosition = rectTransform.anchoredPosition;
-        
-        var canvasRect = canvas.pixelRect;
+        var canvasRect = _rectTransform.rect;
         var rectTransformAnchor = rectTransform.anchorMin;
         var anchorPosition = new Vector2(rectTransformAnchor.x * canvasRect.width, rectTransformAnchor.y * canvasRect.height);
         
@@ -34,11 +36,18 @@ public class TouchHelper : MonoBehaviour
     {
         Vector2 resultPos = screenPos;
 
-        float scaleFactor = canvas.scaleFactor;
+        float scaleFactor = _canvas.scaleFactor;
         
         resultPos.x /= scaleFactor;
         resultPos.y /= scaleFactor;
         
         return resultPos;
+    }
+
+    public Boolean FingerInsideRectTransform(RectTransform rectTransform, Finger finger)
+    {
+        var rect = GetRectTransformCanvasPos(rectTransform);
+        var fingerPos = ScaleScreenToCanvas(finger.screenPosition);
+        return rect.Contains(fingerPos);
     }
 }

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 22daba49ad5d1cd448688ac494279799
+=======
+guid: 4fc6019237eb8c442b705bd88d8584fb
+>>>>>>> 96ce835 (Dodanie generacji mapy)
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
