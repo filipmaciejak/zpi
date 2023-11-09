@@ -8,6 +8,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 enum MessageEvent
 {
@@ -86,6 +87,8 @@ public class ClientManager : MonoBehaviour
             {
                 Debug.Log("Client failed to connect or got disconnected from server");
                 m_Connection = default(NetworkConnection);
+                if(SceneManager.GetActiveScene().name != "QrReadingScene")
+                    SceneManager.LoadScene("QrReadingScene");
                 Disconnect?.Invoke();
             }
         }
