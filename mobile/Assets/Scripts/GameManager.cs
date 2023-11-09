@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 enum MinigameType
 {
-    MOVEMENT_MODULE
+    MOVEMENT_MODULE,
+    ENERGY_MODULE
 }
 
 public class GameManager : MonoBehaviour
