@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/QrReadingScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/SHIELD_MODULE.unity
+    guid: 4b3265deece35e94c9bc5df991016c78
+  - enabled: 0
     path: Assets/Scenes/ENERGY_MODULE.unity
     guid: 4c5d1960ce647594493e5fd04985ffb9
   - enabled: 1
