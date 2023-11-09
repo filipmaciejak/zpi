@@ -25,22 +25,25 @@ public class ClientManager : MonoBehaviour
 {
     NetworkDriver m_Driver;
     NetworkConnection m_Connection;
-    bool Done;
     int playerId = -1;
 
-    const int DISCONNECT_TIMEOUT = 3000;
+    const int DISCONNECT_TIMEOUT_MS = 5000;
+    const int CONNECT_TIMEOUT_MS = 5000;
+    const int HEARTBEAT_TIMEOUT_MS = 500;
+    const int MAX_CONNECT_ATTEMPTS = 3;
     const ushort SERVER_PORT = 9000;
 
     public event Action<Dictionary<string, string>> StartMinigame; 
-    public event Action<Dictionary<string, string>> UpdateMinigame; 
+    public event Action<Dictionary<string, string>> UpdateMinigame;
+    public event Action Connect;
+    public event Action Disconnect;
 
     void Start()
     {
         var settings = new NetworkSettings();
-        settings.WithNetworkConfigParameters(disconnectTimeoutMS: DISCONNECT_TIMEOUT);
+        settings.WithNetworkConfigParameters(disconnectTimeoutMS: DISCONNECT_TIMEOUT_MS, connectTimeoutMS: CONNECT_TIMEOUT_MS, maxConnectAttempts: MAX_CONNECT_ATTEMPTS, heartbeatTimeoutMS: HEARTBEAT_TIMEOUT_MS);
         m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface(), settings);
         m_Connection = default(NetworkConnection);
-        Done = true;
     }
 
     public void OnDestroy() 
@@ -55,8 +58,6 @@ public class ClientManager : MonoBehaviour
 
         if (!m_Connection.IsCreated)
         {
-            if (!Done)
-                Debug.Log("Something went wrong during connect");
             return;
         }
         DataStreamReader stream;
@@ -72,6 +73,7 @@ public class ClientManager : MonoBehaviour
                 dict_message.Add("player", playerId.ToString());
                 Debug.Log(JsonConvert.SerializeObject(dict_message));
                 SendClientMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_message)));
+                Connect?.Invoke();
             }
             else if (cmd == NetworkEvent.Type.Data)
             {
@@ -80,7 +82,6 @@ public class ClientManager : MonoBehaviour
                 stream.ReadBytes(buffer);
                 HandleMessage(buffer.ToArray());
                 buffer.Dispose();
-                Done = true;
             }
             else if (cmd == NetworkEvent.Type.Disconnect)
             {
@@ -88,6 +89,7 @@ public class ClientManager : MonoBehaviour
                 m_Connection = default(NetworkConnection);
                 if(SceneManager.GetActiveScene().name != "QrReadingScene")
                     SceneManager.LoadScene("QrReadingScene");
+                Disconnect?.Invoke();
             }
         }
     }
@@ -155,8 +157,12 @@ public class ClientManager : MonoBehaviour
     public void ConnectToIp(string ipAddress)
     {
         var endpoint = NetworkEndpoint.Parse(ipAddress, SERVER_PORT);
+        if (endpoint == default(NetworkEndpoint)) 
+        {
+            throw new Exception("Bad ip format");
+        }
+
         m_Connection = m_Driver.Connect(endpoint);
-        Done = false;
     }
 
     private void OnSetPlayerId(Dictionary<string, string> message)
