@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 enum MinigameType
 {
     MOVEMENT_MODULE,
+    CANNON_MODULE,
     ENERGY_MODULE,
     SHIELD_MODULE
 }
