@@ -17,10 +17,10 @@ public class MovementManager : MonoBehaviour
 
     void Start()
     {
-        mechMovement1 = mech1.GetComponent<MechMovement>();
+        mechMovement1 = mech1.GetComponentInChildren<MechMovement>();
         mechBody1 = mech1.GetComponentInChildren<BodyMovement>();
         mechShooting1 = mech1.GetComponentInChildren<MechShooting>();
-        mechMovement2 = mech2.GetComponent<MechMovement>();
+        mechMovement2 = mech2.GetComponentInChildren<MechMovement>();
         mechShooting2 = mech2.GetComponentInChildren<MechShooting>();
         mechBody2 = mech2.GetComponentInChildren<BodyMovement>();
     }
@@ -98,7 +98,7 @@ public class MovementManager : MonoBehaviour
         }
         else
         {
-            mechMovement2.StopMovement();
+            //mechMovement2.StopMovement();
         }
         if (Input.GetKey(KeyCode.Slash))
         {

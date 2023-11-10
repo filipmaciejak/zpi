@@ -12,7 +12,14 @@ public class BodyMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.centerOfMass = Vector3.zero;
     }
+
+    private void FixedUpdate()
+    {
+        rb.centerOfMass = Vector3.zero;
+    }
+
     public void Rotate(int rotationInput)
     {
         float rotationAngle = -1 * rotationInput * rotationSpeed * Time.deltaTime; //-1 is needed -> when we click right, we rotate to right
