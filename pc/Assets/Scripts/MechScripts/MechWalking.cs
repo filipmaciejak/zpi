@@ -15,11 +15,14 @@ public class MechWalking : MonoBehaviour
     private float stepTime = 0.4f;
 
     [SerializeField]
-    private float stepCooldown = 0.7f;
+    private float baseStepCooldown = 0.6f;
 
+    
     private float timeCounter;
     private float mass;
     private Rigidbody2D rb;
+    private float direction = 0f;
+    public float stepCooldownMultiplier = 1f;
 
     void Start()
     {
@@ -30,31 +33,40 @@ public class MechWalking : MonoBehaviour
         maxVelocity += rb.drag;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        ApplyStepForce();
-    }
-
     float GetStepCycleTime()
     {
-        return accTime + stepTime + stepCooldown;
+        return accTime + stepTime + baseStepCooldown * stepCooldownMultiplier;
     }
-    
+
     float CalculateAccForce()
     {
         return maxVelocity * mass / accTime;
     }
 
-    void ApplyStepForce()
+    public void ApplyStepForce()
     {
         timeCounter += Time.deltaTime;
-        if(timeCounter >= GetStepCycleTime()) { timeCounter = 0; }
-        else if(timeCounter >= 0 && timeCounter <= accTime) 
+        if (timeCounter >= GetStepCycleTime()) { timeCounter = 0; }
+        else if (timeCounter >= 0 && timeCounter <= accTime)
         {
-            Vector2 force = rb.transform.up * CalculateAccForce();
+            Vector2 force = rb.transform.up * CalculateAccForce() * direction;
             rb.AddForce(force);
         }
 
+    }
+
+    public void ChangeStep(float input)
+    {
+        float multiplier = Mathf.Abs(input);
+        stepCooldownMultiplier = multiplier;
+        if (input > 0)
+        {
+            direction = 1;
+        }
+        else if (input < 0)
+        {
+            direction = -1;
+        }
+        else { direction = 0; }
     }
 }

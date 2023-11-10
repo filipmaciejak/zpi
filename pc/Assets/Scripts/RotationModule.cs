@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class RotationModule : Module
 {
-    MechMovement movement;
+    MechRotation movement;
     void Start()
     {
-        movement = mech.GetComponent<MechMovement>();
+        movement = mech.GetComponent<MechRotation>();
     }
 
     // Update is called once per frame
