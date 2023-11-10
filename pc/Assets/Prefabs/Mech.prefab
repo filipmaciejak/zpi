@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8059415451779690988}
   m_Layer: 7
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,9 +258,13 @@ GameObject:
   - component: {fileID: 3087194192637260132}
   - component: {fileID: 6121159161333015593}
   - component: {fileID: 7346937853321354502}
+  - component: {fileID: 4131691009422969128}
+  - component: {fileID: 1915707561188242722}
+  - component: {fileID: 776119884292870421}
+  - component: {fileID: 246317872167400230}
   m_Layer: 6
   m_Name: Mech
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -294,12 +298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5df6e48da42a864f898b779d7299d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 5
-  maxSpeed: 20
-  slowSpeed: 10
-  rotationSpeed: 50
-  maxRotationSpeed: 80
-  angularSlow: 30
+  acceleration: 2.5
+  maxSpeed: 6
+  slowSpeed: 4
+  rotationSpeed: 30
+  maxRotationSpeed: 50
+  angularSlow: 40
 --- !u!50 &6121159161333015593
 Rigidbody2D:
   serializedVersion: 4
@@ -352,6 +356,61 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &4131691009422969128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7052256437403833633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3fbe01f3da743940b4874d280870b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hullBreakTime: 10
+  hullBreakDamage: 30
+--- !u!114 &1915707561188242722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7052256437403833633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8525fcfd9c0b684eadb0fd65ce1288b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  lives: 3
+  maxHealth: 100
+--- !u!114 &776119884292870421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7052256437403833633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99f7caf23cb5e4e4394d5fe593fe0fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &246317872167400230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7052256437403833633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d39268af89348a943a8a9631327d049d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentShield: 50
+  maxShield: 100
 --- !u!1 &7662817498916255913
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +424,7 @@ GameObject:
   - component: {fileID: 3001150250962094947}
   m_Layer: 8
   m_Name: Legs
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

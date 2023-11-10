@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 enum MinigameType
 {
-    MOVEMENT_MODULE
+    MOVEMENT_MODULE,
+    ENERGY_MODULE,
+    SHIELD_MODULE
 }
 
 public class GameManager : MonoBehaviour
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         DontDestroyOnLoad(gameObject);
         clientManager = GetComponentInChildren<ClientManager>();
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
 
     private void OnEnable()
