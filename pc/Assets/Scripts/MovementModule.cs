@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class MovementModule : Module
 {
-    MechMovement movement;
+    MechRotation movement;
     Boolean isForward;
     public void Start()
     {
-        movement = mech.GetComponent<MechMovement>();
+        movement = mech.GetComponent<MechRotation>();
     }
 
     public void Update()
