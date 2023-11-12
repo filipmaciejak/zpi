@@ -9,6 +9,7 @@ namespace MovementModule
 
         public SteeringSlider steeringSlider;
         public SpeedLever speedLever;
+        public Button leaveButton;
         
         public void Awake()
         {
@@ -33,6 +34,8 @@ namespace MovementModule
             steeringSlider.StoppedControlling += OnEndedSlider;
 
             speedLever.SpeedChanged += OnSpeedChange;
+
+            leaveButton.StartedPress += OnLeave;
         }
 
         public void OnDisable()
@@ -103,6 +106,11 @@ namespace MovementModule
             };
             
             _clientManager.SendDict(sentDict);
+        }
+
+        private void OnLeave(string name)
+        {
+            GameManager.Instance.AbortMinigame();
         }
         
     }

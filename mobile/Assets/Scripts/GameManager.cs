@@ -68,4 +68,14 @@ public class GameManager : MonoBehaviour
     {
         UpdateMinigameData?.Invoke(data);
     }
+
+    public void AbortMinigame()
+    {
+        var abortMessage = new Dictionary<string, string>
+        {
+            {"event", MessageEvent.ABORT_MINIGAME.ToString()}
+        };
+        clientManager.SendDict(abortMessage);
+        SceneManager.LoadScene("MovementScene");
+    }
 }
