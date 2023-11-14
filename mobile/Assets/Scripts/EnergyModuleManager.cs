@@ -82,6 +82,12 @@ public class EnergyModuleManager : MonoBehaviour
     void OnButtonEndedPress(string placeholder)
     {
         SceneManager.LoadScene("MovementScene");
+        Dictionary<string, string> sentDict = new Dictionary<string, string>
+        {
+            { "event", MessageEvent.ABORT_MINIGAME.ToString() },
+        };
+
+        _clientManager.SendDict(sentDict);
     }
 
     void SendMinigameSuccess()

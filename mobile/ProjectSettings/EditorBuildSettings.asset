@@ -5,21 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/QrReadingScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MovementScene.unity
     guid: c58662e167ac2dfa6b3d336322d88c97
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SHIELD_MODULE.unity
     guid: 4b3265deece35e94c9bc5df991016c78
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ENERGY_MODULE.unity
     guid: 4c5d1960ce647594493e5fd04985ffb9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MOVEMENT_MODULE.unity
     guid: f760a1ff470e3a8a89233c1778acc12e
+  - enabled: 1
+    path: Assets/Scenes/GYROSCOPE_MODULE.unity
+    guid: 2d6c27190c7e78145b7b9bcb47e8fa3f
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: d7db9414c2c91e9a3b2f52bc7c94a191, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: a9d5e5272496f64798a38790a2ecf61c, type: 2}

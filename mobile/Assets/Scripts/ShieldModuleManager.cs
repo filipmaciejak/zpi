@@ -33,7 +33,6 @@ public class ShieldModuleManager : MonoBehaviour
     }
     void Start()
     {
-        InputSystem.EnableDevice(LinearAccelerationSensor.current);
         InputSystem.EnableDevice(AttitudeSensor.current);
         fullBatteryTexture = Resources.Load("ShieldBattery") as Texture2D;
     }
@@ -51,7 +50,6 @@ public class ShieldModuleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 acceleration = LinearAccelerationSensor.current.acceleration.ReadValue();
         Vector3 attitude = AttitudeSensor.current.attitude.ReadValue().eulerAngles; 
         
         if ((attitude.x < minAngle + angularMargin || attitude.x > maxAngle - angularMargin) &&
@@ -71,14 +69,19 @@ public class ShieldModuleManager : MonoBehaviour
 
         batterySprite.sprite = Sprite.Create(fullBatteryTexture, new Rect(0,0,fullBatteryTexture.width, fullBatteryTexture.height * currentEnergyInCell / maxEnergyInCell), new Vector2(0.5f, fullBatteryTexture.height / (2 * fullBatteryTexture.height * currentEnergyInCell / maxEnergyInCell)));
 
-        text.SetText( $"Acceleration\nX={acceleration.x:#0.00} Y={acceleration.y:#0.00} Z={acceleration.z:#0.00}\n\n" +
-                        $"Attitude\nX={attitude.x:#0.00} Y={attitude.y:#0.00} Z={attitude.z:#0.00}\n\n" +
-                        $"Result\n{currentEnergyInCell}");
+        text.SetText( $"Attitude\nX={attitude.x:#0.00} Y={attitude.y:#0.00} Z={attitude.z:#0.00}\n\n" +
+                      $"Result\n{currentEnergyInCell}");
     }
 
     void OnButtonEndedPress(string placeholder)
     {
         SceneManager.LoadScene("MovementScene");
+        Dictionary<string, string> sentDict = new Dictionary<string, string>
+        {
+            { "event", MessageEvent.ABORT_MINIGAME.ToString() },
+        };
+
+        _clientManager.SendDict(sentDict);
     }
 
     void SendMinigameSuccess()
