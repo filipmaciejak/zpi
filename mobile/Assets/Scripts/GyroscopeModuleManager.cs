@@ -23,7 +23,7 @@ public class GyroscopeModuleManager : MonoBehaviour
 
     public void Awake()
     {
-        //_clientManager = GameManager.Instance.clientManager;
+        _clientManager = GameManager.Instance.clientManager;
     }
 
     void Start()
@@ -88,7 +88,7 @@ public class GyroscopeModuleManager : MonoBehaviour
             { "event", MessageEvent.ABORT_MINIGAME.ToString() },
         };
 
-        //_clientManager.SendDict(sentDict);
+        _clientManager.SendDict(sentDict);
     }
 
     void OnButtonAEndedPress(string placeholder)
@@ -101,6 +101,6 @@ public class GyroscopeModuleManager : MonoBehaviour
             { "parameter", calibrationValue.ToString("0.00") },
         };
 
-        //_clientManager.SendDict(sentDict);
+        _clientManager.SendDict(sentDict);
     }
 }
