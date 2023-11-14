@@ -72,7 +72,11 @@ public class GyroscopeModuleManager : MonoBehaviour
             if (attitudeY > 180)
                 attitudeY -= 360;
             //swapping x and y here is not a mistake.
-            aim.GetComponent<Rigidbody2D>().AddForce(new Vector2(-attitudeY, attitudeX).normalized * forceFactor);
+            var northFacingDirection = new Vector2(attitudeY, -attitudeX).normalized;
+            //adjusting for orientation
+            float angle = - Mathf.PI * attitude.z / 180.0f;
+            var adjustedDirection = new Vector2(northFacingDirection.x * Mathf.Cos(angle) - northFacingDirection.y * Mathf.Sin(angle), northFacingDirection.x * Mathf.Sin(angle) + northFacingDirection.y * Mathf.Cos(angle));
+            aim.GetComponent<Rigidbody2D>().AddForce(adjustedDirection.normalized * forceFactor);
         }
     }
 
