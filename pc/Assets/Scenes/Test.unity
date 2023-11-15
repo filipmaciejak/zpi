@@ -387,8 +387,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1327771275}
+  - component: {fileID: 1327771276}
   m_Layer: 0
-  m_Name: MovementModule(TODO)
+  m_Name: MovementModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,6 +410,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1327771276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327771274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ecb4dc60d18434b9ac678a0cd895b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mech: {fileID: 1907179428}
+  mechManager: {fileID: 387599555}
+  type: 0
+  isBeingUsed: 0
+  maxVelocity: 0
+  accTime: 0.2
+  stepTime: 0.4
+  baseStepCooldown: 0.6
+  maxRotationSpeed: 100
+  baseRotationSpeed: 30
+  rotationMultiplier: 0
+  rotationDirection: 0
+  direction: 0
+  stepCooldownMultiplier: 1
 --- !u!1 &1503241781
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +723,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 5081774596881587823, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

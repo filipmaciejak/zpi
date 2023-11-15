@@ -66,6 +66,7 @@ public class ShootingModule : Module
 
     public override void Perform()
     {
+        Debug.Log("Body center of mass: " + rb.centerOfMass);
         Rotate();
         Shoot();
     }
