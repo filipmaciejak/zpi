@@ -4,22 +4,9 @@ using UnityEngine;
 
 public class RotationModule : Module
 {
-    MechRotation movement;
-    void Start()
+    //
+    public override void Perform()
     {
-        movement = mech.GetComponent<MechRotation>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (isBeingUsed)
-        {
-            movement.Rotate(1);
-        }
-        else
-        {
-            movement.StopRotation();
-        }
+        throw new System.NotImplementedException();
     }
 }

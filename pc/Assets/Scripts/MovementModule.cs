@@ -5,32 +5,8 @@ using UnityEngine;
 
 public class MovementModule : Module
 {
-    MechRotation movement;
-    Boolean isForward;
-    public void Start()
+    public override void Perform()
     {
-        movement = mech.GetComponent<MechRotation>();
-    }
-
-    public void Update()
-    {
-        if(isBeingUsed) {
-            Move();
-        }
-        else
-        {
-            movement.StopMovement();
-        }
-    }
-    public void Move()
-    {
-        if (isForward)
-        {
-            movement.Move(1);
-        }
-        else
-        {
-            movement.Move(-1);
-        }
+        throw new NotImplementedException();
     }
 }

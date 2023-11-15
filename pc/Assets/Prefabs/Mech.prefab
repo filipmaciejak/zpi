@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3594417520299228071}
   - component: {fileID: 1773487882933682444}
   - component: {fileID: 8438122430545333155}
-  - component: {fileID: 5081774596881587823}
   - component: {fileID: 8059415451779690988}
+  - component: {fileID: 30778622396631485}
   m_Layer: 7
   m_Name: Body
   m_TagString: Player
@@ -157,21 +157,6 @@ PolygonCollider2D:
       - {x: 0.97999996, y: -0.83}
       - {x: 0.97999996, y: 1.2099999}
   m_UseDelaunayMesh: 0
---- !u!114 &5081774596881587823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534248535845332062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b5cab2944062b34aaacb8261e4115b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 30
-  maxRotationSpeed: 100
-  angularSlow: 500
 --- !u!50 &8059415451779690988
 Rigidbody2D:
   serializedVersion: 4
@@ -199,6 +184,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!233 &30778622396631485
+HingeJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534248535845332062}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 1978367146747929633}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 0
+  m_AngleLimits:
+    m_LowerAngle: 0
+    m_UpperAngle: 359
 --- !u!1 &2667729656357632413
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,9 +265,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8821230470402625684}
-  - component: {fileID: 3087194192637260132}
-  - component: {fileID: 6121159161333015593}
-  - component: {fileID: 7346937853321354502}
   - component: {fileID: 4131691009422969128}
   - component: {fileID: 1915707561188242722}
   - component: {fileID: 776119884292870421}
@@ -286,76 +293,6 @@ Transform:
   - {fileID: 5773757438546643509}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3087194192637260132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7052256437403833633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5df6e48da42a864f898b779d7299d1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acceleration: 2.5
-  maxSpeed: 6
-  slowSpeed: 4
-  rotationSpeed: 30
-  maxRotationSpeed: 50
-  angularSlow: 40
---- !u!50 &6121159161333015593
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7052256437403833633}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!233 &7346937853321354502
-HingeJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7052256437403833633}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 8059415451779690988}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
 --- !u!114 &4131691009422969128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +322,7 @@ MonoBehaviour:
   currentHealth: 100
   lives: 3
   maxHealth: 100
+  healthSlider: {fileID: 0}
 --- !u!114 &776119884292870421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentShield: 50
   maxShield: 100
+  shieldBar: {fileID: 0}
 --- !u!1 &7662817498916255913
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +361,9 @@ GameObject:
   - component: {fileID: 5773757438546643509}
   - component: {fileID: 7172844144494963414}
   - component: {fileID: 3001150250962094947}
+  - component: {fileID: 1978367146747929633}
+  - component: {fileID: 4897281213928646643}
+  - component: {fileID: 1058861293781020391}
   m_Layer: 8
   m_Name: Legs
   m_TagString: Player
@@ -574,3 +516,63 @@ PolygonCollider2D:
       - {x: -0.38, y: -1.04}
       - {x: -0.34, y: -0.64}
   m_UseDelaunayMesh: 0
+--- !u!50 &1978367146747929633
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662817498916255913}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 25
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &4897281213928646643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662817498916255913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ecb4dc60d18434b9ac678a0cd895b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxVelocity: 5
+  accTime: 0.2
+  stepTime: 0.4
+  baseStepCooldown: 0.6
+  stepCooldownMultiplier: 1
+--- !u!114 &1058861293781020391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662817498916255913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5df6e48da42a864f898b779d7299d1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRotationSpeed: 100
+  baseRotationSpeed: 30
+  rotationMultiplier: 0
+  rotationDirection: 0
