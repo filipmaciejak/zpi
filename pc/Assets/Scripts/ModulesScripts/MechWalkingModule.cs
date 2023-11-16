@@ -39,7 +39,7 @@ public class MechWalkingModule : Module
     [SerializeField]
     private float stepCooldownMultiplier = 1f;
 
-    void Start()
+    new void Start()
     {
         base.Start();
         rb = mech.transform.Find("Legs").GetComponent<Rigidbody2D>();

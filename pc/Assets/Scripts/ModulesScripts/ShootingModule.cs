@@ -22,9 +22,7 @@ public class ShootingModule : Module
     [SerializeField]
     float maxRotationSpeed = 100.0f;
 
-#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
-    void Start()
-#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+    new void Start()
     {
         base.Start();
         Transform body = mech.transform.Find("Body");
