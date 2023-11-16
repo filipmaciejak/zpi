@@ -3,23 +3,32 @@ using System.Collections.Generic;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
-public class BodyMovement : MonoBehaviour
+public class ShootingModule : Module
 {
 
     private Rigidbody2D rb;
 
+    [SerializeField] 
+    private bool isShooting;
 
+    private MechShooting cannon;
+
+    [SerializeField]
     private float rotationMultiplier;
+    [SerializeField]
     private float direction;
     [SerializeField]
-    float baseRotationSpeed = 30.0f; // Adjust the speed as needed
+    float baseRotationSpeed = 30.0f;
     [SerializeField]
     float maxRotationSpeed = 100.0f;
 
-    void Start()
+    new void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        base.Start();
+        Transform body = mech.transform.Find("Body");
+        rb = body.GetComponent<Rigidbody2D>();
         rb.centerOfMass = Vector3.zero;
+        cannon = body.Find("Cannon").GetComponent<MechShooting>();
     }
 
     public void Rotate()
@@ -29,7 +38,13 @@ public class BodyMovement : MonoBehaviour
         else if (rb.angularVelocity < 0 && Mathf.Abs(rb.angularVelocity) > maxRotationSpeed) rb.angularVelocity = -maxRotationSpeed;
         rb.AddTorque(rotationAngle);
     }
-
+    public void Shoot()
+    {
+        if (isShooting)
+        {
+            cannon.ShootBullet();
+        }
+    }
     public void ChangeRotationMultiplier(float input)
     {
         rotationMultiplier = Mathf.Abs(input);
@@ -45,5 +60,12 @@ public class BodyMovement : MonoBehaviour
         {
             direction = 0;
         }
+    }
+
+    public override void Perform()
+    {
+        Debug.Log("Body center of mass: " + rb.centerOfMass);
+        Rotate();
+        Shoot();
     }
 }

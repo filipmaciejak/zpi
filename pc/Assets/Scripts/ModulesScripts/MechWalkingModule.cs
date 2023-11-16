@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class MechWalking : MonoBehaviour
+public class MechWalkingModule : Module
 {
     [SerializeField]
     private float maxVelocity;
@@ -17,16 +17,32 @@ public class MechWalking : MonoBehaviour
     [SerializeField]
     private float baseStepCooldown = 0.6f;
 
-    
+    [SerializeField]
+    private float maxRotationSpeed = 100f;
+
+    [SerializeField]
+    private float baseRotationSpeed = 30.0f;
+
+    [SerializeField]
+    private float rotationMultiplier = 0f;
+
+    [SerializeField]
+    private float rotationDirection = 0f;
+
     private float timeCounter;
     private float mass;
     private Rigidbody2D rb;
-    private float direction = 0f;
-    public float stepCooldownMultiplier = 1f;
 
-    void Start()
+    [SerializeField]
+    private float direction = 0f;
+
+    [SerializeField]
+    private float stepCooldownMultiplier = 1f;
+
+    new void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        base.Start();
+        rb = mech.transform.Find("Legs").GetComponent<Rigidbody2D>();
         mass = rb.mass;
         rb.centerOfMass = Vector3.zero;
         timeCounter = 0;
@@ -54,7 +70,6 @@ public class MechWalking : MonoBehaviour
         }
 
     }
-
     public void ChangeStep(float input)
     {
         float multiplier = Mathf.Abs(input);
@@ -68,5 +83,32 @@ public class MechWalking : MonoBehaviour
             direction = -1;
         }
         else { direction = 0; }
+    }
+
+    public void Rotate()
+    {
+        float rotationForce = baseRotationSpeed * rotationMultiplier * rotationDirection;
+        if (rb.angularVelocity > 0 && rb.angularVelocity > maxRotationSpeed) rb.angularVelocity = maxRotationSpeed;
+        else if (rb.angularVelocity < 0 && Mathf.Abs(rb.angularVelocity) > maxRotationSpeed) rb.angularVelocity = -maxRotationSpeed;
+        rb.AddTorque(rotationForce);
+    }
+
+    public void ChangeRotationMultiplier(float rotationMultiplier)
+    {
+        this.rotationMultiplier = Mathf.Abs(rotationMultiplier);
+        if (rotationMultiplier > 0)
+        {
+            rotationDirection = -1;
+        }
+        else if (rotationMultiplier < 0)
+        {
+            rotationDirection = 1;
+        }
+        else { rotationDirection = 0; }
+    }
+    public override void Perform()
+    {
+        ApplyStepForce();
+        Rotate();
     }
 }
