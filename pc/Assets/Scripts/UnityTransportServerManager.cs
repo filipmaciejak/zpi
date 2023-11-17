@@ -130,19 +130,19 @@ public class ServerManager : MonoBehaviour
             string buttonName = dict_message["button_name"];
             string buttonEvent = dict_message["button_event"];
             
-            if buttonName.Equals("Button A") && buttonEvent.Equals("started") {
+            if (buttonName.Equals("Button A") && buttonEvent.Equals("started")) {
                 CrewmateEventManager.instance.onCrewmateButtonAPushed.Invoke(id);
                 return true;
             }
-            else if buttonName.Equals("Button A") && buttonEvent.Equals("ended") {
+            else if (buttonName.Equals("Button A") && buttonEvent.Equals("ended")) {
                 CrewmateEventManager.instance.onCrewmateButtonAReleased.Invoke(id);
                 return true;
             }
-            else if buttonName.Equals("Button B") && buttonEvent.Equals("started") {
+            else if (buttonName.Equals("Button B") && buttonEvent.Equals("started")) {
                 CrewmateEventManager.instance.onCrewmateButtonBPushed.Invoke(id);
                 return true;
             }
-            else if buttonName.Equals("Button B") && buttonEvent.Equals("ended") {
+            else if (buttonName.Equals("Button B") && buttonEvent.Equals("ended")) {
                 CrewmateEventManager.instance.onCrewmateButtonBReleased.Invoke(id);
                 return true;
             }
