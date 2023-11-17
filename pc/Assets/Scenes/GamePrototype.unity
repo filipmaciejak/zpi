@@ -784,7 +784,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1429421088}
   m_SourcePrefab: {fileID: 100100000, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
 --- !u!1 &879928592
 GameObject:
@@ -4312,6 +4315,7 @@ GameObject:
   - component: {fileID: 1002371846}
   - component: {fileID: 1002371845}
   - component: {fileID: 1002371844}
+  - component: {fileID: 1002371847}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4375,7 +4379,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &1002371846
@@ -4393,6 +4397,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 241747295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1002371847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002371843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78198b6cb988f9a4f81035ddb55d4a42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSize: 4
+  maxSize: 20
+  distanceOffset: 0.1
+  mech1: {fileID: 1429421079}
+  mech2: {fileID: 799955745}
 --- !u!1 &1273925839
 GameObject:
   m_ObjectHideFlags: 0
@@ -4573,6 +4594,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
   m_PrefabInstance: {fileID: 817068364}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1429421088
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429421079}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &1516825664
 PrefabInstance:
   m_ObjectHideFlags: 0
