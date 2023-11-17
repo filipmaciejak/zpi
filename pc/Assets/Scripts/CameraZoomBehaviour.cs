@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraZoom : MonoBehaviour
+public class CameraZoomBehaviour: MonoBehaviour
 {
     [SerializeField]
     private int minSize = 4;
