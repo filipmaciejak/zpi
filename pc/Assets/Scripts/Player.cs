@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
         groundCheck = transform.Find("GroundCheck");
         rb = GetComponent<Rigidbody2D>();
 
-        CrewmateEventManager.instance.onCrewmateJump.AddListener(
+        CrewmateEventManager.instance.onCrewmateButtonAPushed.AddListener(
             (id) => {
                 if (id != _id) return;
                 Jump();
@@ -38,19 +38,6 @@ public class Player : MonoBehaviour
             }
         );
 
-        CrewmateEventManager.instance.onCrewmateInteractionStart.AddListener(
-            (id) => {
-                if (id != _id) return;
-                Interact();
-            }
-        );
-
-        CrewmateEventManager.instance.onCrewmateInteractionEnd.AddListener(
-            (id) => {
-                if (id != _id) return;
-                FinishInteraction();
-            }
-        );
     }
 
     void FixedUpdate()

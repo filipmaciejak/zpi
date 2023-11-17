@@ -7,10 +7,11 @@ public class CrewmateEventManager : MonoBehaviour
 {
     public static CrewmateEventManager instance;
 
-    public UnityEvent<int> onCrewmateJump;
     public UnityEvent<int, float, float> onCrewmateMoveInputUpdate;
-    public UnityEvent<int> onCrewmateInteractionStart;
-    public UnityEvent<int> onCrewmateInteractionEnd;
+    public UnityEvent<int> onCrewmateButtonAPushed;
+    public UnityEvent<int> onCrewmateButtonAReleased;
+    public UnityEvent<int> onCrewmateButtonBPushed;
+    public UnityEvent<int> onCrewmateButtonBReleased;
 
     void Awake()
     {
@@ -21,9 +22,10 @@ public class CrewmateEventManager : MonoBehaviour
     {
         instance = this;
 
-        onCrewmateJump = new UnityEvent<int>();
         onCrewmateMoveInputUpdate = new UnityEvent<int, float, float>();
-        onCrewmateInteractionStart = new UnityEvent<int>();
-        onCrewmateInteractionEnd = new UnityEvent<int>();
+        onCrewmateButtonAPushed = new UnityEvent<int>();
+        onCrewmateButtonAReleased = new UnityEvent<int>();
+        onCrewmateButtonBPushed = new UnityEvent<int>();
+        onCrewmateButtonBReleased = new UnityEvent<int>();
     }
 }

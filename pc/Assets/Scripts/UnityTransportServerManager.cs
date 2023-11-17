@@ -123,10 +123,60 @@ public class ServerManager : MonoBehaviour
         }
     }
 
+    bool HandleButtonPushedEvent(Dictionary<string, string> dict_message)
+    {
+        try {
+            int id = int.Parse(dict_message["player"]);
+            string buttonName = dict_message["button_name"];
+            string buttonEvent = dict_message["button_event"];
+            
+            if buttonName.Equals("Button A") && buttonEvent.Equals("started") {
+                CrewmateEventManager.instance.onCrewmateButtonAPushed.Invoke(id);
+                return true;
+            }
+            else if buttonName.Equals("Button A") && buttonEvent.Equals("ended") {
+                CrewmateEventManager.instance.onCrewmateButtonAReleased.Invoke(id);
+                return true;
+            }
+            else if buttonName.Equals("Button B") && buttonEvent.Equals("started") {
+                CrewmateEventManager.instance.onCrewmateButtonBPushed.Invoke(id);
+                return true;
+            }
+            else if buttonName.Equals("Button B") && buttonEvent.Equals("ended") {
+                CrewmateEventManager.instance.onCrewmateButtonBReleased.Invoke(id);
+                return true;
+            }
+            return false;
+        } catch (Exception) {
+            return false;
+        }
+    }
+
+    bool HandleJoystickPositionEvent(Dictionary<string, string> dict_message)
+    {
+        try {
+            int id = int.Parse(dict_message["player"]);
+            float inputX = float.Parse(dict_message["x"]);
+            float inputY = float.Parse(dict_message["y"]);
+            CrewmateEventManager.instance.onCrewmateMoveInputUpdate.Invoke(id, inputX, inputY);
+            return true;
+        } catch (Exception) {
+            return false;
+        }
+    }
+
+    bool HandleUpdateMinigameEvent(Dictionary<string, string> dict_message)
+    {
+        try {
+            //  todo
+            return true;
+        } catch (Exception) {
+            return false;
+        }
+    }
+
     void HandleMessage(byte[] message, int connectionId)
     {
-        Debug.Log(Encoding.UTF8.GetString(message));
-        
         try
         {
             Dictionary<string, string> dict_message = JsonConvert.DeserializeObject<Dictionary<string, string>>(Encoding.UTF8.GetString(message));
@@ -146,24 +196,28 @@ public class ServerManager : MonoBehaviour
             }
             else if (dict_message["event"].Equals(MessageEvent.BUTTON_PUSHED.ToString()))
             {
-                int id = int.Parse(dict_message["player"]);
-                if (dict_message["button_event"].Equals("started") && dict_message["button_name"].Equals("Button A"))
-                    CrewmateEventManager.instance.onCrewmateJump.Invoke(id);
-                else if (dict_message["button_event"].Equals("started") && dict_message["button_name"].Equals("Button B"))
-                    CrewmateEventManager.instance.onCrewmateInteractionStart.Invoke(id);
-                else if (dict_message["button_event"].Equals("ended") && dict_message["button_name"].Equals("Button B"))
-                    CrewmateEventManager.instance.onCrewmateInteractionEnd.Invoke(id);
+                bool success = HandleButtonPushedEvent(dict_message);
+                if (!success) {
+                    Debug.Log("Unrecognised button event: " + Encoding.UTF8.GetString(message));
+                }
             }
             else if (dict_message["event"].Equals(MessageEvent.JOYSTICK_POSITION.ToString()))
             {
-                int id = int.Parse(dict_message["player"]);
-                float inputX = float.Parse(dict_message["x"]);
-                float inputY = float.Parse(dict_message["y"]);
-                CrewmateEventManager.instance.onCrewmateMoveInputUpdate.Invoke(id, inputX, inputY);
+                bool success = HandleJoystickPositionEvent(dict_message);
+                if (!success) {
+                    Debug.Log("Unrecognised joystick event: " + Encoding.UTF8.GetString(message));
+                }
+            }
+            else if (dict_message["event"].Equals(MessageEvent.UPDATE_MINIGAME.ToString()))
+            {
+                bool success = HandleUpdateMinigameEvent(dict_message);
+                if (!success) {
+                    Debug.Log("Unrecognised minigame event: " + Encoding.UTF8.GetString(message));
+                }
             }
             else
             {
-                Debug.Log("Unrecognised message event: " + dict_message["event"]);
+                Debug.Log("Unrecognised message: " + Encoding.UTF8.GetString(message));
             }
         }
         catch (Exception)
