@@ -412,6 +412,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mech: {fileID: 1429421079}
   mechManager: {fileID: 1969167512}
+  energyConsumption: 5
+  consumeCooldown: 2
+  activeEnergyConsumptionMultiplier: 1
   type: 0
   isBeingUsed: 0
   maxVelocity: 0
@@ -749,6 +752,10 @@ PrefabInstance:
       propertyPath: mech
       value: 
       objectReference: {fileID: 799955745}
+    - target: {fileID: 4384650392055652072, guid: c0bff73a75307ab469bb300c1b7968c7, type: 3}
+      propertyPath: mechManager
+      value: 
+      objectReference: {fileID: 1969167512}
     - target: {fileID: 4532861359481348301, guid: c0bff73a75307ab469bb300c1b7968c7, type: 3}
       propertyPath: m_Name
       value: MovementModule
@@ -828,7 +835,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1429421084}
   m_SourcePrefab: {fileID: 100100000, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
 --- !u!1 &879928592
 GameObject:
@@ -4635,6 +4645,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
   m_PrefabInstance: {fileID: 817068364}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1429421084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429421079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbc7a3c0cf742a4f85eed39b4e24f64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnergy: 100
 --- !u!1001 &1516825664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4753,6 +4776,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mech: {fileID: 799955745}
   mechManager: {fileID: 1969167512}
+  energyConsumption: 5
+  consumeCooldown: 2
+  activeEnergyConsumptionMultiplier: 1
   type: 0
   isBeingUsed: 0
   maxVelocity: 0

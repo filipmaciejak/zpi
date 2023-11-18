@@ -14,6 +14,7 @@ public class MechManager : MonoBehaviour
         foreach (var module in modules)
         {
             module.Perform();
+            module.ConsumeEnergy();
         }
     }
 

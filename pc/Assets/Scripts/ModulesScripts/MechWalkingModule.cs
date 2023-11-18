@@ -15,7 +15,7 @@ public class MechWalkingModule : Module
     private float stepTime = 0.4f;
 
     [SerializeField]
-    private float baseStepCooldown = 0.6f;
+    private float baseStepCooldown = 1.5f;
 
     [SerializeField]
     private float maxRotationSpeed = 100f;
@@ -51,7 +51,7 @@ public class MechWalkingModule : Module
 
     float GetStepCycleTime()
     {
-        return accTime + stepTime + baseStepCooldown * stepCooldownMultiplier;
+        return accTime + stepTime + GetStepCooldown();
     }
 
     float CalculateAccForce()
@@ -65,7 +65,7 @@ public class MechWalkingModule : Module
         if (timeCounter >= GetStepCycleTime()) { timeCounter = 0; }
         else if (timeCounter >= 0 && timeCounter <= accTime)
         {
-            Vector2 force = rb.transform.up * CalculateAccForce() * direction;
+            Vector2 force = CalculateAccForce() * direction * rb.transform.up;
             rb.AddForce(force);
         }
 
@@ -73,7 +73,7 @@ public class MechWalkingModule : Module
     public void ChangeStep(float input)
     {
         float multiplier = Mathf.Abs(input);
-        stepCooldownMultiplier = multiplier;
+        stepCooldownMultiplier = 1/multiplier;
         if (input > 0)
         {
             direction = 1;
@@ -87,7 +87,7 @@ public class MechWalkingModule : Module
 
     public void Rotate()
     {
-        float rotationForce = baseRotationSpeed * rotationMultiplier * rotationDirection;
+        float rotationForce = GetRotationSpeed() * rotationDirection;
         if (rb.angularVelocity > 0 && rb.angularVelocity > maxRotationSpeed) rb.angularVelocity = maxRotationSpeed;
         else if (rb.angularVelocity < 0 && Mathf.Abs(rb.angularVelocity) > maxRotationSpeed) rb.angularVelocity = -maxRotationSpeed;
         rb.AddTorque(rotationForce);
@@ -111,4 +111,21 @@ public class MechWalkingModule : Module
         ApplyStepForce();
         Rotate();
     }
+
+    public override void SetLowEnergyBehaviour(bool isLowEnergy)
+    {
+        lowEnergyMode = isLowEnergy;
+    }
+
+    public float GetRotationSpeed()
+    {
+        return baseRotationSpeed * rotationMultiplier * (lowEnergyMode ? lowEnergyModeMulltiplier : 1);
+    }
+
+    public float GetStepCooldown()
+    {
+        return baseStepCooldown * (lowEnergyMode ? 3 : stepCooldownMultiplier);
+    } 
+
+
 }
