@@ -5,9 +5,15 @@ using UnityEngine;
 
 public class MechShooting : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-    public float bulletSpeed = 20; 
-    public float cooldown = 0.5f;
+    [SerializeField]
+    private GameObject bulletPrefab;
+
+    [SerializeField]
+    private float bulletSpeed = 20;
+
+    [SerializeField]
+    private float cooldown = 0.5f;
+
     private float lastShotTime = 0;
     public void ShootBullet()
     {
@@ -18,5 +24,15 @@ public class MechShooting : MonoBehaviour
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.velocity = rb.transform.up * bulletSpeed;
         }
+    }
+
+    public float GetCooldown()
+    {
+        return cooldown;
+    }
+
+    public void SetCooldown(float cooldown)
+    {
+        this.cooldown = cooldown;
     }
 }
