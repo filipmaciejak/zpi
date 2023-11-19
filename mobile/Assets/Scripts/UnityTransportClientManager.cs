@@ -25,7 +25,7 @@ public class ClientManager : MonoBehaviour
 {
     NetworkDriver m_Driver;
     NetworkConnection m_Connection;
-    int playerId = -1;
+    public int playerId = -1;
 
     const int DISCONNECT_TIMEOUT_MS = 5000;
     const int CONNECT_TIMEOUT_MS = 5000;
