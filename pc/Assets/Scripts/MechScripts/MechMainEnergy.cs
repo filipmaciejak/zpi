@@ -35,7 +35,13 @@ public class MechMainEnergy : MonoBehaviour
 
     public float GetCurrentEnergy()
     {
+        if (currentEnergy >= 0) { return currentEnergy; }
         return currentEnergy;
+    }
+
+    public float GetMaxEnergy()
+    {
+        return maxEnergy;
     }
 
 }
