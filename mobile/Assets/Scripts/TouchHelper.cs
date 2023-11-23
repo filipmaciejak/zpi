@@ -63,4 +63,11 @@ public class TouchHelper : MonoBehaviour
         var fingerPos = ScaleScreenToCanvas(finger.screenPosition);
         return rect.Contains(fingerPos);
     }
+
+    public Boolean FingerInsideBounds(Bounds bounds, Finger finger)
+    {
+        var worldFinger = Camera.main.ScreenToWorldPoint(finger.screenPosition);
+        worldFinger = new Vector3(worldFinger.x, worldFinger.y, bounds.center.z);
+        return bounds.Contains(worldFinger);
+    }
 }
