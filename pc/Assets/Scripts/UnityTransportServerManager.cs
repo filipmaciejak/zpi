@@ -66,6 +66,14 @@ public class ServerManager : MonoBehaviour
                 SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_message)), id);
             }
         );
+
+        ModuleEventManager.instance.onMinigameInitialized.AddListener(
+            (id, dict) => {
+                dict.Add("event", MessageEvent.UPDATE_MINIGAME.ToString());
+                dict.Add("player", id.ToString());
+                SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict)), id);
+            }
+        );
     }
 
     void OnDestroy()
@@ -282,7 +290,7 @@ public class ServerManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Sending data...");
+        // Debug.Log("Sending data...");
         NativeArray<byte> buffer = new NativeArray<byte>(message, Allocator.Temp);
         m_Driver.BeginSend(NetworkPipeline.Null, m_Connections[playerId], out var writer);
         writer.WriteBytes(buffer);

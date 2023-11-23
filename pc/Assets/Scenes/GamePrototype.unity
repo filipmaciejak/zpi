@@ -4062,7 +4062,7 @@ PrefabInstance:
       objectReference: {fileID: 1429421079}
     - target: {fileID: 594634518449913297, guid: 723547e894bc85641a25d2d62b749ecd, type: 3}
       propertyPath: type
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 594634518449913297, guid: 723547e894bc85641a25d2d62b749ecd, type: 3}
       propertyPath: mechManager

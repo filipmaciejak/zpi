@@ -37,6 +37,13 @@ public class Player : MonoBehaviour
                 bool success = Interact();
                 if (success) {
                     ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type);
+
+                    if (usedModule.type == Module.Type.MOVEMENT_MODULE) {
+                        Dictionary<string, string> dict = new Dictionary<string, string>();
+                        dict.Add("steering_pos", "1"); // TODO: Add steering pos
+                        dict.Add("speed_pos", "1"); // TODO: Add speed pos
+                        ModuleEventManager.instance.onMinigameInitialized.Invoke(_id, dict);
+                    }
                 }
             }
         );
