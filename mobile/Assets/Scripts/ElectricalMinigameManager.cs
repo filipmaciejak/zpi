@@ -17,6 +17,8 @@ public class ElectricalMinigameManager : MonoBehaviour
     private GameObject _currentlyDrawnLine;
     private Dictionary<GameObject, bool> _isCableConnected;
     private Material _cableMaterial;
+    private GameObject _startingCable;
+    private int _numberOfConnectedCables;
     
 
     private static System.Random rng = new System.Random();
@@ -24,7 +26,7 @@ public class ElectricalMinigameManager : MonoBehaviour
 
     public void Awake()
     {
-        //_clientManager = GameManager.Instance.clientManager;
+        _clientManager = GameManager.Instance.clientManager;
     }
 
     private void OnEnable()
@@ -47,7 +49,7 @@ public class ElectricalMinigameManager : MonoBehaviour
 
     void Start()
     {
-        _cableMaterial = (Material)Resources.Load("LineMaterial", typeof(Material));
+        _numberOfConnectedCables = 0;
         _isCableConnected = new Dictionary<GameObject, bool>();
         List<Color> colorList = new List<Color>()
         { Color.blue, Color.red, Color.green, Color.cyan, Color.magenta };
@@ -68,27 +70,28 @@ public class ElectricalMinigameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(_numberOfConnectedCables >= _isCableConnected.Count)
+        {
+            SendMinigameSuccess();
+            EndMinigame();
+        }
     }
 
     private void OnFingerDown(Finger finger)
     {
-        Debug.Log(finger.screenPosition);
-        Debug.Log(_touchHelper.ScaleScreenToCanvas(finger.screenPosition));
         if (_cableFinger != null)
             return;
 
-        GameObject startingCable = null;
+        _startingCable = null;
         foreach(var cable in leftCableList)
         {
             if (_touchHelper.FingerInsideBounds(cable.GetComponent<SpriteRenderer>().bounds, finger))
             {
-                startingCable = cable;
-                cable.GetComponent<SpriteRenderer>().color=Color.yellow;
+                _startingCable = cable;
             }
         }
 
-        if (startingCable == null || _isCableConnected[startingCable])
+        if (_startingCable == null || _isCableConnected[_startingCable])
             return;
         
         _cableFinger = finger;
@@ -97,15 +100,16 @@ public class ElectricalMinigameManager : MonoBehaviour
 
         _currentlyDrawnLine = new GameObject("Line");
         var lineRenderer = _currentlyDrawnLine.AddComponent<LineRenderer>();
-        _cableMaterial.color = Color.red;
-        lineRenderer.material = _cableMaterial;
+        lineRenderer.material = _startingCable.GetComponent<SpriteRenderer>().material;
+        lineRenderer.startColor = _startingCable.GetComponent<SpriteRenderer>().color;
+        lineRenderer.endColor = _startingCable.GetComponent<SpriteRenderer>().color;
         lineRenderer.startWidth = 1f;
         lineRenderer.endWidth = 1f;
         lineRenderer.positionCount = 2;
         lineRenderer.useWorldSpace = true;
 
-        var position = startingCable.GetComponent<SpriteRenderer>().bounds.center;
-        lineRenderer.SetPosition(0, new Vector3(position.x, position.y, 0)); //x,y and z position of the starting point of the line
+        var position = _startingCable.GetComponent<SpriteRenderer>().bounds.center;
+        lineRenderer.SetPosition(0, new Vector3(position.x, position.y, -_numberOfConnectedCables)); //x,y and z position of the starting point of the line
         OnFingerMove(finger);
     }
 
@@ -113,10 +117,11 @@ public class ElectricalMinigameManager : MonoBehaviour
     {
         if (finger != _cableFinger)
             return;
-        var fingerPos = _touchHelper.ScaleScreenToCanvas(finger.screenPosition);
-        Debug.Log(fingerPos);
+        var fingerPos = Camera.main.ScreenToWorldPoint(finger.screenPosition);
         if(_currentlyDrawnLine != null)
-            _currentlyDrawnLine.GetComponent<LineRenderer>().SetPosition(1, new Vector3(fingerPos.x, fingerPos.y, 0));
+        {
+            _currentlyDrawnLine.GetComponent<LineRenderer>().SetPosition(1, new Vector3(fingerPos.x, fingerPos.y, -_numberOfConnectedCables));
+        }
     }
 
     private void OnFingerUp(Finger finger)
@@ -126,13 +131,23 @@ public class ElectricalMinigameManager : MonoBehaviour
 
         _cableFinger = null;
 
-        //jesli palec jest w koncowym punkcie pozostaw linie i zaktualizuj punkt koncowy
-        //jesli nie to usun linie
-        if (_currentlyDrawnLine != null)
+        bool isSuccess = false;
+        foreach (var cable in rightCableList)
         {
-            Destroy(_currentlyDrawnLine);
-            _currentlyDrawnLine = null;
+            if (_touchHelper.FingerInsideBounds(cable.GetComponent<SpriteRenderer>().bounds, finger))
+            {
+                _currentlyDrawnLine.GetComponent<LineRenderer>().SetPosition(1, cable.GetComponent<SpriteRenderer>().bounds.center);
+                _isCableConnected[_startingCable] = true;
+                isSuccess = true;
+                ++_numberOfConnectedCables;
+            }
         }
+        if (!isSuccess && _currentlyDrawnLine != null)
+        {
+            Destroy(_currentlyDrawnLine);            
+        }
+        _currentlyDrawnLine = null;
+        _startingCable = null;
     }
 
     void SendMinigameSuccess()
