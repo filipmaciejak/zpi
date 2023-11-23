@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 1915707561188242722}
   - component: {fileID: 776119884292870421}
   - component: {fileID: 246317872167400230}
+  - component: {fileID: 6779687987172913256}
   m_Layer: 6
   m_Name: Mech
   m_TagString: Player
@@ -350,6 +351,18 @@ MonoBehaviour:
   currentShield: 50
   maxShield: 100
   shieldBar: {fileID: 0}
+--- !u!114 &6779687987172913256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7052256437403833633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83b3282a79969e42928bb2a886b55d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7662817498916255913
 GameObject:
   m_ObjectHideFlags: 0

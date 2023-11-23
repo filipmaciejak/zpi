@@ -30,11 +30,28 @@ public class Player : MonoBehaviour
                 Jump();
             }
         );
+
+        CrewmateEventManager.instance.onCrewmateButtonBPushed.AddListener(
+            (id) => {
+                if (id != _id) return;
+                bool success = Interact();
+                if (success) {
+                    ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type);
+                }
+            }
+        );
         
         CrewmateEventManager.instance.onCrewmateMoveInputUpdate.AddListener(
             (id, inputX, inputY) => {
                 if (id != _id) return;
                 UpdateMoveInput(inputX);
+            }
+        );
+
+        ModuleEventManager.instance.onMinigameAborted.AddListener(
+            (id) => {
+                if (id != _id) return;
+                FinishInteraction();
             }
         );
 
@@ -67,20 +84,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Interact()
+    public bool Interact()
     {
-        if (usedModule != null) return;
+        if (usedModule != null) return false;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero, 0f, moduleLayer);
-        if (hit.collider == null) return;
+        if (hit.collider == null) return false;
 
         Module module = hit.collider.GetComponent<Module>();
-        if (module.isBeingUsed) return;
+        if (module.isBeingUsed) return false;
 
         UpdateMoveInput(0f);
         usedModule = module;
         usedModule.isBeingUsed = true;
         Debug.Log($"Interaction with {usedModule.type} module started!");
+        return true;
     }
 
     public void FinishInteraction()

@@ -6,7 +6,7 @@ public abstract class Module : MonoBehaviour
 {
     public GameObject mech;
     public GameObject mechManager;
-    public enum Type {Walking, Shield, Gun};
+    public enum Type {ENERGY_MODULE, SHIELD_MODULE, GYROSCOPE_MODULE};
     [SerializeField] public Type type;
     public bool isBeingUsed = false;
     public abstract void Perform();

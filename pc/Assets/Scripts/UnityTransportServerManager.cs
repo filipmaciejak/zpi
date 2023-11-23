@@ -56,6 +56,16 @@ public class ServerManager : MonoBehaviour
         }
 
         System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
+        ModuleEventManager.instance.onModuleEntered.AddListener(
+            (id, type) => {
+                Dictionary<string, string> dict_message = new Dictionary<string, string>();
+                dict_message.Add("event", MessageEvent.START_MINIGAME.ToString());
+                dict_message.Add("player", id.ToString());
+                dict_message.Add("minigame", type.ToString());
+                SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_message)), id);
+            }
+        );
     }
 
     void OnDestroy()
@@ -107,7 +117,7 @@ public class ServerManager : MonoBehaviour
             {
                 if (cmd == NetworkEvent.Type.Data)
                 {
-                    Debug.Log("Reading data...");
+                    // Debug.Log("Reading data...");
                     NativeArray<byte> buffer = new NativeArray<byte>(stream.Length, Allocator.Temp, NativeArrayOptions.ClearMemory);
                     stream.ReadBytes(buffer);
                     HandleMessage(buffer.ToArray(), i);
@@ -168,7 +178,38 @@ public class ServerManager : MonoBehaviour
     bool HandleUpdateMinigameEvent(Dictionary<string, string> dict_message)
     {
         try {
-            //  todo
+            int id = int.Parse(dict_message["player"]);
+            if (dict_message.ContainsKey("energy")) {
+
+                int energy = int.Parse(dict_message["energy"]);
+                if (energy == 1) {
+                    ModuleEventManager.instance.onEnergyModuleUpdate.Invoke(id);
+                }
+
+            } else if (dict_message.ContainsKey("parameter")) {
+
+                float parameter = float.Parse(dict_message["parameter"]);
+                ModuleEventManager.instance.onGyroscopeModuleUpdate.Invoke(id, parameter);
+
+            } else if (dict_message.ContainsKey("shield")) {
+
+                int shield = int.Parse(dict_message["shield"]);
+                if (shield == 1) {
+                    ModuleEventManager.instance.onShieldModuleUpdate.Invoke(id);
+                }
+
+            }
+            return true;
+        } catch (Exception) {
+            return false;
+        }
+    }
+
+    bool HandleAbortMinigameEvent(Dictionary<string, string> dict_message)
+    {
+        try {
+            int id = int.Parse(dict_message["player"]);
+            ModuleEventManager.instance.onMinigameAborted.Invoke(id);
             return true;
         } catch (Exception) {
             return false;
@@ -212,7 +253,14 @@ public class ServerManager : MonoBehaviour
             {
                 bool success = HandleUpdateMinigameEvent(dict_message);
                 if (!success) {
-                    Debug.Log("Unrecognised minigame event: " + Encoding.UTF8.GetString(message));
+                    Debug.Log("Unrecognised minigame update event: " + Encoding.UTF8.GetString(message));
+                }
+            }
+            else if (dict_message["event"].Equals(MessageEvent.ABORT_MINIGAME.ToString()))
+            {
+                bool success = HandleAbortMinigameEvent(dict_message);
+                if (!success) {
+                    Debug.Log("Unrecognised minigame abort event: " + Encoding.UTF8.GetString(message));
                 }
             }
             else
@@ -241,6 +289,5 @@ public class ServerManager : MonoBehaviour
         m_Driver.EndSend(writer);
         buffer.Dispose();
     }
-
 
 }
