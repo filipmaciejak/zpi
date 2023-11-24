@@ -13,6 +13,8 @@ public class ShootingModule : Module
 
     private MechShooting cannon;
 
+    private float lastTimeShot;
+
     [SerializeField]
     private float rotationMultiplier;
     [SerializeField]
@@ -29,11 +31,12 @@ public class ShootingModule : Module
         rb = body.GetComponent<Rigidbody2D>();
         rb.centerOfMass = Vector3.zero;
         cannon = body.Find("Cannon").GetComponent<MechShooting>();
+        lastTimeShot = Time.time - cannon.GetCooldown(); 
     }
 
     public void Rotate()
     {
-        float rotationAngle = direction * baseRotationSpeed * rotationMultiplier;
+        float rotationAngle = direction * GetRotationSpeed();
         if (rb.angularVelocity > 0 && rb.angularVelocity > maxRotationSpeed) rb.angularVelocity = maxRotationSpeed;
         else if (rb.angularVelocity < 0 && Mathf.Abs(rb.angularVelocity) > maxRotationSpeed) rb.angularVelocity = -maxRotationSpeed;
         rb.AddTorque(rotationAngle);
@@ -42,7 +45,11 @@ public class ShootingModule : Module
     {
         if (isShooting)
         {
-            cannon.ShootBullet();
+            if (Time.time >= lastTimeShot + GetCannonCooldown()) 
+            {
+                cannon.ShootBullet();
+                lastTimeShot += Time.time;
+            }
         }
     }
     public void ChangeRotationMultiplier(float input)
@@ -68,4 +75,20 @@ public class ShootingModule : Module
         Rotate();
         Shoot();
     }
+
+    private float GetRotationSpeed()
+    {
+        return baseRotationSpeed * rotationMultiplier * (lowEnergyMode ? lowEnergyModeMulltiplier: 1);
+    }
+
+    private float GetCannonCooldown()
+    {
+        return cannon.GetCooldown() * (lowEnergyMode ? 1 / lowEnergyModeMulltiplier : 1);
+    }
+    public override void SetLowEnergyBehaviour(bool isLowEnergy)
+    {
+        lowEnergyMode = isLowEnergy;
+    }
+
+
 }
