@@ -8,4 +8,9 @@ public class PlaceholderModule : Module
     {
         Debug.Log("PlaceholderModule.Perform()");
     }
+
+    public override void SetLowEnergyBehaviour(bool isLowEnergy)
+    {
+        // TODO: Implement
+    }
 }
