@@ -9,7 +9,9 @@ enum MinigameType
     MOVEMENT_MODULE,
     CANNON_MODULE,
     ENERGY_MODULE,
-    SHIELD_MODULE
+    SHIELD_MODULE,
+    GYROSCOPE_MODULE,
+    ELECTRICAL_MINIGAME
 }
 
 public class GameManager : MonoBehaviour
