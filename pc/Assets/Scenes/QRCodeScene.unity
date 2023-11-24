@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 250163493}
   - component: {fileID: 250163494}
   - component: {fileID: 250163495}
+  - component: {fileID: 250163496}
   m_Layer: 0
   m_Name: EventManager
   m_TagString: Untagged
@@ -326,16 +327,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c5fee4e9a1a804f845eb880b142bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onCrewmateJump:
-    m_PersistentCalls:
-      m_Calls: []
   onCrewmateMoveInputUpdate:
     m_PersistentCalls:
       m_Calls: []
-  onCrewmateInteractionStart:
+  onCrewmateButtonAPushed:
     m_PersistentCalls:
       m_Calls: []
-  onCrewmateInteractionEnd:
+  onCrewmateButtonAReleased:
+    m_PersistentCalls:
+      m_Calls: []
+  onCrewmateButtonBPushed:
+    m_PersistentCalls:
+      m_Calls: []
+  onCrewmateButtonBReleased:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &250163496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250163492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bbbe59dd5c0cfb4e86010682d12505c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onMinigameAborted:
+    m_PersistentCalls:
+      m_Calls: []
+  onModuleEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnergyModuleUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onGyroscopeModuleUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onShieldModuleUpdate:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &519420028

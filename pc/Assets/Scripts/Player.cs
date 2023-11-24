@@ -24,10 +24,34 @@ public class Player : MonoBehaviour
         groundCheck = transform.Find("GroundCheck");
         rb = GetComponent<Rigidbody2D>();
 
-        CrewmateEventManager.instance.onCrewmateJump.AddListener(
+        CrewmateEventManager.instance.onCrewmateButtonAPushed.AddListener(
             (id) => {
                 if (id != _id) return;
                 Jump();
+            }
+        );
+
+        CrewmateEventManager.instance.onCrewmateButtonBPushed.AddListener(
+            (id) => {
+                if (id != _id) return;
+                bool success = Interact();
+                if (success) {
+                    ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type);
+
+                    if (usedModule.type == Module.Type.MOVEMENT_MODULE) {
+                        Dictionary<string, string> dict = new Dictionary<string, string>();
+                        dict.Add("steering_pos", "1"); // TODO: Add steering pos
+                        dict.Add("speed_pos", "1"); // TODO: Add speed pos
+                        ModuleEventManager.instance.onMinigameInitialized.Invoke(_id, dict);
+                    } else if (usedModule.type == Module.Type.CANNON_MODULE) {
+                        Dictionary<string, string> dict = new Dictionary<string, string>();
+                        dict.Add("fire_cooldown", "3.0"); // TODO: Add fire_cooldown
+                        dict.Add("ammo", "5"); // TODO: Add ammo
+                        dict.Add("chamber_open", "False"); // TODO: Add chamber_open
+                        dict.Add("chamber_loaded", "True"); // TODO: Add chamber_loaded
+                        ModuleEventManager.instance.onMinigameInitialized.Invoke(_id, dict);
+                    }
+                }
             }
         );
         
@@ -38,19 +62,13 @@ public class Player : MonoBehaviour
             }
         );
 
-        CrewmateEventManager.instance.onCrewmateInteractionStart.AddListener(
-            (id) => {
-                if (id != _id) return;
-                Interact();
-            }
-        );
-
-        CrewmateEventManager.instance.onCrewmateInteractionEnd.AddListener(
+        ModuleEventManager.instance.onMinigameAborted.AddListener(
             (id) => {
                 if (id != _id) return;
                 FinishInteraction();
             }
         );
+
     }
 
     void FixedUpdate()
@@ -80,20 +98,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Interact()
+    public bool Interact()
     {
-        if (usedModule != null) return;
+        if (usedModule != null) return false;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero, 0f, moduleLayer);
-        if (hit.collider == null) return;
+        if (hit.collider == null) return false;
 
         Module module = hit.collider.GetComponent<Module>();
-        if (module.isBeingUsed) return;
+        if (module.isBeingUsed) return false;
 
         UpdateMoveInput(0f);
         usedModule = module;
         usedModule.isBeingUsed = true;
         Debug.Log($"Interaction with {usedModule.type} module started!");
+        return true;
     }
 
     public void FinishInteraction()

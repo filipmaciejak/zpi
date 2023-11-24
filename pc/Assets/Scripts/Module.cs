@@ -6,6 +6,8 @@ public abstract class Module : MonoBehaviour
 {
     public GameObject mech;
     public GameObject mechManager;
+    public enum Type {ENERGY_MODULE, SHIELD_MODULE, GYROSCOPE_MODULE, MOVEMENT_MODULE, CANNON_MODULE};
+    [SerializeField] public Type type;
 
     [SerializeField]
     private float energyConsumption = 5;
@@ -27,8 +29,6 @@ public abstract class Module : MonoBehaviour
 
 
     private float timeSinceLastEnergyConsumption;
-    public enum Type {Walking, Shield, Gun};
-    public Type type;
     public bool isBeingUsed = false;
     public abstract void Perform();
     public bool IsBeingUsed()

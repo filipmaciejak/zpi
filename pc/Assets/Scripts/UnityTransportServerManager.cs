@@ -56,6 +56,24 @@ public class ServerManager : MonoBehaviour
         }
 
         System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
+        ModuleEventManager.instance.onModuleEntered.AddListener(
+            (id, type) => {
+                Dictionary<string, string> dict_message = new Dictionary<string, string>();
+                dict_message.Add("event", MessageEvent.START_MINIGAME.ToString());
+                dict_message.Add("player", id.ToString());
+                dict_message.Add("minigame", type.ToString());
+                SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_message)), id);
+            }
+        );
+
+        ModuleEventManager.instance.onMinigameInitialized.AddListener(
+            (id, dict) => {
+                dict.Add("event", MessageEvent.UPDATE_MINIGAME.ToString());
+                dict.Add("player", id.ToString());
+                SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict)), id);
+            }
+        );
     }
 
     void OnDestroy()
@@ -107,7 +125,7 @@ public class ServerManager : MonoBehaviour
             {
                 if (cmd == NetworkEvent.Type.Data)
                 {
-                    Debug.Log("Reading data...");
+                    // Debug.Log("Reading data...");
                     NativeArray<byte> buffer = new NativeArray<byte>(stream.Length, Allocator.Temp, NativeArrayOptions.ClearMemory);
                     stream.ReadBytes(buffer);
                     HandleMessage(buffer.ToArray(), i);
@@ -123,10 +141,141 @@ public class ServerManager : MonoBehaviour
         }
     }
 
+    bool HandleButtonPushedEvent(Dictionary<string, string> dict_message)
+    {
+        try {
+            int id = int.Parse(dict_message["player"]);
+            string buttonName = dict_message["button_name"];
+            string buttonEvent = dict_message["button_event"];
+            
+            if (buttonName.Equals("Button A") && buttonEvent.Equals("started")) {
+                CrewmateEventManager.instance.onCrewmateButtonAPushed.Invoke(id);
+                return true;
+            }
+            else if (buttonName.Equals("Button A") && buttonEvent.Equals("ended")) {
+                CrewmateEventManager.instance.onCrewmateButtonAReleased.Invoke(id);
+                return true;
+            }
+            else if (buttonName.Equals("Button B") && buttonEvent.Equals("started")) {
+                CrewmateEventManager.instance.onCrewmateButtonBPushed.Invoke(id);
+                return true;
+            }
+            else if (buttonName.Equals("Button B") && buttonEvent.Equals("ended")) {
+                CrewmateEventManager.instance.onCrewmateButtonBReleased.Invoke(id);
+                return true;
+            }
+            return false;
+        } catch (Exception) {
+            return false;
+        }
+    }
+
+    bool HandleJoystickPositionEvent(Dictionary<string, string> dict_message)
+    {
+        try {
+            int id = int.Parse(dict_message["player"]);
+            float inputX = float.Parse(dict_message["x"]);
+            float inputY = float.Parse(dict_message["y"]);
+            CrewmateEventManager.instance.onCrewmateMoveInputUpdate.Invoke(id, inputX, inputY);
+            return true;
+        } catch (Exception) {
+            return false;
+        }
+    }
+
+    bool HandleUpdateMinigameEvent(Dictionary<string, string> dict_message)
+    {
+        try {
+            int id = int.Parse(dict_message["player"]);
+            if (dict_message.ContainsKey("energy")) { /* ENERGY_MODULE */
+
+                int energy = int.Parse(dict_message["energy"]);
+                if (energy == 1) {
+                    ModuleEventManager.instance.onEnergyModuleUpdate.Invoke(id);
+                }
+                return true;
+
+            } else if (dict_message.ContainsKey("parameter")) { /* GYROSCOPE_MODULE */
+
+                float parameter = float.Parse(dict_message["parameter"]);
+                ModuleEventManager.instance.onGyroscopeModuleUpdate.Invoke(id, parameter);
+                return true;
+
+            } else if (dict_message.ContainsKey("shield")) { /* SHIELD_MODULE */
+
+                int shield = int.Parse(dict_message["shield"]);
+                if (shield == 1) {
+                    ModuleEventManager.instance.onShieldModuleUpdate.Invoke(id);
+                }
+                return true;
+
+            } else if (dict_message.ContainsKey("speed_pos")) { /* MOVEMENT_MODULE - speed */
+
+                float speed_pos = float.Parse(dict_message["speed_pos"]);
+                ModuleEventManager.instance.onSpeedModuleUpdate.Invoke(id, speed_pos);
+                return true;
+
+            } else if (dict_message.ContainsKey("steering_pos")) { /* MOVEMENT_MODULE - steering */
+
+                float steering_pos = float.Parse(dict_message["steering_pos"]);
+                ModuleEventManager.instance.onSteeringModuleUpdate.Invoke(id, steering_pos);
+                return true;
+
+            } else if (dict_message.ContainsKey("aim_pos")) { /* CANNON_MODULE - aiming */
+
+                float aim_pos = float.Parse(dict_message["aim_pos"]);
+                ModuleEventManager.instance.onCannonAimModuleUpdate.Invoke(id, aim_pos);
+                return true;
+
+            } else if (dict_message.ContainsKey("chamber_open")) { /* CANNON_MODULE - is chamber open */
+
+                bool chamber_open = bool.Parse(dict_message["chamber_open"]);
+                if (chamber_open) {
+                    ModuleEventManager.instance.onCannonModuleChamberOpened.Invoke(id);
+                } else {
+                    ModuleEventManager.instance.onCannonModuleChamberClosed.Invoke(id);
+                }
+                return true;
+
+            } else if (dict_message.ContainsKey("chamber_loaded")) { /* CANNON_MODULE - is chamber loaded */
+
+                bool chamber_loaded = bool.Parse(dict_message["chamber_loaded"]);
+                if (chamber_loaded) {
+                    ModuleEventManager.instance.onCannonModuleChamberLoaded.Invoke(id);
+                } else {
+                    ModuleEventManager.instance.onCannonModuleChamberUnloaded.Invoke(id);
+                }
+                return true;
+
+            } else if (dict_message.ContainsKey("fire_event")) { /* CANNON_MODULE - fire event */
+
+                string fire_event = dict_message["fire_event"];
+                if (fire_event.Equals("fired")) {
+                    ModuleEventManager.instance.onCannonModuleFired.Invoke(id);
+                }
+                return true;
+
+            }
+
+            return false;
+        } catch (Exception) {
+            return false;
+        }
+    }
+
+    bool HandleAbortMinigameEvent(Dictionary<string, string> dict_message)
+    {
+        try {
+            int id = int.Parse(dict_message["player"]);
+            ModuleEventManager.instance.onMinigameAborted.Invoke(id);
+            return true;
+        } catch (Exception) {
+            return false;
+        }
+    }
+
     void HandleMessage(byte[] message, int connectionId)
     {
-        Debug.Log(Encoding.UTF8.GetString(message));
-        
         try
         {
             Dictionary<string, string> dict_message = JsonConvert.DeserializeObject<Dictionary<string, string>>(Encoding.UTF8.GetString(message));
@@ -146,24 +295,35 @@ public class ServerManager : MonoBehaviour
             }
             else if (dict_message["event"].Equals(MessageEvent.BUTTON_PUSHED.ToString()))
             {
-                int id = int.Parse(dict_message["player"]);
-                if (dict_message["button_event"].Equals("started") && dict_message["button_name"].Equals("Button A"))
-                    CrewmateEventManager.instance.onCrewmateJump.Invoke(id);
-                else if (dict_message["button_event"].Equals("started") && dict_message["button_name"].Equals("Button B"))
-                    CrewmateEventManager.instance.onCrewmateInteractionStart.Invoke(id);
-                else if (dict_message["button_event"].Equals("ended") && dict_message["button_name"].Equals("Button B"))
-                    CrewmateEventManager.instance.onCrewmateInteractionEnd.Invoke(id);
+                bool success = HandleButtonPushedEvent(dict_message);
+                if (!success) {
+                    Debug.Log("Unrecognised button event: " + Encoding.UTF8.GetString(message));
+                }
             }
             else if (dict_message["event"].Equals(MessageEvent.JOYSTICK_POSITION.ToString()))
             {
-                int id = int.Parse(dict_message["player"]);
-                float inputX = float.Parse(dict_message["x"]);
-                float inputY = float.Parse(dict_message["y"]);
-                CrewmateEventManager.instance.onCrewmateMoveInputUpdate.Invoke(id, inputX, inputY);
+                bool success = HandleJoystickPositionEvent(dict_message);
+                if (!success) {
+                    Debug.Log("Unrecognised joystick event: " + Encoding.UTF8.GetString(message));
+                }
+            }
+            else if (dict_message["event"].Equals(MessageEvent.UPDATE_MINIGAME.ToString()))
+            {
+                bool success = HandleUpdateMinigameEvent(dict_message);
+                if (!success) {
+                    Debug.Log("Unrecognised minigame update event: " + Encoding.UTF8.GetString(message));
+                }
+            }
+            else if (dict_message["event"].Equals(MessageEvent.ABORT_MINIGAME.ToString()))
+            {
+                bool success = HandleAbortMinigameEvent(dict_message);
+                if (!success) {
+                    Debug.Log("Unrecognised minigame abort event: " + Encoding.UTF8.GetString(message));
+                }
             }
             else
             {
-                Debug.Log("Unrecognised message event: " + dict_message["event"]);
+                Debug.Log("Unrecognised message: " + Encoding.UTF8.GetString(message));
             }
         }
         catch (Exception)
@@ -180,13 +340,12 @@ public class ServerManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Sending data...");
+        // Debug.Log("Sending data...");
         NativeArray<byte> buffer = new NativeArray<byte>(message, Allocator.Temp);
         m_Driver.BeginSend(NetworkPipeline.Null, m_Connections[playerId], out var writer);
         writer.WriteBytes(buffer);
         m_Driver.EndSend(writer);
         buffer.Dispose();
     }
-
 
 }
