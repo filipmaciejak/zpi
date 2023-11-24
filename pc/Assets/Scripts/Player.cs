@@ -43,6 +43,13 @@ public class Player : MonoBehaviour
                         dict.Add("steering_pos", "1"); // TODO: Add steering pos
                         dict.Add("speed_pos", "1"); // TODO: Add speed pos
                         ModuleEventManager.instance.onMinigameInitialized.Invoke(_id, dict);
+                    } else if (usedModule.type == Module.Type.CANNON_MODULE) {
+                        Dictionary<string, string> dict = new Dictionary<string, string>();
+                        dict.Add("fire_cooldown", "3.0"); // TODO: Add fire_cooldown
+                        dict.Add("ammo", "5"); // TODO: Add ammo
+                        dict.Add("chamber_open", "False"); // TODO: Add chamber_open
+                        dict.Add("chamber_loaded", "True"); // TODO: Add chamber_loaded
+                        ModuleEventManager.instance.onMinigameInitialized.Invoke(_id, dict);
                     }
                 }
             }

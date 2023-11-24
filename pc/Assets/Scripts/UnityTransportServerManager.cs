@@ -187,7 +187,7 @@ public class ServerManager : MonoBehaviour
     {
         try {
             int id = int.Parse(dict_message["player"]);
-            if (dict_message.ContainsKey("energy")) {
+            if (dict_message.ContainsKey("energy")) { /* ENERGY_MODULE */
 
                 int energy = int.Parse(dict_message["energy"]);
                 if (energy == 1) {
@@ -195,13 +195,13 @@ public class ServerManager : MonoBehaviour
                 }
                 return true;
 
-            } else if (dict_message.ContainsKey("parameter")) {
+            } else if (dict_message.ContainsKey("parameter")) { /* GYROSCOPE_MODULE */
 
                 float parameter = float.Parse(dict_message["parameter"]);
                 ModuleEventManager.instance.onGyroscopeModuleUpdate.Invoke(id, parameter);
                 return true;
 
-            } else if (dict_message.ContainsKey("shield")) {
+            } else if (dict_message.ContainsKey("shield")) { /* SHIELD_MODULE */
 
                 int shield = int.Parse(dict_message["shield"]);
                 if (shield == 1) {
@@ -209,16 +209,50 @@ public class ServerManager : MonoBehaviour
                 }
                 return true;
 
-            } else if (dict_message.ContainsKey("speed_pos")) {
+            } else if (dict_message.ContainsKey("speed_pos")) { /* MOVEMENT_MODULE - speed */
 
                 float speed_pos = float.Parse(dict_message["speed_pos"]);
                 ModuleEventManager.instance.onSpeedModuleUpdate.Invoke(id, speed_pos);
                 return true;
 
-            } else if (dict_message.ContainsKey("steering_pos")) {
+            } else if (dict_message.ContainsKey("steering_pos")) { /* MOVEMENT_MODULE - steering */
 
                 float steering_pos = float.Parse(dict_message["steering_pos"]);
                 ModuleEventManager.instance.onSteeringModuleUpdate.Invoke(id, steering_pos);
+                return true;
+
+            } else if (dict_message.ContainsKey("aim_pos")) { /* CANNON_MODULE - aiming */
+
+                float aim_pos = float.Parse(dict_message["aim_pos"]);
+                ModuleEventManager.instance.onCannonAimModuleUpdate.Invoke(id, aim_pos);
+                return true;
+
+            } else if (dict_message.ContainsKey("chamber_open")) { /* CANNON_MODULE - is chamber open */
+
+                bool chamber_open = bool.Parse(dict_message["chamber_open"]);
+                if (chamber_open) {
+                    ModuleEventManager.instance.onCannonModuleChamberOpened.Invoke(id);
+                } else {
+                    ModuleEventManager.instance.onCannonModuleChamberClosed.Invoke(id);
+                }
+                return true;
+
+            } else if (dict_message.ContainsKey("chamber_loaded")) { /* CANNON_MODULE - is chamber loaded */
+
+                bool chamber_loaded = bool.Parse(dict_message["chamber_loaded"]);
+                if (chamber_loaded) {
+                    ModuleEventManager.instance.onCannonModuleChamberLoaded.Invoke(id);
+                } else {
+                    ModuleEventManager.instance.onCannonModuleChamberUnloaded.Invoke(id);
+                }
+                return true;
+
+            } else if (dict_message.ContainsKey("fire_event")) { /* CANNON_MODULE - fire event */
+
+                string fire_event = dict_message["fire_event"];
+                if (fire_event.Equals("fired")) {
+                    ModuleEventManager.instance.onCannonModuleFired.Invoke(id);
+                }
                 return true;
 
             }
