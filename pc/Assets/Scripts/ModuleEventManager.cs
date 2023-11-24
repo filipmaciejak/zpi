@@ -15,6 +15,8 @@ public class ModuleEventManager : MonoBehaviour
     public UnityEvent<int> onEnergyModuleUpdate;
     public UnityEvent<int, float> onGyroscopeModuleUpdate;
     public UnityEvent<int> onShieldModuleUpdate;
+    public UnityEvent<int, float> onSpeedModuleUpdate;
+    public UnityEvent<int, float> onSteeringModuleUpdate;
 
     void Awake()
     {
@@ -28,6 +30,8 @@ public class ModuleEventManager : MonoBehaviour
         onEnergyModuleUpdate = new UnityEvent<int>();
         onGyroscopeModuleUpdate = new UnityEvent<int, float>();
         onShieldModuleUpdate = new UnityEvent<int>();
+        onSpeedModuleUpdate = new UnityEvent<int, float>();
+        onSteeringModuleUpdate = new UnityEvent<int, float>();
     }
 
     void Start()
@@ -46,7 +50,7 @@ public class ModuleEventManager : MonoBehaviour
 
         onMinigameInitialized.AddListener(
             (id, dict) => {
-                Debug.Log("ModuleEventManager: onModuleInitialized<" + id + ", " + dict + ">");
+                Debug.Log("ModuleEventManager: onModuleInitialized<" + id + ">");
             }
         );
 
@@ -65,6 +69,18 @@ public class ModuleEventManager : MonoBehaviour
         onShieldModuleUpdate.AddListener(
             (id) => {
                 Debug.Log("ModuleEventManager: onShieldModuleUpdate<" + id + ">");
+            }
+        );
+
+        onSpeedModuleUpdate.AddListener(
+            (id, speed_pos) => {
+                Debug.Log("ModuleEventManager: onSpeedModuleUpdate<" + id + ", " + speed_pos + ">");
+            }
+        );
+
+        onSteeringModuleUpdate.AddListener(
+            (id, steering_pos) => {
+                Debug.Log("ModuleEventManager: onSteeringModuleUpdate<" + id + ", " + steering_pos + ">");
             }
         );
     }

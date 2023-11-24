@@ -193,11 +193,13 @@ public class ServerManager : MonoBehaviour
                 if (energy == 1) {
                     ModuleEventManager.instance.onEnergyModuleUpdate.Invoke(id);
                 }
+                return true;
 
             } else if (dict_message.ContainsKey("parameter")) {
 
                 float parameter = float.Parse(dict_message["parameter"]);
                 ModuleEventManager.instance.onGyroscopeModuleUpdate.Invoke(id, parameter);
+                return true;
 
             } else if (dict_message.ContainsKey("shield")) {
 
@@ -205,9 +207,23 @@ public class ServerManager : MonoBehaviour
                 if (shield == 1) {
                     ModuleEventManager.instance.onShieldModuleUpdate.Invoke(id);
                 }
+                return true;
+
+            } else if (dict_message.ContainsKey("speed_pos")) {
+
+                float speed_pos = float.Parse(dict_message["speed_pos"]);
+                ModuleEventManager.instance.onSpeedModuleUpdate.Invoke(id, speed_pos);
+                return true;
+
+            } else if (dict_message.ContainsKey("steering_pos")) {
+
+                float steering_pos = float.Parse(dict_message["steering_pos"]);
+                ModuleEventManager.instance.onSteeringModuleUpdate.Invoke(id, steering_pos);
+                return true;
 
             }
-            return true;
+
+            return false;
         } catch (Exception) {
             return false;
         }
