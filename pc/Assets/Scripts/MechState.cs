@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MechState : MonoBehaviour
 {
+    public int teamId;
 
     ArrayList damageTracker;
 

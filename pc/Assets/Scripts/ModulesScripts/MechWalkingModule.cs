@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,6 +48,25 @@ public class MechWalkingModule : Module
         rb.centerOfMass = Vector3.zero;
         timeCounter = 0;
         maxVelocity += rb.drag;
+
+        int mechId = mech.GetComponent<MechState>().teamId;
+        ModuleEventManager moduleEventManager = ModuleEventManager.instance;
+
+        moduleEventManager.onSpeedModuleUpdate.AddListener((id, speed) =>
+        {
+            if (moduleEventManager.teamIds.GetValueOrDefault(id,0) == mech.GetComponent<MechState>().teamId) 
+            { 
+                ChangeStep(speed);
+            }
+        });
+
+        moduleEventManager.onSteeringModuleUpdate.AddListener((id, steering) =>
+        {
+            if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mech.GetComponent<MechState>().teamId)
+            {
+                ChangeRotationMultiplier(steering);
+            }
+        });
     }
 
     float GetStepCycleTime()

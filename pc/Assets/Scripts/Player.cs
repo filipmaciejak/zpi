@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int teamId;
+
     [SerializeField] private int _id = 0;
     [SerializeField] private float moveForce = 5f;
     [SerializeField] private float jumpForce = 5f;
@@ -21,6 +23,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+
+        ModuleEventManager.instance.teamIds.Add(_id, teamId);
         groundCheck = transform.Find("GroundCheck");
         rb = GetComponent<Rigidbody2D>();
 

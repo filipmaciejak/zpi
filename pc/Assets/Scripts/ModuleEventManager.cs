@@ -26,6 +26,8 @@ public class ModuleEventManager : MonoBehaviour
     public UnityEvent<int> onCannonModuleChamberUnloaded;
     public UnityEvent<int> onCannonModuleFired;
 
+    public Dictionary<int, int> teamIds;
+
 
     void Awake()
     {
@@ -49,6 +51,8 @@ public class ModuleEventManager : MonoBehaviour
         onCannonModuleChamberLoaded = new UnityEvent<int>();
         onCannonModuleChamberUnloaded = new UnityEvent<int>();
         onCannonModuleFired = new UnityEvent<int>();
+
+        teamIds = new Dictionary<int, int>();
     }
 
     void Start()
