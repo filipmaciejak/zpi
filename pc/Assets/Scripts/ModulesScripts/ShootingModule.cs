@@ -68,7 +68,10 @@ public class ShootingModule : Module
             direction = 0;
         }
     }
-
+    public float GetRotationMultiplier()
+    {
+        return rotationMultiplier;
+    }
     public override void Perform()
     {
         Debug.Log("Body center of mass: " + rb.centerOfMass);
