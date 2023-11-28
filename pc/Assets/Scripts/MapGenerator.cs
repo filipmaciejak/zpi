@@ -19,7 +19,7 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tileSize = 2.56f * floor.transform.localScale.x;
+        tileSize = floor.transform.localScale.x;
         GenerateWalls();
         GenerateFloor();
         GenerateObstacles(barrelChance, lavaChance);
@@ -56,10 +56,10 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateFloor()
     {
-        float y = tileSize * (mapHeight / 2);
+        float y = tileSize * (mapHeight / 2) + 2 * tileSize;
         for (int i = 0; i < mapWidth; i++)
         {
-            float x = -tileSize * (mapWidth / 2) ;
+            float x = -tileSize * (mapWidth / 2) + 2 * tileSize ;
             for (int j = 0; j < mapHeight; j++)
             {
                 GameObject floorObject = Instantiate(floor, gameObject.transform);
