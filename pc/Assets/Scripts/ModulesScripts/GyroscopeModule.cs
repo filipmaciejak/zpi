@@ -22,7 +22,7 @@ public class GyroscopeModule : Module
 
     [SerializeField]
     private ShootingModule shootingModule;
-    private float distanceFromZero
+    private float DistanceFromZero
     {
         get
         {
@@ -45,7 +45,7 @@ public class GyroscopeModule : Module
             CalculateNewCooldown();
             lastCoordShiftTime = Time.time;
             ShiftCoordinates();
-            shootingModule.ChangeRotationMultiplier(shootingModule.GetRotationMultiplier() + distanceFromZero * (x>0?1:-1));
+            shootingModule.ChangeRotationMultiplier(shootingModule.GetRotationMultiplier() + DistanceFromZero * (x>0?1:-1));
         }
     
     }
