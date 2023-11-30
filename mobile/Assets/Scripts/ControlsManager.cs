@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -25,7 +26,6 @@ public class ControlsManager : MonoBehaviour
         joystick.StartedControlling += OnStartedControlling;
         joystick.MovedControls += OnMovedControls;
         joystick.StoppedControlling += OnStoppedControlling;
-        
         foreach(var button in buttons)
         {
             button.StartedPress += OnStartedPress;
@@ -89,8 +89,8 @@ public class ControlsManager : MonoBehaviour
         {
             { "event", MessageEvent.JOYSTICK_POSITION.ToString() },
             { "joystick_event", "started" },
-            { "x", movement.x.ToString() },
-            { "y", movement.y.ToString() }
+            { "x", movement.x.ToString(new CultureInfo("en")) },
+            { "y", movement.y.ToString(new CultureInfo("en")) }
         };
 
         _clientManager.SendDict(sentDict);
@@ -102,8 +102,8 @@ public class ControlsManager : MonoBehaviour
         {
             { "event", MessageEvent.JOYSTICK_POSITION.ToString() },
             { "joystick_event", "moved" },
-            { "x", movement.x.ToString() },
-            { "y", movement.y.ToString() }
+            { "x", movement.x.ToString(new CultureInfo("en")) },
+            { "y", movement.y.ToString(new CultureInfo("en")) }
         };
 
         _clientManager.SendDict(sentDict);
@@ -115,8 +115,8 @@ public class ControlsManager : MonoBehaviour
         {
             { "event", MessageEvent.JOYSTICK_POSITION.ToString() },
             { "joystick_event", "ended" },
-            { "x", movement.x.ToString() },
-            { "y", movement.y.ToString() }
+            { "x", movement.x.ToString(new CultureInfo("en")) },
+            { "y", movement.y.ToString(new CultureInfo("en")) }
         };
 
         _clientManager.SendDict(sentDict);
