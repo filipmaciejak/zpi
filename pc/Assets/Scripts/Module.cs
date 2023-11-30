@@ -27,6 +27,8 @@ public abstract class Module : MonoBehaviour
     [SerializeField]
     protected float lowEnergyModeMulltiplier = .5f;
 
+    protected int mechId;
+    protected ModuleEventManager moduleEventManager;
 
     private float timeSinceLastEnergyConsumption;
     public bool isBeingUsed = false;
@@ -41,6 +43,10 @@ public abstract class Module : MonoBehaviour
         mechManager.GetComponent<MechManager>().AddModule(this);
         mechEnergy = mech.GetComponent<MechMainEnergy>();
         timeSinceLastEnergyConsumption = Time.time;
+
+
+        mechId = mech.GetComponent<MechState>().teamId;
+        moduleEventManager = ModuleEventManager.instance;
     }
 
     public void ConsumeEnergy()
@@ -51,11 +57,11 @@ public abstract class Module : MonoBehaviour
             timeSinceLastEnergyConsumption = Time.time;
             if (!mechEnergy.AddEnergy(-energyToConsume))
             {
-                SetLowEnergyBehaviour(true);
+                SetEnergyBehaviour(true);
             }
-            else if (lowEnergyMode) { SetLowEnergyBehaviour(false); }
+            else if (lowEnergyMode) { SetEnergyBehaviour(false); }
         }
     }
 
-    public abstract void SetLowEnergyBehaviour(bool isLowEnergy);
+    public abstract void SetEnergyBehaviour(bool isLowEnergy);
 }

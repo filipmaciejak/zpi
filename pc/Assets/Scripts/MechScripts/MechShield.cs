@@ -5,7 +5,7 @@ using UnityEngine;
 public class MechShield : MonoBehaviour
 {
     [SerializeField]
-    private int currentShield;
+    private int currentShield = 50;
 
     [SerializeField]
     private int maxShield;
@@ -19,5 +19,9 @@ public class MechShield : MonoBehaviour
         shieldBar.SetStatBarLevel(currentShield);
     }
 
+    private void Start()
+    {
+        shieldBar.SetStatBarLevel(currentShield);
+    }
     public int GetMaxShield() { return  maxShield; }
 }

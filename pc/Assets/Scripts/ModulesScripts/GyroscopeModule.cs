@@ -1,11 +1,16 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GyroscopeModule : Module
 {
-    private float x = 0;
-    private float y = 0;
+    [Range(0f, 1f)]
+    [SerializeField]
+    private float gyroscopeDecalibration;
+
+    [SerializeField]
+    private float decalibrationMultiplier = 1f;
 
     [SerializeField]
     private float minCooldown;
@@ -18,62 +23,62 @@ public class GyroscopeModule : Module
 
     private float currentCooldown;
 
-    private float lastCoordShiftTime;
+    private float lastRotationTime;
 
     [SerializeField]
     private ShootingModule shootingModule;
-    private float distanceFromZero
-    {
-        get
-        {
-            return x*x + y*y;
-        }
-    }
+
+    [SerializeField]
+    private Rigidbody2D mechBody;
 
     private new void Start()
     {
         base.Start();
         CalculateNewCooldown();
-        lastCoordShiftTime = Time.time;
+        lastRotationTime = Time.time;
+
+        moduleEventManager.onGyroscopeModuleUpdate.AddListener((id, number) =>
+        {
+            if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
+            {
+                gyroscopeDecalibration = 1 - number;
+                Debug.Log(number);
+            }
+        });
     }
     public override void Perform()
     {
-        Debug.Log("x: " + x + " y:" + y);
-        Debug.Log("Current cooldown " + currentCooldown);
-        if (Time.time > lastCoordShiftTime + currentCooldown)
+        if (Time.time > lastRotationTime + currentCooldown)
         {
+            Debug.Log("Destabilize");
             CalculateNewCooldown();
-            lastCoordShiftTime = Time.time;
-            ShiftCoordinates();
-            shootingModule.ChangeRotationMultiplier(shootingModule.GetRotationMultiplier() + distanceFromZero * (x>0?1:-1));
+            lastRotationTime = Time.time;
+            Rotate();
         }
     
     }
 
-    private void ShiftCoordinates()
+    private void Rotate()
     {
-        float xLeftRightChance = Random.Range(0f, 1f);
-        float yLeftRightChance = Random.Range(0f, 1f);
-
-        Debug.Log("X chance " + xLeftRightChance);
-        Debug.Log("Y chance " + yLeftRightChance);
-
-        if (xLeftRightChance < 0.5) { x += coordinatesShiftDistance; }
-        else { x -= coordinatesShiftDistance; }
-        if(yLeftRightChance < 0.5) {  y += coordinatesShiftDistance; }
-        else {  y -= coordinatesShiftDistance; }
+        float leftRightChance = Random.Range(0f, 1f);
+        int direction;
+        if (leftRightChance < .5f)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 1;
+        }
+        mechBody.AddTorque(shootingModule.GetRotationMultiplier() + (gyroscopeDecalibration * direction * decalibrationMultiplier));
     }
 
     private void CalculateNewCooldown()
     {
         currentCooldown = Random.Range(minCooldown, maxCooldown);
     }
-    public void SetNewCoordinates(float x, float y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-    public override void SetLowEnergyBehaviour(bool isLowEnergy)
+
+    public override void SetEnergyBehaviour(bool isLowEnergy)
     {
         throw new System.NotImplementedException();
     }

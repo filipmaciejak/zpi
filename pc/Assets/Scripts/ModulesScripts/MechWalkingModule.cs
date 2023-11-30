@@ -49,12 +49,9 @@ public class MechWalkingModule : Module
         timeCounter = 0;
         maxVelocity += rb.drag;
 
-        int mechId = mech.GetComponent<MechState>().teamId;
-        ModuleEventManager moduleEventManager = ModuleEventManager.instance;
-
         moduleEventManager.onSpeedModuleUpdate.AddListener((id, speed) =>
         {
-            if (moduleEventManager.teamIds.GetValueOrDefault(id,0) == mech.GetComponent<MechState>().teamId) 
+            if (moduleEventManager.teamIds.GetValueOrDefault(id,0) == mechId) 
             { 
                 ChangeStep(speed);
             }
@@ -62,7 +59,7 @@ public class MechWalkingModule : Module
 
         moduleEventManager.onSteeringModuleUpdate.AddListener((id, steering) =>
         {
-            if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mech.GetComponent<MechState>().teamId)
+            if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
                 ChangeRotationMultiplier(steering);
             }
@@ -132,7 +129,7 @@ public class MechWalkingModule : Module
         Rotate();
     }
 
-    public override void SetLowEnergyBehaviour(bool isLowEnergy)
+    public override void SetEnergyBehaviour(bool isLowEnergy)
     {
         lowEnergyMode = isLowEnergy;
     }
