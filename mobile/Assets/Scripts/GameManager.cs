@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         clientManager = GetComponentInChildren<ClientManager>();
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-Us");
+        System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
     }
 
     private void OnEnable()

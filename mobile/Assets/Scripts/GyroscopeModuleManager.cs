@@ -30,10 +30,20 @@ public class GyroscopeModuleManager : MonoBehaviour
     {
         InputSystem.EnableDevice(AttitudeSensor.current);
         fullBarTexture = Resources.Load("FullCalibrationBar") as Texture2D;
-        calibrationValue = 0.4f;
+        calibrationValue = 0.0f;
         maxDistanceFromTarget = 4f;
         forceFactor = 10.0f;
         isCalibrating = false;
+
+        var initData = GameManager.Instance.MinigameInitializationData;
+        if (initData == null)
+            return;
+
+        if (initData.TryGetValue("gyroscope_calibration", out var calibration))
+            calibrationValue = float.Parse(calibration);
+
+        
+        aim.transform.localPosition = Random.insideUnitCircle.normalized * (1.0f - calibrationValue) * maxDistanceFromTarget;
     }
 
     public void OnEnable()

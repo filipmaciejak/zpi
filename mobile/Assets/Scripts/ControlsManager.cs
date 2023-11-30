@@ -89,8 +89,8 @@ public class ControlsManager : MonoBehaviour
         {
             { "event", MessageEvent.JOYSTICK_POSITION.ToString() },
             { "joystick_event", "started" },
-            { "x", movement.x.ToString(new CultureInfo("en")) },
-            { "y", movement.y.ToString(new CultureInfo("en")) }
+            { "x", movement.x.ToString() },
+            { "y", movement.y.ToString() }
         };
 
         _clientManager.SendDict(sentDict);
@@ -102,8 +102,8 @@ public class ControlsManager : MonoBehaviour
         {
             { "event", MessageEvent.JOYSTICK_POSITION.ToString() },
             { "joystick_event", "moved" },
-            { "x", movement.x.ToString(new CultureInfo("en")) },
-            { "y", movement.y.ToString(new CultureInfo("en")) }
+            { "x", movement.x.ToString() },
+            { "y", movement.y.ToString() }
         };
 
         _clientManager.SendDict(sentDict);
@@ -115,8 +115,8 @@ public class ControlsManager : MonoBehaviour
         {
             { "event", MessageEvent.JOYSTICK_POSITION.ToString() },
             { "joystick_event", "ended" },
-            { "x", movement.x.ToString(new CultureInfo("en")) },
-            { "y", movement.y.ToString(new CultureInfo("en")) }
+            { "x", movement.x.ToString() },
+            { "y", movement.y.ToString() }
         };
 
         _clientManager.SendDict(sentDict);
