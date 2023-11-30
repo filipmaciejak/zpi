@@ -8,13 +8,21 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int _id = 0;
     [SerializeField] private float moveForce = 5f;
-    [SerializeField] private float jumpForce = 5f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask moduleLayer;
     public Module usedModule { get; private set; } = null;
     private float moveInput = 0f;
+
     private Transform groundCheck;
+    public static float timeToApex = 3f;
+    public static float timeOfFalling = 2.5f;
+    public static float jumpHeight = 15f;
+
     private Rigidbody2D rb;
+
+    private static float gravityScaleUp => (2 * jumpHeight) / Mathf.Pow(timeToApex, 2);
+    private static float gravityScaleDown => (2 * jumpHeight) / Mathf.Pow(timeOfFalling, 2);
+    private static float jumpVelocity => Mathf.Abs(gravityScaleUp * timeToApex);
 
     private bool IsGrounded()
     {
@@ -85,6 +93,12 @@ public class Player : MonoBehaviour
         } else if (IsGrounded()) {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
+
+        if (rb.velocity.y > 0) {
+            rb.gravityScale = gravityScaleUp;
+        } else {
+            rb.gravityScale = gravityScaleDown;
+        }
     }
 
     public void UpdateMoveInput(float input)
@@ -98,7 +112,9 @@ public class Player : MonoBehaviour
         if (usedModule != null) return;
         if (IsGrounded())
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.gravityScale = gravityScaleUp;
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * jumpVelocity * rb.mass, ForceMode2D.Impulse);
         }
     }
 
