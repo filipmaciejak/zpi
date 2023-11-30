@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -25,7 +26,6 @@ public class ControlsManager : MonoBehaviour
         joystick.StartedControlling += OnStartedControlling;
         joystick.MovedControls += OnMovedControls;
         joystick.StoppedControlling += OnStoppedControlling;
-        
         foreach(var button in buttons)
         {
             button.StartedPress += OnStartedPress;
