@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ShootingModule : Module
 {
+
+
 
     private Rigidbody2D rb;
 
@@ -21,6 +25,8 @@ public class ShootingModule : Module
     [SerializeField]
     float maxRotationSpeed = 100.0f;
 
+    private bool isCannonLoaded = false;
+    private bool isCannonClosed = true;
 
     new void Start()
     {
@@ -35,6 +41,7 @@ public class ShootingModule : Module
             if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
                 Shoot();
+                isCannonLoaded = false;
             }
         });
 
@@ -43,6 +50,22 @@ public class ShootingModule : Module
             if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
                 ChangeRotationMultiplier(rotationDirection);
+            }
+        });
+
+        moduleEventManager.onCannonModuleChamberClosed.AddListener((id) =>
+        {
+            if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
+            {
+                isCannonClosed = true;
+            }
+        });
+
+        moduleEventManager.onCannonModuleChamberOpened.AddListener((id) =>
+        {
+            if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
+            {
+                isCannonClosed = false;
             }
         });
     }

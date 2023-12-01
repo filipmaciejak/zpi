@@ -866,7 +866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2622091626685060550, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.272
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 4131691009422969128, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: teamId
@@ -875,6 +875,10 @@ PrefabInstance:
     - target: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_Name
       value: Mech
+      objectReference: {fileID: 0}
+    - target: {fileID: 8059415451779690988, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: m_AngularDrag
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.x
