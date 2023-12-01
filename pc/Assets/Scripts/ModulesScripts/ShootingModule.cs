@@ -26,7 +26,7 @@ public class ShootingModule : Module
     float maxRotationSpeed = 100.0f;
 
     private bool isCannonLoaded = false;
-    private bool isCannonClosed = true;
+    private bool isCannonOpened = true;
 
     new void Start()
     {
@@ -35,6 +35,14 @@ public class ShootingModule : Module
         rb = body.GetComponent<Rigidbody2D>();
         rb.centerOfMass = Vector3.zero;
         cannon = body.Find("Cannon").GetComponent<MechShooting>();
+
+        moduleEventManager.onCannonModuleChamberLoaded.AddListener((id) =>
+        {
+            if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
+            {
+                isCannonLoaded = true;
+            }
+        });
 
         moduleEventManager.onCannonModuleFired.AddListener((id) =>
         {
@@ -49,6 +57,7 @@ public class ShootingModule : Module
         {
             if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
+                Debug.Log(rotationDirection.ToString());
                 ChangeRotationMultiplier(rotationDirection);
             }
         });
@@ -57,7 +66,7 @@ public class ShootingModule : Module
         {
             if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
-                isCannonClosed = true;
+                isCannonOpened = false;
             }
         });
 
@@ -65,7 +74,7 @@ public class ShootingModule : Module
         {
             if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
-                isCannonClosed = false;
+                isCannonOpened = true;
             }
         });
     }
@@ -106,8 +115,10 @@ public class ShootingModule : Module
     }
     public override void Perform()
     {
+
         if (IsBeingUsed())
         {
+            Debug.Log($"Rotating {rotationMultiplier}");
             Rotate();
         }
     }
@@ -126,5 +137,13 @@ public class ShootingModule : Module
         lowEnergyMode = isLowEnergy;
     }
 
+    public bool IsCannonLoaded()
+    {
+        return isCannonLoaded;
+    }
 
+    public bool IsCannonClosed()
+    {
+        return isCannonOpened;
+    }
 }

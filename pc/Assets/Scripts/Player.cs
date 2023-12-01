@@ -83,11 +83,12 @@ public class Player : MonoBehaviour
                         dict.Add("speed_pos", "1"); // TODO: Add speed pos
                         ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
                     } else if (usedModule.type == Module.Type.CANNON_MODULE) {
+                        ShootingModule cannonModule = (ShootingModule)usedModule;
                         Dictionary<string, string> dict = new Dictionary<string, string>();
                         dict.Add("fire_cooldown", "3.0"); // TODO: Add fire_cooldown
                         dict.Add("ammo", "5"); // TODO: Add ammo
-                        dict.Add("chamber_open", "False"); // TODO: Add chamber_open
-                        dict.Add("chamber_loaded", "True"); // TODO: Add chamber_loaded
+                        dict.Add("chamber_open", cannonModule.IsCannonClosed().ToString()); // TODO: Add chamber_open
+                        dict.Add("chamber_loaded", cannonModule.IsCannonLoaded().ToString()); // TODO: Add chamber_loaded
                         ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
                     }
                 }
