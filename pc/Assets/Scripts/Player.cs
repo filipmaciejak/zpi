@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     private bool quickFall = false;
 
     private Rigidbody2D rb;
+    private float timeOfLastGrounded;
+    public static float coyoteTime = 0.1f;
 
     private static float gravityScaleUp => (2 * jumpHeight) / Mathf.Pow(timeToApex, 2);
     private static float gravityScaleDown => (2 * jumpHeight) / Mathf.Pow(timeOfFalling, 2);
@@ -34,7 +36,7 @@ public class Player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapBox(groundCheck.position, new Vector2(0.74f, 0.1f), 0f, groundLayer);
+        return Physics2D.OverlapBox(groundCheck.position, new Vector2(0.38f, 0.01f), 0f, groundLayer);
     }
 
     void Start()
@@ -100,6 +102,9 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (IsGrounded()) {
+            timeOfLastGrounded = Time.time;
+        }
         
         float input = inputTranslation(moveInput);
         float desiredVelocity;
@@ -130,7 +135,7 @@ public class Player : MonoBehaviour
     {
         if (usedModule != null) return;
         quickFall = false;
-        if (IsGrounded())
+        if (timeOfLastGrounded + coyoteTime > Time.time)
         {
             rb.gravityScale = gravityScaleUp;
             rb.velocity = new Vector2(rb.velocity.x, 0);
