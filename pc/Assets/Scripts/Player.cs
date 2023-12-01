@@ -31,9 +31,19 @@ public class Player : MonoBehaviour
     private static float gravityScaleDown => (2 * jumpHeight) / Mathf.Pow(timeOfFalling, 2);
     private static float jumpVelocity => Mathf.Abs(gravityScaleUp * timeToApex);
 
+    public static float deadZone = 0.1f;
+    public static float maxZone = 0.4f;
+
     private float inputTranslation(float input)
     {
-        return input; // todo
+        float absInput = Mathf.Abs(input);
+        if (absInput < deadZone) {
+            return 0f;
+        } else if (absInput < maxZone) {
+            return (absInput - deadZone) / (maxZone - deadZone) * Mathf.Sign(input);
+        } else {
+            return Mathf.Sign(input);
+        }
     }
 
     private bool IsGrounded()
