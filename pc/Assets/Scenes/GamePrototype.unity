@@ -4583,7 +4583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSize: 4
-  maxSize: 16
+  maxSize: 32
   cameraPadding: 1.1
   mech1: {fileID: 1429421079}
   mech2: {fileID: 799955745}
@@ -4949,20 +4949,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1681061650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5133422cba907b04cad5dca6ef936668, type: 3}
+  m_Script: {fileID: 11500000, guid: 9db53a52dab4b0c4ea46e8b205c9dcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall: {fileID: 2209545580675590641, guid: d84b91c092cbfb14fa8ebdd18103d80e, type: 3}
-  floor: {fileID: 490170791979012748, guid: 30ea7c8b872fee84285abee35a7cf2fd, type: 3}
-  barrel: {fileID: 8583810453850939839, guid: c5a18bb58d1a37c46a6230a728820b35, type: 3}
-  lava: {fileID: 252985571924369960, guid: 97667188aab018c47ba1555ad287f186, type: 3}
+  mapWidth: 24
+  mapHeight: 24
+  wallPrefab: {fileID: 2209545580675590641, guid: d84b91c092cbfb14fa8ebdd18103d80e, type: 3}
+  floorPrefab: {fileID: 490170791979012748, guid: 30ea7c8b872fee84285abee35a7cf2fd, type: 3}
+  destructibleWallPrefab: {fileID: 8583810453850939839, guid: c5a18bb58d1a37c46a6230a728820b35, type: 3}
+  destructibleWallSpawnChance: 0.05
+  trapTilePrefab: {fileID: 252985571924369960, guid: 97667188aab018c47ba1555ad287f186, type: 3}
+  trapTileSpawnChance: 0.05
+  impassableObstaclePrefab: {fileID: 7705433732340329099, guid: 7d131e82f6ae4274cb33ccb2fa1dae3b, type: 3}
+  impassableObstacleSpawnChance: 0.02
   mech1: {fileID: 1429421079}
   mech2: {fileID: 799955745}
-  lavaChance: 0
-  barrelChance: 0
-  obstaclesArea: 0
-  mapWidth: 16
-  mapHeight: 16
+  obstaclesSpawnRowRestriction: 2
+  obstaclesSpawnColRestriction: 2
 --- !u!1001 &1712100639
 PrefabInstance:
   m_ObjectHideFlags: 0
