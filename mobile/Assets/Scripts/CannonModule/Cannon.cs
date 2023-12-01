@@ -38,10 +38,6 @@ namespace CannonModule
             _touchHelper = GetComponentInParent<TouchHelper>();
             _chamberCoverRT = chamberCover.GetComponent<RectTransform>();
             _chamberRT = chamber.GetComponent<RectTransform>();
-        }
-
-        private void Start()
-        {
             _chamberCoverRightSideLimit = _chamberRT.anchoredPosition.x
                                           + chamberCoverMargin;
             _chamberCoverLeftSideLimit = _chamberCoverRT.anchoredPosition.x;
