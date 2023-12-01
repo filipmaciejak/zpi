@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public int id;
     CrewmateEventManager eventManager;
 
     void Start()
@@ -16,31 +15,27 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        bool anyInput = false;
+
+        float x = 0f;
+        float y = 0f;
 
         if (Input.GetKey(KeyCode.A)) {
-            eventManager.onCrewmateMoveInputUpdate.Invoke(0, -1, 0);
-            anyInput = true;
+            x += -1f;
         }
 
         if (Input.GetKey(KeyCode.D)) {
-            eventManager.onCrewmateMoveInputUpdate.Invoke(0, 1, 0);
-            anyInput = true;
+            x += 1f;
         }
 
         if (Input.GetKey(KeyCode.W)) {
-            eventManager.onCrewmateMoveInputUpdate.Invoke(0, 0, 1);
-            anyInput = true;
+            y += 1f;
         }
 
         if (Input.GetKey(KeyCode.S)) {
-            eventManager.onCrewmateMoveInputUpdate.Invoke(0, 0, -1);
-            anyInput = true;
+            y -= 1f;
         }
 
-        if (!anyInput) {
-            eventManager.onCrewmateMoveInputUpdate.Invoke(0, 0, 0);
-        }
+        eventManager.onCrewmateMoveInputUpdate.Invoke(0, x, y);
 
         if (Input.GetKeyDown(KeyCode.Space)) {
             eventManager.onCrewmateButtonAPushed.Invoke(0);

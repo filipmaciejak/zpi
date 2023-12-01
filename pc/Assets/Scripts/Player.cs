@@ -7,11 +7,13 @@ public class Player : MonoBehaviour
     public int teamId;
 
     [SerializeField] private int _id = 0;
-    [SerializeField] private float moveForce = 5f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask moduleLayer;
     public Module usedModule { get; private set; } = null;
     private float moveInput = 0f;
+
+    public float maxSpeed = 2f;
+    public float moveForce = 10f;
 
     private Transform groundCheck;
     public static float timeToApex = 3f;
@@ -23,6 +25,11 @@ public class Player : MonoBehaviour
     private static float gravityScaleUp => (2 * jumpHeight) / Mathf.Pow(timeToApex, 2);
     private static float gravityScaleDown => (2 * jumpHeight) / Mathf.Pow(timeOfFalling, 2);
     private static float jumpVelocity => Mathf.Abs(gravityScaleUp * timeToApex);
+
+    private float inputTranslation(float input)
+    {
+        return input; // todo
+    }
 
     private bool IsGrounded()
     {
@@ -85,14 +92,18 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (moveInput != 0) {
-            if (rb.velocity.x < 0 && moveInput > 0 || rb.velocity.x > 0 && moveInput < 0) {
-                rb.velocity = new Vector2(0, rb.velocity.y);
-            }
-            rb.AddForce(Vector2.right * moveInput * moveForce);
-        } else if (IsGrounded()) {
-            rb.velocity = new Vector2(0, rb.velocity.y);
+        
+        float input = inputTranslation(moveInput);
+        float desiredVelocity;
+        if (input == 0f) {
+            desiredVelocity = 0f;
+        } else {
+            desiredVelocity = input * maxSpeed;
         }
+
+        float velocityChange = desiredVelocity - rb.velocity.x;
+        float force = moveForce * rb.mass * velocityChange;
+        rb.AddForce(Vector2.right * force, ForceMode2D.Force);
 
         if (rb.velocity.y > 0) {
             rb.gravityScale = gravityScaleUp;
