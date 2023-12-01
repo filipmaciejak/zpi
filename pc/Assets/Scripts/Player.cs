@@ -7,18 +7,48 @@ public class Player : MonoBehaviour
     public int teamId;
 
     [SerializeField] private int _id = 0;
-    [SerializeField] private float moveForce = 5f;
-    [SerializeField] private float jumpForce = 5f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask moduleLayer;
     public Module usedModule { get; private set; } = null;
     private float moveInput = 0f;
+
+    public float maxSpeed = 2f;
+    public float moveForce = 10f;
+
     private Transform groundCheck;
+    public static float timeToApex = 4f;
+    public static float timeOfFalling = 2f;
+    public static float jumpHeight = 20f;
+    private bool quickFall = false;
+    private float timeOfLastJump = 0f;
+    public static float jumpBuffering = 0.1f;
+
     private Rigidbody2D rb;
+    private float timeOfLastGrounded = 0f;
+    public static float coyoteTime = 0.1f;
+
+    private static float gravityScaleUp => (2 * jumpHeight) / Mathf.Pow(timeToApex, 2);
+    private static float gravityScaleDown => (2 * jumpHeight) / Mathf.Pow(timeOfFalling, 2);
+    private static float jumpVelocity => Mathf.Abs(gravityScaleUp * timeToApex);
+
+    public static float deadZone = 0.1f;
+    public static float maxZone = 0.4f;
+
+    private float inputTranslation(float input)
+    {
+        float absInput = Mathf.Abs(input);
+        if (absInput < deadZone) {
+            return 0f;
+        } else if (absInput < maxZone) {
+            return (absInput - deadZone) / (maxZone - deadZone) * Mathf.Sign(input);
+        } else {
+            return Mathf.Sign(input);
+        }
+    }
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapBox(groundCheck.position, new Vector2(0.74f, 0.1f), 0f, groundLayer);
+        return Physics2D.OverlapBox(groundCheck.position, new Vector2(0.38f, 0.01f), 0f, groundLayer);
     }
 
     void Start()
@@ -31,7 +61,14 @@ public class Player : MonoBehaviour
         CrewmateEventManager.instance.onCrewmateButtonAPushed.AddListener(
             (id) => {
                 if (id != _id) return;
-                Jump();
+                JumpStart();
+            }
+        );
+
+        CrewmateEventManager.instance.onCrewmateButtonAReleased.AddListener(
+            (id) => {
+                if (id != _id) return;
+                JumpEnd();
             }
         );
 
@@ -77,13 +114,30 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (moveInput != 0) {
-            if (rb.velocity.x < 0 && moveInput > 0 || rb.velocity.x > 0 && moveInput < 0) {
-                rb.velocity = new Vector2(0, rb.velocity.y);
-            }
-            rb.AddForce(Vector2.right * moveInput * moveForce);
-        } else if (IsGrounded()) {
-            rb.velocity = new Vector2(0, rb.velocity.y);
+        if (IsGrounded()) {
+            timeOfLastGrounded = Time.time;
+        }
+
+        if (timeOfLastJump + jumpBuffering > Time.time && timeOfLastGrounded + coyoteTime > Time.time) {
+            Jump();
+        }
+        
+        float input = inputTranslation(moveInput);
+        float desiredVelocity;
+        if (input == 0f) {
+            desiredVelocity = 0f;
+        } else {
+            desiredVelocity = input * maxSpeed;
+        }
+
+        float velocityChange = desiredVelocity - rb.velocity.x;
+        float force = moveForce * rb.mass * velocityChange;
+        rb.AddForce(Vector2.right * force, ForceMode2D.Force);
+
+        if (rb.velocity.y > 0 && !quickFall) {
+            rb.gravityScale = gravityScaleUp;
+        } else {
+            rb.gravityScale = gravityScaleDown;
         }
     }
 
@@ -93,13 +147,24 @@ public class Player : MonoBehaviour
         moveInput = input;
     }
 
+    public void JumpStart()
+    {
+        timeOfLastJump = Time.time;
+    }
+
     public void Jump()
     {
         if (usedModule != null) return;
-        if (IsGrounded())
-        {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
+        quickFall = false;
+        rb.gravityScale = gravityScaleUp;
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(Vector2.up * jumpVelocity * rb.mass, ForceMode2D.Impulse);
+    }
+
+    public void JumpEnd()
+    {
+        quickFall = true;
+        timeOfLastJump = 0f;
     }
 
     public bool Interact()
