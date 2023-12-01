@@ -176,37 +176,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 430552486}
-  - component: {fileID: 430552485}
+  - component: {fileID: 430552487}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &430552485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430552484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5133422cba907b04cad5dca6ef936668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wall: {fileID: 2209545580675590641, guid: d84b91c092cbfb14fa8ebdd18103d80e, type: 3}
-  floor: {fileID: 490170791979012748, guid: 30ea7c8b872fee84285abee35a7cf2fd, type: 3}
-  barrel: {fileID: 8583810453850939839, guid: c5a18bb58d1a37c46a6230a728820b35, type: 3}
-  lava: {fileID: 252985571924369960, guid: 97667188aab018c47ba1555ad287f186, type: 3}
-  mech1: {fileID: 1907179428}
-  mech2: {fileID: 0}
-  lavaChance: 0
-  barrelChance: 0
-  obstaclesArea: 0
-  mapWidth: 6
-  mapHeight: 8
+  m_IsActive: 1
 --- !u!4 &430552486
 Transform:
   m_ObjectHideFlags: 0
@@ -222,6 +199,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &430552487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430552484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db53a52dab4b0c4ea46e8b205c9dcde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapWidth: 16
+  mapHeight: 12
+  wallPrefab: {fileID: 2209545580675590641, guid: d84b91c092cbfb14fa8ebdd18103d80e, type: 3}
+  floorPrefab: {fileID: 490170791979012748, guid: 30ea7c8b872fee84285abee35a7cf2fd, type: 3}
+  destructibleWallPrefab: {fileID: 8583810453850939839, guid: c5a18bb58d1a37c46a6230a728820b35, type: 3}
+  destructibleWallSpawnChance: 0.1
+  trapTilePrefab: {fileID: 252985571924369960, guid: 97667188aab018c47ba1555ad287f186, type: 3}
+  trapTileSpawnChance: 0.1
+  impassableObstaclePrefab: {fileID: 7705433732340329099, guid: 7d131e82f6ae4274cb33ccb2fa1dae3b, type: 3}
+  impassableObstacleSpawnChance: 0.02
+  mech1: {fileID: 1907179428}
+  mech2: {fileID: 1092016922}
+  obstaclesSpawnRowRestriction: 2
+  obstaclesSpawnColRestriction: 2
 --- !u!1 &518372115
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +477,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863279845}
   m_CullTransparentMesh: 1
+--- !u!1 &1092016922 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+  m_PrefabInstance: {fileID: 1614205727}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1231972387
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,12 +513,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mech: {fileID: 1907179428}
   mechManager: {fileID: 387599555}
+  type: 0
   energyConsumption: 0.5
   consumeCooldown: 0.5
   activeEnergyConsumptionMultiplier: 1
   lowEnergyMode: 0
   lowEnergyModeMulltiplier: 0.5
-  type: 0
   isBeingUsed: 0
   isShooting: 0
   rotationMultiplier: 0
@@ -667,12 +675,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mech: {fileID: 1907179428}
   mechManager: {fileID: 387599555}
+  type: 0
   energyConsumption: 5
   consumeCooldown: 2
   activeEnergyConsumptionMultiplier: 1
   lowEnergyMode: 0
   lowEnergyModeMulltiplier: 0.5
-  type: 0
   isBeingUsed: 0
   maxVelocity: 0
   accTime: 0.2
@@ -801,6 +809,7 @@ GameObject:
   - component: {fileID: 1592364066}
   - component: {fileID: 1592364065}
   - component: {fileID: 1592364064}
+  - component: {fileID: 1592364067}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -845,7 +854,7 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
+    width: 0.5
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -882,6 +891,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1592364067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592364063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78198b6cb988f9a4f81035ddb55d4a42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSize: 4
+  maxSize: 20
+  cameraPadding: 1.2
+  mech1: {fileID: 1907179428}
+  mech2: {fileID: 1092016922}
 --- !u!1001 &1614205727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -974,12 +1000,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mech: {fileID: 1907179428}
   mechManager: {fileID: 387599555}
+  type: 0
   energyConsumption: 5
   consumeCooldown: 2
   activeEnergyConsumptionMultiplier: 1
   lowEnergyMode: 0
   lowEnergyModeMulltiplier: 0.5
-  type: 0
   isBeingUsed: 0
   minCooldown: 8
   maxCooldown: 20
@@ -1143,8 +1169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7706f672cd383a4e998fa74719a6809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyBar: {fileID: 1308248458}
-  mechEnergy: {fileID: 1907179436}
 --- !u!1001 &2628643361467248052
 PrefabInstance:
   m_ObjectHideFlags: 0

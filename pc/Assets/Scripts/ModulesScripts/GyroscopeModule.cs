@@ -51,7 +51,7 @@ public class GyroscopeModule : Module
         if (Time.time > lastRotationTime + currentCooldown)
         {
             Debug.Log("Destabilize");
-            CalculateNewCooldown();
+
             lastRotationTime = Time.time;
             Rotate();
         }

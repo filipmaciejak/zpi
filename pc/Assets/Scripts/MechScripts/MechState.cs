@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-public class MechState : MonoBehaviour
+public class MechState : MonoBehaviour, IDamagable
 {
     public int teamId;
 
