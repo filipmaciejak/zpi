@@ -12,8 +12,6 @@ public class ShootingModule : Module
 
     private MechShooting cannon;
 
-    private float lastTimeShot;
-
     [SerializeField]
     private float rotationMultiplier;
     [SerializeField]
@@ -23,6 +21,7 @@ public class ShootingModule : Module
     [SerializeField]
     float maxRotationSpeed = 100.0f;
 
+
     new void Start()
     {
         base.Start();
@@ -30,7 +29,22 @@ public class ShootingModule : Module
         rb = body.GetComponent<Rigidbody2D>();
         rb.centerOfMass = Vector3.zero;
         cannon = body.Find("Cannon").GetComponent<MechShooting>();
-        lastTimeShot = Time.time - cannon.GetCooldown(); 
+
+        moduleEventManager.onCannonModuleFired.AddListener((id) =>
+        {
+            if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
+            {
+                Shoot();
+            }
+        });
+
+        moduleEventManager.onCannonAimModuleUpdate.AddListener((id, rotationDirection) =>
+        {
+            if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
+            {
+                ChangeRotationMultiplier(rotationDirection);
+            }
+        });
     }
 
     public void Rotate()
@@ -42,14 +56,10 @@ public class ShootingModule : Module
     }
     public void Shoot()
     {
-        if (isShooting)
-        {
-            if (Time.time >= lastTimeShot + GetCannonCooldown()) 
-            {
-                cannon.ShootBullet();
-                lastTimeShot += Time.time;
-            }
-        }
+        Debug.Log("Shoot!");
+ 
+        cannon.ShootBullet();
+
     }
     public void ChangeRotationMultiplier(float input)
     {
@@ -73,9 +83,10 @@ public class ShootingModule : Module
     }
     public override void Perform()
     {
-        Debug.Log("Body center of mass: " + rb.centerOfMass);
-        Rotate();
-        Shoot();
+        if (IsBeingUsed())
+        {
+            Rotate();
+        }
     }
 
     private float GetRotationSpeed()
@@ -87,7 +98,7 @@ public class ShootingModule : Module
     {
         return cannon.GetCooldown() * (lowEnergyMode ? 1 / lowEnergyModeMulltiplier : 1);
     }
-    public override void SetLowEnergyBehaviour(bool isLowEnergy)
+    public override void SetEnergyBehaviour(bool isLowEnergy)
     {
         lowEnergyMode = isLowEnergy;
     }

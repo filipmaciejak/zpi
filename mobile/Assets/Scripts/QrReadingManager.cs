@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class QrReadingManager : MonoBehaviour
 {
-    public GameObject ClientManager;
+    
     public GameObject PopUpPanel;
     private CameraHandler CameraHandler;
+    private ClientManager ClientManager;
 
     private double TimerStartSeconds;
     private double TimerLengthSeconds;
@@ -22,11 +23,12 @@ public class QrReadingManager : MonoBehaviour
 
     private void OnEnable()
     {
+        ClientManager = GameManager.Instance.clientManager;
         PopUpPanel.SetActive(false);
         CameraHandler = GetComponent<CameraHandler>();
         CameraHandler.QrRead += OnQrRead;
-        ClientManager.GetComponent<ClientManager>().Connect += OnConnect;
-        ClientManager.GetComponent<ClientManager>().Disconnect += OnDisconnect;
+        ClientManager.Connect += OnConnect;
+        ClientManager.Disconnect += OnDisconnect;
         TimerLengthSeconds = 3.0;
         TimerStartSeconds = -1;
         connectionSuccess = false;
@@ -34,8 +36,8 @@ public class QrReadingManager : MonoBehaviour
 
     private void OnDisable()
     {
-        ClientManager.GetComponent<ClientManager>().Connect -= OnConnect;
-        ClientManager.GetComponent<ClientManager>().Disconnect -= OnDisconnect;
+        ClientManager.Connect -= OnConnect;
+        ClientManager.Disconnect -= OnDisconnect;
     }
 
     // Update is called once per frame
@@ -59,7 +61,7 @@ public class QrReadingManager : MonoBehaviour
         TimerStartSeconds = -1;
         try
         {
-            ClientManager.GetComponent<ClientManager>().ConnectToIp(ip_text);
+            ClientManager.ConnectToIp(ip_text);
         }catch (Exception)
         {
             PopUpPanel.GetComponentInChildren<TextMeshProUGUI>().text = "Nieprawidłowy format adresu. Czy na pewno zeskanowałeś właściwy kod QR?";
