@@ -8,7 +8,7 @@ public class ModuleEventManager : MonoBehaviour
     public static ModuleEventManager instance;
 
     public UnityEvent<int> onMinigameAborted;
-    public UnityEvent<int, Module.Type> onModuleEntered;
+    public UnityEvent<int, Module.Type, Dictionary<string, string>> onModuleEntered;
 
     public UnityEvent<int, Dictionary<string, string>> onMinigameInitialized;
 
@@ -35,8 +35,7 @@ public class ModuleEventManager : MonoBehaviour
         instance = this;
         
         onMinigameAborted = new UnityEvent<int>();
-        onModuleEntered = new UnityEvent<int, Module.Type>();
-        onMinigameInitialized = new UnityEvent<int, Dictionary<string, string>>();
+        onModuleEntered = new UnityEvent<int, Module.Type, Dictionary<string, string>>();
 
         onEnergyModuleUpdate = new UnityEvent<int>();
         onGyroscopeModuleUpdate = new UnityEvent<int, float>();
@@ -64,7 +63,7 @@ public class ModuleEventManager : MonoBehaviour
         );
 
         onModuleEntered.AddListener(
-            (id, type) => {
+            (id, type, dict) => {
                 Debug.Log("ModuleEventManager: onModuleEntered<" + id + ", " + type + ">");
             }
         );

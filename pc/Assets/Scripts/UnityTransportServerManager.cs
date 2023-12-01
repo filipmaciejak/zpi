@@ -58,19 +58,10 @@ public class ServerManager : MonoBehaviour
         System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
         ModuleEventManager.instance.onModuleEntered.AddListener(
-            (id, type) => {
-                Dictionary<string, string> dict_message = new Dictionary<string, string>();
-                dict_message.Add("event", MessageEvent.START_MINIGAME.ToString());
-                dict_message.Add("player", id.ToString());
-                dict_message.Add("minigame", type.ToString());
-                SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict_message)), id);
-            }
-        );
-
-        ModuleEventManager.instance.onMinigameInitialized.AddListener(
-            (id, dict) => {
-                dict.Add("event", MessageEvent.UPDATE_MINIGAME.ToString());
+            (id, type, dict) => {
+                dict.Add("event", MessageEvent.START_MINIGAME.ToString());
                 dict.Add("player", id.ToString());
+                dict.Add("minigame", type.ToString());
                 SendMessage(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dict)), id);
             }
         );
