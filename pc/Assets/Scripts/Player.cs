@@ -20,9 +20,11 @@ public class Player : MonoBehaviour
     public static float timeOfFalling = 2f;
     public static float jumpHeight = 20f;
     private bool quickFall = false;
+    private float timeOfLastJump = 0f;
+    public static float jumpBuffering = 0.1f;
 
     private Rigidbody2D rb;
-    private float timeOfLastGrounded;
+    private float timeOfLastGrounded = 0f;
     public static float coyoteTime = 0.1f;
 
     private static float gravityScaleUp => (2 * jumpHeight) / Mathf.Pow(timeToApex, 2);
@@ -105,6 +107,10 @@ public class Player : MonoBehaviour
         if (IsGrounded()) {
             timeOfLastGrounded = Time.time;
         }
+
+        if (timeOfLastJump + jumpBuffering > Time.time && timeOfLastGrounded + coyoteTime > Time.time) {
+            Jump();
+        }
         
         float input = inputTranslation(moveInput);
         float desiredVelocity;
@@ -133,19 +139,22 @@ public class Player : MonoBehaviour
 
     public void JumpStart()
     {
+        timeOfLastJump = Time.time;
+    }
+
+    public void Jump()
+    {
         if (usedModule != null) return;
         quickFall = false;
-        if (timeOfLastGrounded + coyoteTime > Time.time)
-        {
-            rb.gravityScale = gravityScaleUp;
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(Vector2.up * jumpVelocity * rb.mass, ForceMode2D.Impulse);
-        }
+        rb.gravityScale = gravityScaleUp;
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(Vector2.up * jumpVelocity * rb.mass, ForceMode2D.Impulse);
     }
 
     public void JumpEnd()
     {
         quickFall = true;
+        timeOfLastJump = 0f;
     }
 
     public bool Interact()
