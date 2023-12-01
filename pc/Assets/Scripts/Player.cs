@@ -16,9 +16,10 @@ public class Player : MonoBehaviour
     public float moveForce = 10f;
 
     private Transform groundCheck;
-    public static float timeToApex = 3f;
-    public static float timeOfFalling = 2.5f;
-    public static float jumpHeight = 15f;
+    public static float timeToApex = 4f;
+    public static float timeOfFalling = 2f;
+    public static float jumpHeight = 20f;
+    private bool quickFall = false;
 
     private Rigidbody2D rb;
 
@@ -46,7 +47,14 @@ public class Player : MonoBehaviour
         CrewmateEventManager.instance.onCrewmateButtonAPushed.AddListener(
             (id) => {
                 if (id != _id) return;
-                Jump();
+                JumpStart();
+            }
+        );
+
+        CrewmateEventManager.instance.onCrewmateButtonAReleased.AddListener(
+            (id) => {
+                if (id != _id) return;
+                JumpEnd();
             }
         );
 
@@ -105,7 +113,7 @@ public class Player : MonoBehaviour
         float force = moveForce * rb.mass * velocityChange;
         rb.AddForce(Vector2.right * force, ForceMode2D.Force);
 
-        if (rb.velocity.y > 0) {
+        if (rb.velocity.y > 0 && !quickFall) {
             rb.gravityScale = gravityScaleUp;
         } else {
             rb.gravityScale = gravityScaleDown;
@@ -118,15 +126,21 @@ public class Player : MonoBehaviour
         moveInput = input;
     }
 
-    public void Jump()
+    public void JumpStart()
     {
         if (usedModule != null) return;
+        quickFall = false;
         if (IsGrounded())
         {
             rb.gravityScale = gravityScaleUp;
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpVelocity * rb.mass, ForceMode2D.Impulse);
         }
+    }
+
+    public void JumpEnd()
+    {
+        quickFall = true;
     }
 
     public bool Interact()
