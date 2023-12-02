@@ -20,11 +20,14 @@ public class BombTileBehaviour: MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collider.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Explosion!");
             Explode();
+            Destroy(gameObject);
         }
     }
 }

@@ -78,17 +78,31 @@ public class Player : MonoBehaviour
                 bool success = Interact();
                 if (success) {
                     if (usedModule.type == Module.Type.MOVEMENT_MODULE) {
-                        Dictionary<string, string> dict = new Dictionary<string, string>();
-                        dict.Add("steering_pos", "1"); // TODO: Add steering pos
-                        dict.Add("speed_pos", "1"); // TODO: Add speed pos
+                        MovementModule movementModule = (MovementModule)usedModule;
+                        Dictionary<string, string> dict = new Dictionary<string, string>
+                        {
+                            { "steering_pos", movementModule.GetRotationSliderPosition().ToString() }, // TODO: Add steering pos
+                            { "speed_pos", movementModule.GetSpeedLeverPosition().ToString() } // TODO: Add speed pos
+                        };
                         ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
                     } else if (usedModule.type == Module.Type.CANNON_MODULE) {
                         ShootingModule cannonModule = (ShootingModule)usedModule;
-                        Dictionary<string, string> dict = new Dictionary<string, string>();
-                        dict.Add("fire_cooldown", "3.0"); // TODO: Add fire_cooldown
-                        dict.Add("ammo", "5"); // TODO: Add ammo
-                        dict.Add("chamber_open", cannonModule.IsCannonClosed().ToString()); // TODO: Add chamber_open
-                        dict.Add("chamber_loaded", cannonModule.IsCannonLoaded().ToString()); // TODO: Add chamber_loaded
+                        Dictionary<string, string> dict = new Dictionary<string, string>
+                        {
+                            { "fire_cooldown", "3.0" }, // TODO: Add fire_cooldown
+                            { "ammo", "5" }, // TODO: Add ammo
+                            { "chamber_open", cannonModule.IsCannonClosed().ToString() }, // TODO: Add chamber_open
+                            { "chamber_loaded", cannonModule.IsCannonLoaded().ToString() } // TODO: Add chamber_loaded
+                        };
+                        ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
+                    }
+                    else if(usedModule.type == Module.Type.GYROSCOPE_MODULE)
+                    {
+                        GyroscopeModule gyroscopeModule = (GyroscopeModule)usedModule;
+                        Dictionary<string, string> dict = new Dictionary<string, string>
+                        {
+                            {"gyroscope_calibration", gyroscopeModule.GetGyroscopeDecalibration().ToString()}
+                        };
                         ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
                     }
                 }
