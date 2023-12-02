@@ -16,21 +16,22 @@ public class DestructibleWallBehaviour : MonoBehaviour, IDamagable
 
     private SpriteRenderer spriteRenderer;
 
+    [SerializeField]
     private float hitPoints;
 
 
     public void GetDamaged(int damage)
     {
         hitPoints -= damage;
-        if (hitPoints < startingHitPoints)
+        if (hitPoints < startingHitPoints && hitPoints > 0.7 * startingHitPoints)
         {
             spriteRenderer.sprite = lightlyDamagedSprite;
         }
-        else if (hitPoints <= 0.7 * startingHitPoints)
+        else if (hitPoints <= 0.7 * startingHitPoints && hitPoints > 0.4 * startingHitPoints)
         {
             spriteRenderer.sprite = averageDamagedSprite;
         }
-        else if (hitPoints <= 0.4 * startingHitPoints)
+        else if (hitPoints <= 0.4 * startingHitPoints && hitPoints > 0)
         {
             spriteRenderer.sprite = heavilyDamagedSprite;
         }

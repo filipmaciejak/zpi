@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5421415207338946729}
   - component: {fileID: 8564136025136903798}
   - component: {fileID: 4216651351254866515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,6 +102,7 @@ MonoBehaviour:
   lightlyDamagedSprite: {fileID: 21300000, guid: d02c24bae081493449b1e2b60dc8bc83, type: 3}
   averageDamagedSprite: {fileID: 21300000, guid: 32346bb7dad3d0542835b53e5da235a1, type: 3}
   heavilyDamagedSprite: {fileID: 21300000, guid: be7c9bea27d1a4749b118bec6af6a342, type: 3}
+  hitPoints: 0
 --- !u!61 &4216651351254866515
 BoxCollider2D:
   m_ObjectHideFlags: 0

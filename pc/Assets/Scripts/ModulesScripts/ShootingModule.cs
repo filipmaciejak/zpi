@@ -17,16 +17,19 @@ public class ShootingModule : Module
     private MechShooting cannon;
 
     [SerializeField]
-    private float rotationMultiplier;
+    private float rotationSpeedMultiplier = 2f;
+
+    [SerializeField]
+    private float rotationSpeed;
     [SerializeField]
     private float direction;
-    [SerializeField]
-    float baseRotationSpeed = 30.0f;
-    [SerializeField]
-    float maxRotationSpeed = 100.0f;
+  //  [SerializeField]
+ //   float baseRotationSpeed = 30.0f;
+ //   [SerializeField]
+ //   float maxRotationSpeed = 100.0f;
 
     private bool isCannonLoaded = false;
-    private bool isCannonClosed = true;
+    private bool isCannonOpened = true;
 
     new void Start()
     {
@@ -35,6 +38,14 @@ public class ShootingModule : Module
         rb = body.GetComponent<Rigidbody2D>();
         rb.centerOfMass = Vector3.zero;
         cannon = body.Find("Cannon").GetComponent<MechShooting>();
+
+        moduleEventManager.onCannonModuleChamberLoaded.AddListener((id) =>
+        {
+            if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
+            {
+                isCannonLoaded = true;
+            }
+        });
 
         moduleEventManager.onCannonModuleFired.AddListener((id) =>
         {
@@ -49,6 +60,7 @@ public class ShootingModule : Module
         {
             if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
+                Debug.Log(rotationDirection.ToString());
                 ChangeRotationMultiplier(rotationDirection);
             }
         });
@@ -57,7 +69,7 @@ public class ShootingModule : Module
         {
             if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
-                isCannonClosed = true;
+                isCannonOpened = false;
             }
         });
 
@@ -65,7 +77,7 @@ public class ShootingModule : Module
         {
             if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
-                isCannonClosed = false;
+                isCannonOpened = true;
             }
         });
     }
@@ -73,20 +85,19 @@ public class ShootingModule : Module
     public void Rotate()
     {
         float rotationAngle = direction * GetRotationSpeed();
-        if (rb.angularVelocity > 0 && rb.angularVelocity > maxRotationSpeed) rb.angularVelocity = maxRotationSpeed;
-        else if (rb.angularVelocity < 0 && Mathf.Abs(rb.angularVelocity) > maxRotationSpeed) rb.angularVelocity = -maxRotationSpeed;
+       // if (rb.angularVelocity > 0 && rb.angularVelocity > maxRotationSpeed) rb.angularVelocity = maxRotationSpeed;
+       // else if (rb.angularVelocity < 0 && Mathf.Abs(rb.angularVelocity) > maxRotationSpeed) rb.angularVelocity = -maxRotationSpeed;
         rb.AddTorque(rotationAngle);
+        Debug.Log("Angular velocity: " + rb.angularVelocity);
     }
     public void Shoot()
-    {
-        Debug.Log("Shoot!");
- 
+    { 
         cannon.ShootBullet();
 
     }
     public void ChangeRotationMultiplier(float input)
     {
-        rotationMultiplier = Mathf.Abs(input);
+        rotationSpeed = Mathf.Abs(input);
         if(input > 0)
         {
             direction = -1;
@@ -102,19 +113,21 @@ public class ShootingModule : Module
     }
     public float GetRotationMultiplier()
     {
-        return rotationMultiplier;
+        return rotationSpeed;
     }
     public override void Perform()
     {
+
         if (IsBeingUsed())
         {
+            Debug.Log($"Rotating {rotationSpeed}");
             Rotate();
         }
     }
 
     private float GetRotationSpeed()
     {
-        return baseRotationSpeed * rotationMultiplier * (lowEnergyMode ? lowEnergyModeMulltiplier: 1);
+        return rotationSpeedMultiplier * rotationSpeed * (lowEnergyMode ? lowEnergyModeMulltiplier: 1);
     }
 
     private float GetCannonCooldown()
@@ -126,5 +139,13 @@ public class ShootingModule : Module
         lowEnergyMode = isLowEnergy;
     }
 
+    public bool IsCannonLoaded()
+    {
+        return isCannonLoaded;
+    }
 
+    public bool IsCannonClosed()
+    {
+        return isCannonOpened;
+    }
 }

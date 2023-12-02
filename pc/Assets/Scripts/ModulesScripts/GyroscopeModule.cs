@@ -7,7 +7,10 @@ public class GyroscopeModule : Module
 {
     [Range(0f, 1f)]
     [SerializeField]
-    private float gyroscopeDecalibration;
+    private float gyroscopeCalibration = 1f;
+
+    [SerializeField]
+    private float gyroscopeDecalibrationStep = 0.05f;
 
     [SerializeField]
     private float decalibrationMultiplier = 1f;
@@ -19,14 +22,16 @@ public class GyroscopeModule : Module
     private float maxCooldown;
 
     [SerializeField]
-    private float coordinatesShiftDistance;
+    private float destabilizationCooldown = 5f;
 
     private float currentCooldown;
 
     private float lastRotationTime;
 
+    private float lastDestibilizationTime;
+
     [SerializeField]
-    private ShootingModule shootingModule;
+    private ShootingModule cannonModule;
 
     [SerializeField]
     private Rigidbody2D mechBody;
@@ -36,13 +41,13 @@ public class GyroscopeModule : Module
         base.Start();
         CalculateNewCooldown();
         lastRotationTime = Time.time;
-
+        lastDestibilizationTime = Time.time;
         moduleEventManager.onGyroscopeModuleUpdate.AddListener((id, number) =>
         {
             if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
-                gyroscopeDecalibration = 1 - number;
-                Debug.Log(number);
+                gyroscopeCalibration = number;
+                Debug.Log("Gyroscope new value" + number);
             }
         });
     }
@@ -50,14 +55,26 @@ public class GyroscopeModule : Module
     {
         if (Time.time > lastRotationTime + currentCooldown)
         {
-            Debug.Log("Destabilize");
-
             lastRotationTime = Time.time;
+            Debug.Log("Gyroscope: Rotate - Cooldown = " + currentCooldown * gyroscopeCalibration);
             Rotate();
         }
-    
+        if (Time.time > lastDestibilizationTime + destabilizationCooldown)
+        {
+            lastDestibilizationTime = Time.time;
+            Debug.Log("Gyroscope: Destabilize");
+            Destablize();
+        }
     }
 
+    private void Destablize()
+    {
+        if (!isBeingUsed)
+        {
+            gyroscopeCalibration -= gyroscopeDecalibrationStep;
+            gyroscopeCalibration = Mathf.Max(gyroscopeCalibration, 0.05f);
+        }
+    }
     private void Rotate()
     {
         float leftRightChance = Random.Range(0f, 1f);
@@ -70,18 +87,23 @@ public class GyroscopeModule : Module
         {
             direction = 1;
         }
-        mechBody.AddTorque(shootingModule.GetRotationMultiplier() + (gyroscopeDecalibration * direction * decalibrationMultiplier));
+        mechBody.AddTorque(cannonModule.GetRotationMultiplier() + ((1 - gyroscopeCalibration) * direction * decalibrationMultiplier));
     }
 
     private void CalculateNewCooldown()
     {
-        currentCooldown = Random.Range(minCooldown, maxCooldown);
+        currentCooldown = Random.Range(minCooldown, maxCooldown * gyroscopeCalibration);
     }
 
     public override void SetEnergyBehaviour(bool isLowEnergy)
     {
-        throw new System.NotImplementedException();
+        //
     }
     
+    public float GetGyroscopeDecalibration()
+    {
+        return gyroscopeCalibration;
+    }
+
 
 }

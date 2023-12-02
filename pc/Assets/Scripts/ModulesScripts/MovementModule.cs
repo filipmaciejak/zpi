@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-public class MechWalkingModule : Module
+public class MovementModule : Module
 {
     [SerializeField]
     private float maxVelocity;
@@ -29,6 +29,10 @@ public class MechWalkingModule : Module
 
     [SerializeField]
     private float rotationDirection = 0f;
+
+    private float walkingSpeedInputFromPhone;
+
+    private float rotatingSpeedInputFromPhone;
 
     private float timeCounter;
     private float mass;
@@ -54,6 +58,7 @@ public class MechWalkingModule : Module
             if (moduleEventManager.teamIds.GetValueOrDefault(id,0) == mechId) 
             { 
                 ChangeStep(speed);
+                walkingSpeedInputFromPhone = speed;
             }
         });
 
@@ -61,6 +66,7 @@ public class MechWalkingModule : Module
         {
             if (moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
+                rotatingSpeedInputFromPhone = steering;
                 ChangeRotationMultiplier(steering);
             }
         });
@@ -100,6 +106,16 @@ public class MechWalkingModule : Module
             direction = -1;
         }
         else { direction = 0; }
+    }
+
+    public float GetSpeedLeverPosition()
+    {
+        return walkingSpeedInputFromPhone;
+    }
+
+    public float GetRotationSliderPosition()
+    {
+        return rotatingSpeedInputFromPhone;
     }
 
     public void Rotate()

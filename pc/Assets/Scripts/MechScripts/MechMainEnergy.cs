@@ -14,10 +14,7 @@ public class MechMainEnergy : MonoBehaviour
     {
         currentEnergy = maxEnergy;
     }
-    private void FixedUpdate()
-    {
-        Debug.Log("Current energy: " + currentEnergy);
-    }
+
     public bool AddEnergy(float energy)
     {
         currentEnergy += energy;
