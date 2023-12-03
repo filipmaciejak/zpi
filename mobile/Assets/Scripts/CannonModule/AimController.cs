@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Android;
 
 public class AimController : MonoBehaviour
 {
@@ -13,11 +14,10 @@ public class AimController : MonoBehaviour
     //angle 0 is completely flat
     public float deadZoneAngle = 10f;
 
-    public float maxRightAngle = 90f;
-    public float maxLeftAngle = 270f;
+    public float maxAngle = 90f;
     
     
-    private void Awake()
+    private void Start()
     {
         InputSystem.EnableDevice(AttitudeSensor.current);
     }
@@ -26,38 +26,52 @@ public class AimController : MonoBehaviour
     void Update()
     {
         Vector3 attitude = AttitudeSensor.current.attitude.ReadValue().eulerAngles;
-        float tiltAngle = attitude.y;
+        
+        var attitudeX = attitude.x;
+        if (attitudeX > 180)
+            attitudeX -= 360;
+        var attitudeY = attitude.y;
+        if (attitudeY > 180)
+            attitudeY -= 360;
+        var northFacingDirection = new Vector2(attitudeY, -attitudeX);
+        float angle = - Mathf.PI * attitude.z / 180.0f;
+        var adjustedDirection = new Vector2(
+            northFacingDirection.x * Mathf.Cos(angle) - northFacingDirection.y * Mathf.Sin(angle), 
+            northFacingDirection.x * Mathf.Sin(angle) + northFacingDirection.y * Mathf.Cos(angle));
 
+        var tiltAngle = adjustedDirection.x;
+        
         float result = 0;
-        if ((tiltAngle > 0 && tiltAngle < deadZoneAngle / 2) ||
-            (tiltAngle < 360 && tiltAngle > 360 - deadZoneAngle / 2))
+        
+        // In deadzone
+        if ((tiltAngle > 0 && tiltAngle < deadZoneAngle) ||
+            (tiltAngle < 0 && tiltAngle > -deadZoneAngle))
         {
             result = 0;
             aimPosition = result;
+            AimPositionUpdated?.Invoke(aimPosition);
             return;
         }
-        
-        if (tiltAngle < maxLeftAngle && tiltAngle > maxRightAngle)
+
+        bool overLeftMax = tiltAngle < -maxAngle;
+        bool overRightMax = tiltAngle > maxAngle;
+        if (overLeftMax || overRightMax)
         {
-            if (tiltAngle < 180)
-                result = 1;
-            if (tiltAngle >= 180)
+            if (overLeftMax)
                 result = -1;
+            if (overRightMax)
+                result = 1;
+
             aimPosition = result;
+            AimPositionUpdated?.Invoke(aimPosition);
             return;
         }
 
-        if (tiltAngle <= maxRightAngle)
-        {
-            aimPosition = tiltAngle / maxRightAngle;
-        }
-
-        if (tiltAngle >= maxLeftAngle)
-        {
-            float distanceFromCenter = Math.Abs(tiltAngle - 360);
-            float maxDistanceFromCenter = Math.Abs(maxLeftAngle - 360);
-            aimPosition = -(distanceFromCenter / maxDistanceFromCenter);
-        }
+        if(tiltAngle > 0)
+            aimPosition = (tiltAngle - deadZoneAngle) / (maxAngle - deadZoneAngle);
+        if(tiltAngle < 0)
+            aimPosition = (tiltAngle + deadZoneAngle) / (maxAngle - deadZoneAngle);
+        
         AimPositionUpdated?.Invoke(aimPosition);
     }
 }

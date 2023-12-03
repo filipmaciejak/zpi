@@ -1105,9 +1105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimPosition: 0
-  deadZoneAngle: 10
-  maxRightAngle: 90
-  maxLeftAngle: 270
+  deadZoneAngle: 20
+  maxAngle: 90
 --- !u!4 &1269241392
 Transform:
   m_ObjectHideFlags: 0
