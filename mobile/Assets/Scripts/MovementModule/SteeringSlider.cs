@@ -16,6 +16,8 @@ namespace MovementModule
         private TouchHelper _touchHelper;
         private Finger _sliderFinger;
 
+        public float sliderNeutralLock;
+
         public RectTransform sliderRectTransform;
 
         [NonSerialized]
@@ -88,6 +90,9 @@ namespace MovementModule
                 return;
 
             _sliderFinger = null;
+            if (NeutralLockCheck())
+                SetSliderPosition(0);
+            
             StoppedControlling?.Invoke(SliderPosition);
         }
 
@@ -102,6 +107,13 @@ namespace MovementModule
             float result = Math.Clamp(normalizedUnclamped, -1f, 1f);
 
             return result;
+        }
+
+        private bool NeutralLockCheck()
+        {
+            if (Math.Abs(SliderPosition) <= sliderNeutralLock)
+                return true;
+            return false;
         }
     }
 }

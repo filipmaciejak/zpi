@@ -1132,6 +1132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845136a01ed578a92bf2374f6fcffbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sliderNeutralLock: 0.3
   sliderRectTransform: {fileID: 1911744717}
 --- !u!114 &984039190
 MonoBehaviour:
