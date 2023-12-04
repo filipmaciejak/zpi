@@ -60,6 +60,7 @@ namespace CannonModule
         public void LoadShell(GameObject shell)
         {
             Destroy(shell);
+            currentAmmo += 1; // Remove this if ammo is to be tracked
             currentShellFinger = null;
             UpdateShells();
         }
