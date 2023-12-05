@@ -5,9 +5,9 @@ public class BulletBehaviour : MonoBehaviour
     public int damage = 5;
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("HIT");
         IDamagable damagedObject = collision.gameObject.GetComponent(typeof(IDamagable)) as IDamagable;
-        if(damagedObject == null)
+
+        if (damagedObject == null)
         {
             Transform parent = collision.gameObject.transform.parent;
             if(parent != null)
@@ -15,7 +15,6 @@ public class BulletBehaviour : MonoBehaviour
                 damagedObject = parent.GetComponent(typeof(IDamagable)) as IDamagable;
             }
         }
-
         damagedObject?.GetDamaged(damage);
 
         Destroy(gameObject);

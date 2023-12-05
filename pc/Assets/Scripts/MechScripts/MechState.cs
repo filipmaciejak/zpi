@@ -2,11 +2,17 @@ using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class MechState : MonoBehaviour, IDamagable
 {
-    public int teamId;
 
+    public UnityEvent<int> onMechDeath;
+    public UnityEvent<int> onHullBreach;
+
+    public int teamId;
+    public int mechLives;
     ArrayList damageTracker;
 
     [SerializeField]
@@ -17,24 +23,28 @@ public class MechState : MonoBehaviour, IDamagable
 
     private MechHealth mechHealth;
     private MechShield mechShield;
-    private MechRespawn mechRespawn;
-
+    private void Awake()
+    {
+        onMechDeath = new UnityEvent<int>();
+        onHullBreach = new UnityEvent<int>();
+    }
     private void Start()
     {
-        mechRespawn = GetComponent<MechRespawn>();
         mechShield = GetComponent<MechShield>();
-        mechHealth = GetComponent<MechHealth>();
+        mechHealth = GetComponentInChildren<MechHealth>();
         damageTracker = new ArrayList();
+
+
     }
 
     public void GetDamaged(int damage)
     {
         int currentShield = mechShield.GetShield();
-        int currentHealth = mechHealth.GetHealth();
+        int currentHealth = mechHealth.GetCurrentHealth();
         int shieldPrediction = currentShield - damage;
         if(shieldPrediction < 0)
         {
-            damage = damage - currentShield;
+            damage -= currentShield;
             mechShield.SetShield(0);       //TODO: przetestowac ladowanie tarczy i dostawanie damage jednoczesnie czy nie wchodzi w konflikt
             currentHealth -= damage;
             if(currentHealth <= 0)
@@ -52,25 +62,14 @@ public class MechState : MonoBehaviour, IDamagable
         {
              mechShield.SetShield(shieldPrediction);
         }
-        Debug.Log("Health " + mechHealth.GetHealth());
-        Debug.Log("Shield " + mechShield.GetShield());
     }
     public void Die()
     {
-        if (mechHealth.GetLives() > 1)
-        {
-            mechRespawn.Respawn();
-        }
-        else
-        {
-            Debug.Log("Przegrales");
-            Destroy(gameObject);
-            //TODO: GameOver
-        }
+        onMechDeath.Invoke(teamId);
     }
     public void TrackRecentDamage(int damage)
     {
-        ArrayList filteredDamageTracker = new ArrayList();
+        ArrayList filteredDamageTracker = new();
         damageTracker.Add(Tuple.Create( damage, Time.time ));
         for (int i = 0; i < damageTracker.Count; i++)
         {
@@ -82,9 +81,8 @@ public class MechState : MonoBehaviour, IDamagable
         int damageSum = damageTracker.Cast<Tuple<int,float>>().Select(tuple => tuple.Item1).Sum();
         if(damageSum >= hullBreakDamage)
         {
-            Debug.Log("HULL DAMAGED, REPAIRS NEEDED");
             damageTracker.Clear();
-            //TODO: Stworzenie wyrwy w mechu
+            onHullBreach.Invoke(teamId);
         }
     }
     

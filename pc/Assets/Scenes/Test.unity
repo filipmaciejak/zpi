@@ -123,6 +123,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &350070703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 350070705}
+  - component: {fileID: 350070704}
+  m_Layer: 0
+  m_Name: GameModeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &350070704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350070703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a503fbd66d80be4ba067098ce66fbb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mech1: {fileID: 1907179428}
+  mech2: {fileID: 1092016922}
+  maxRoundTime: 500
+  startingLives: 1
+--- !u!4 &350070705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350070703}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -56.032143, y: -29.412037, z: -0.04007807}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &387599555
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +525,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863279845}
   m_CullTransparentMesh: 1
+--- !u!1 &956265541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 956265543}
+  - component: {fileID: 956265542}
+  m_Layer: 0
+  m_Name: GameStateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &956265542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956265541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1169e8d332a8d3c4d94b0687a6657394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &956265543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956265541}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -56.032143, y: -29.412037, z: -0.04007807}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1092016922 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
@@ -521,10 +613,9 @@ MonoBehaviour:
   lowEnergyModeMulltiplier: 0.5
   isBeingUsed: 0
   isShooting: 0
-  rotationMultiplier: 0
+  rotationSpeedMultiplier: 2
+  rotationSpeed: 0
   direction: 0
-  baseRotationSpeed: 30
-  maxRotationSpeed: 100
 --- !u!4 &1231972389
 Transform:
   m_ObjectHideFlags: 0
@@ -920,6 +1011,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.y
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 39111513153727069, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_Name
       value: Mech (1)
@@ -1007,10 +1102,14 @@ MonoBehaviour:
   lowEnergyMode: 0
   lowEnergyModeMulltiplier: 0.5
   isBeingUsed: 0
+  gyroscopeCalibration: 1
+  gyroscopeDecalibrationStep: 0.05
+  decalibrationMultiplier: 1
   minCooldown: 8
   maxCooldown: 20
-  coordinatesShiftDistance: 0.05
-  shootingModule: {fileID: 1231972388}
+  destabilizationCooldown: 5
+  cannonModule: {fileID: 0}
+  mechBody: {fileID: 0}
 --- !u!4 &1807378454
 Transform:
   m_ObjectHideFlags: 0
@@ -1393,6 +1492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52554ccc38c4f6e42b7650a751d916b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarSlider: {fileID: 0}
 --- !u!1001 &5850067103770545642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1536,3 +1636,5 @@ SceneRoots:
   - {fileID: 1327771275}
   - {fileID: 689309137}
   - {fileID: 1807378454}
+  - {fileID: 956265543}
+  - {fileID: 350070705}
