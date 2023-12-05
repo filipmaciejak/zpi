@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ public class EnergyRechargingModule : Module
         {
             if(moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
             {
-                mechEnergy.AddEnergy(amountOfEnergyToRecharge);
+                mechEnergy.ChangeEnergy(amountOfEnergyToRecharge);
             }
         });
     }

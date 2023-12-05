@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: 585501319}
   - component: {fileID: 585501318}
   m_Layer: 0
-  m_Name: MechManager (1)
+  m_Name: MechManager2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4463,7 +4463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8180824593716559679, guid: b88ea54460993bc47b4efe836d93e172, type: 3}
       propertyPath: m_Name
-      value: Crewmate (1)
+      value: Crewmate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4630,7 +4630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4816634600724648903, guid: 8917f9593256ddf4cbf8485b2ebe9b2b, type: 3}
       propertyPath: m_Name
-      value: CannonModule (1)
+      value: CannonModule
       objectReference: {fileID: 0}
     - target: {fileID: 7198866000397019555, guid: 8917f9593256ddf4cbf8485b2ebe9b2b, type: 3}
       propertyPath: mech
@@ -4825,7 +4825,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418721511030324943, guid: eae00e33c133f19499639cfce8f82605, type: 3}
       propertyPath: m_Name
-      value: GyroscopeModule (1)
+      value: GyroscopeModule
       objectReference: {fileID: 0}
     - target: {fileID: 4321152146030807149, guid: eae00e33c133f19499639cfce8f82605, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5524,6 +5524,14 @@ PrefabInstance:
       propertyPath: mechManager
       value: 
       objectReference: {fileID: 1969167512}
+    - target: {fileID: 939001408733877813, guid: 0c22b8a607b420f449139475124c345c, type: 3}
+      propertyPath: energyConsumption
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 939001408733877813, guid: 0c22b8a607b420f449139475124c345c, type: 3}
+      propertyPath: activeEnergyConsumptionMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4216001592605256449, guid: 0c22b8a607b420f449139475124c345c, type: 3}
       propertyPath: m_Name
       value: MovementModule
@@ -5708,6 +5716,14 @@ PrefabInstance:
       propertyPath: mechManager
       value: 
       objectReference: {fileID: 1969167512}
+    - target: {fileID: 2046404826520909007, guid: 8d27476d8ac9ec64a90cd92f92b04a2b, type: 3}
+      propertyPath: consumeCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2046404826520909007, guid: 8d27476d8ac9ec64a90cd92f92b04a2b, type: 3}
+      propertyPath: energyConsumption
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -42,6 +42,7 @@ public abstract class Module : MonoBehaviour
     {
         mechManager.GetComponent<MechManager>().AddModule(this);
         mechEnergy = mech.GetComponent<MechMainEnergy>();
+        mechEnergy.onEnergyModeChange.AddListener(isLowEnergyMode => SetEnergyBehaviour(isLowEnergyMode));
         timeSinceLastEnergyConsumption = Time.time;
 
 
@@ -55,11 +56,8 @@ public abstract class Module : MonoBehaviour
         {
             float energyToConsume = energyConsumption * (isBeingUsed ? activeEnergyConsumptionMultiplier : 1);
             timeSinceLastEnergyConsumption = Time.time;
-            if (!mechEnergy.AddEnergy(-energyToConsume))
-            {
-                SetEnergyBehaviour(true);
-            }
-            else if (lowEnergyMode) { SetEnergyBehaviour(false); }
+            Debug.Log("Consuming " + energyToConsume);
+            mechEnergy.ChangeEnergy(-energyToConsume);
         }
     }
 

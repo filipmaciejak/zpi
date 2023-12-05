@@ -2,32 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MechMainEnergy : MonoBehaviour
 {
     [SerializeField]
     private float maxEnergy = 100;
 
+    [SerializeField]
     private float currentEnergy;
 
-    private void Start()
+    public UnityEvent<bool> onEnergyModeChange;
+    private float predictedEnergyChange = 0;
+    private bool isLowEnergyMode = false;
+    public void Awake()
+    {
+        onEnergyModeChange = new();
+    }
+    public void Start()
     {
         currentEnergy = maxEnergy;
     }
-
-    public bool AddEnergy(float energy)
+    public void LateUpdate()
     {
-        currentEnergy += energy;
-        if (currentEnergy > maxEnergy)
+        if (predictedEnergyChange != 0)
         {
-            currentEnergy = maxEnergy;
+            currentEnergy += predictedEnergyChange;
+            if (currentEnergy > maxEnergy)
+            {
+                currentEnergy = maxEnergy;
+            }
+            else if (currentEnergy <= 0)
+            {
+                currentEnergy = 0;
+                onEnergyModeChange.Invoke(true);
+                Debug.Log("Low energy mode on ");
+                isLowEnergyMode = true;
+            }
+            else if(isLowEnergyMode && currentEnergy > 0)
+            {
+                onEnergyModeChange.Invoke(false);
+            }
+            predictedEnergyChange = 0;
         }
-        else if (currentEnergy < 0)
-        {
-            currentEnergy = 0;
-            return false;
-        }
-        return true;
+    }
+    public void ChangeEnergy(float energy)
+    {
+        predictedEnergyChange += energy;
     }
 
     public float GetCurrentEnergy()
