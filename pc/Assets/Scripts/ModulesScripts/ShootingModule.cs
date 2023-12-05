@@ -7,8 +7,6 @@ using UnityEngine;
 public class ShootingModule : Module
 {
 
-
-
     private Rigidbody2D rb;
 
     [SerializeField] 
@@ -23,10 +21,6 @@ public class ShootingModule : Module
     private float rotationSpeed;
     [SerializeField]
     private float direction;
-  //  [SerializeField]
- //   float baseRotationSpeed = 30.0f;
- //   [SerializeField]
- //   float maxRotationSpeed = 100.0f;
 
     private bool isCannonLoaded = false;
     private bool isCannonOpened = true;
@@ -130,10 +124,6 @@ public class ShootingModule : Module
         return rotationSpeedMultiplier * rotationSpeed * (lowEnergyMode ? lowEnergyModeMulltiplier: 1);
     }
 
-    private float GetCannonCooldown()
-    {
-        return cannon.GetCooldown() * (lowEnergyMode ? 1 / lowEnergyModeMulltiplier : 1);
-    }
     public override void SetEnergyBehaviour(bool isLowEnergy)
     {
         lowEnergyMode = isLowEnergy;

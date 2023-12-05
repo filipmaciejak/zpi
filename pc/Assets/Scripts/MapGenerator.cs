@@ -1,106 +1,144 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public GameObject wall;
-    public GameObject floor;
-    public GameObject barrel;
-    public GameObject lava;
-    public GameObject mech1;
-    public GameObject mech2;
-    public float lavaChance;
-    public float barrelChance;
-    public int obstaclesArea; //Przeszkody będą losowo generowane w kwadracie o zadanym boku. Musi to być liczba parzysta
-    public int mapWidth;
-    public int mapHeight;
-    private float tileSize;
-    // Start is called before the first frame update
+    [SerializeField]
+    private int mapWidth;
+
+    [SerializeField]
+    private int mapHeight;
+
+    [SerializeField]
+    private GameObject wallPrefab;
+
+    [SerializeField]
+    private GameObject floorPrefab;
+
+    [SerializeField]
+    private GameObject destructibleWallPrefab;
+
+    [SerializeField]
+    private float destructibleWallSpawnChance;
+
+    [SerializeField]
+    private GameObject trapTilePrefab;
+
+    [SerializeField]
+    private float trapTileSpawnChance;
+
+    [SerializeField]
+    private GameObject impassableObstaclePrefab;
+
+    [SerializeField]
+    private float impassableObstacleSpawnChance;
+
+    [SerializeField]
+    private GameObject mech1;
+
+    [SerializeField]
+    private GameObject mech2;
+
+    [SerializeField]
+    private int obstaclesSpawnRowRestriction;
+
+    [SerializeField]
+    private int obstaclesSpawnColRestriction;
+
+    private int[,] mapMatrix;
+
+    private const int STARTING_X = -1;
+    private const int STARTING_Y = -1;
+
+    private (int, int) spawnPoint1;
+    private (int, int) spawnPoint2;
+
     void Start()
     {
-        tileSize = floor.transform.localScale.x;
+        mapMatrix = new int[mapWidth, mapHeight];
+        spawnPoint1 = (mapWidth - 2, mapHeight - 2);
+        spawnPoint2 = (1, 1);
+        mapMatrix[spawnPoint1.Item1, spawnPoint1.Item2] = 10;//Set spawnpoints 
+        mapMatrix[spawnPoint2.Item1, spawnPoint2.Item2] = 10;
         GenerateWalls();
         GenerateFloor();
-        GenerateObstacles(barrelChance, lavaChance);
-        PlaceMechs();
+        GenerateObstacles();
+        MovePlayersToSpawnPoints();
     }
 
-    void GenerateWalls()
+    private void GenerateWalls()
     {
-        float y = tileSize * ((mapWidth/2)) + tileSize;
-        float x = -tileSize * (mapHeight/2) - tileSize; 
-        for (int i = 0; i < mapHeight + 2; i++)
+        for (int x = STARTING_X; x < mapWidth + STARTING_X + 2; x++)
         {
-            GameObject wallObject = Instantiate(wall, gameObject.transform);
-            wallObject.transform.localPosition = new Vector2(x, y);
-            x += tileSize;
+            Instantiate(wallPrefab, new Vector3(x, STARTING_Y), Quaternion.identity);
+            Instantiate(wallPrefab, new Vector3(x, mapHeight + STARTING_Y + 1), Quaternion.identity);
         }
-        for(int i = 0;i < mapWidth; i++) 
+
+        for (int y = STARTING_Y; y < mapHeight + STARTING_Y + 1; y++)
         {
-            y -= tileSize;
-            GameObject leftWall = Instantiate(wall, gameObject.transform);
-            GameObject rightWall = Instantiate(wall, gameObject.transform);
-            leftWall.transform.localPosition = new Vector2(-tileSize * (mapHeight / 2) - tileSize, y);
-            rightWall.transform.localPosition = new Vector2(tileSize * (mapHeight / 2), y);
-        }
-        y = -tileSize * (mapWidth / 2);
-        x = -tileSize * (mapHeight / 2) - tileSize;
-        for (int i = 0; i < mapHeight + 2; i++)
-        {
-            GameObject wallObject = Instantiate(wall, gameObject.transform);
-            wallObject.transform.localPosition = new Vector2(x, y);
-            x += tileSize;
+            Instantiate(wallPrefab, new Vector3(STARTING_X , y), Quaternion.identity);
+            Instantiate(wallPrefab, new Vector3(mapWidth + STARTING_X + 1, y), Quaternion.identity);
+
         }
     }
 
-    void GenerateFloor()
+    private void GenerateFloor()
     {
-        float y = tileSize * (mapHeight / 2) + 2 * tileSize;
-        for (int i = 0; i < mapWidth; i++)
+        for(int x = STARTING_X + 1; x < STARTING_X + 1 + mapWidth; x++)
         {
-            float x = -tileSize * (mapWidth / 2) + 2 * tileSize ;
-            for (int j = 0; j < mapHeight; j++)
+            for(int y = STARTING_Y + 1; y < STARTING_Y + 1 + mapHeight; y++)
             {
-                GameObject floorObject = Instantiate(floor, gameObject.transform);
-                floorObject.transform.localPosition = new Vector2(x, y);
-                x += tileSize;
+                Instantiate(floorPrefab, new Vector3(x, y), Quaternion.identity);
             }
-            y -= tileSize;
         }
     }
 
-    void GenerateObstacles(float barrelChance, float lavaChance)
+
+    public int[,] GetMapMatrix()
     {
-        lavaChance = 1 - lavaChance;
-        float y = (obstaclesArea/ 2) * tileSize;
-        for(int i = 0;i < obstaclesArea; i++)
+        return mapMatrix;
+    }
+
+    private void GenerateObstacles()
+    {
+        for (int row = obstaclesSpawnRowRestriction; row < mapWidth - obstaclesSpawnRowRestriction; row++)
         {
-            float x = (obstaclesArea / 2) * tileSize * -1;
-            for (int j = 0; j < obstaclesArea; j++)
+            for (int col = obstaclesSpawnColRestriction; col < mapHeight - obstaclesSpawnColRestriction; col++)
             {
-                float randNumber = Random.Range(0.0f, 1);
-                if (randNumber <= barrelChance)
+                if (mapMatrix[row, col] == 0)
                 {
-                    GameObject obstacleObject = Instantiate(barrel, gameObject.transform);
-                    obstacleObject.transform.localPosition = new Vector2(x, y);
+                    TryToGenerateObstacle(row, col);
                 }
-                else if (randNumber >= lavaChance)
-                {
-                    GameObject obstacleObject = Instantiate(lava, gameObject.transform);
-                    obstacleObject.transform.localPosition = new Vector2(x, y);
-                }
-                x += tileSize;
             }
-            y-= tileSize;
         }
     }
-    void PlaceMechs()
-    {
-        mech1.transform.position = new Vector2(mapWidth /2, mapHeight /2 - tileSize);
-        mech2.transform.position = new Vector2(mapWidth /-2, mapHeight /-2 + tileSize);
-        Debug.Log("Position 1" + new Vector2(mapWidth / 2, mapHeight / 2 - tileSize));
-        Debug.Log("Position 2" + new Vector2(mapWidth / -2, mapHeight / -2 + tileSize));
 
+    public void MovePlayersToSpawnPoints()
+    {
+        mech1.transform.position = new Vector3(spawnPoint1.Item1, spawnPoint1.Item2);
+        mech2.transform.position = new Vector3(spawnPoint2.Item1, spawnPoint2.Item2);
+    }
+
+    private void TryToGenerateObstacle(int x, int y)
+    {
+        float spawnChance = Random.Range(0f, 1f);
+        GameObject obstacleToSpawn = null;
+        if(spawnChance < trapTileSpawnChance) 
+        {
+            obstacleToSpawn = trapTilePrefab;
+        }
+        else if(spawnChance < (destructibleWallSpawnChance + trapTileSpawnChance))
+        {
+            obstacleToSpawn = destructibleWallPrefab;
+        }
+        
+        else if (spawnChance < (destructibleWallSpawnChance + impassableObstacleSpawnChance + trapTileSpawnChance))
+        {
+            obstacleToSpawn = impassableObstaclePrefab;
+        }
+
+        if(obstacleToSpawn != null)
+        {
+            Instantiate(obstacleToSpawn, new Vector3(x, y), Quaternion.identity);
+        }
     }
 }

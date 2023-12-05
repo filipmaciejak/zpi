@@ -8,10 +8,9 @@ public class EnergyRechargingModule : Module
     [SerializeField]
     private float amountOfEnergyToRecharge;
 
-    private MechMainEnergy mechEnergy;
     public override void Perform()
     {
-       //
+        //
     }
 
     public override void SetEnergyBehaviour(bool isLowEnergy)
@@ -24,8 +23,6 @@ public class EnergyRechargingModule : Module
     {
         base.Start();
 
-        mechEnergy = mech.GetComponent<MechMainEnergy>();
-
         moduleEventManager.onEnergyModuleUpdate.AddListener(id => 
         {
             if(moduleEventManager.teamIds.GetValueOrDefault(id, 0) == mechId)
@@ -33,11 +30,5 @@ public class EnergyRechargingModule : Module
                 mechEnergy.AddEnergy(amountOfEnergyToRecharge);
             }
         });
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

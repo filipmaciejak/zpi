@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4885943354917646230}
   - component: {fileID: 9222340290611009486}
   - component: {fileID: 6399011285032759790}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sciana_metal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

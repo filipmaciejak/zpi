@@ -17,10 +17,8 @@ public class MechRespawn : MonoBehaviour
     {
        
 
-        MechHealth mechHealth = GetComponent<MechHealth>();
+        MechHealth mechHealth = GetComponentInChildren<MechHealth>();
         MechShield mechShield = GetComponent<MechShield>();
-
-        mechHealth.SetLives(mechHealth.GetLives() - 1);
 
         //TODO: stworzenie wraku mecha w miejsce smierci
         mechShield.SetShield(mechShield.GetMaxShield() /2);
@@ -28,8 +26,7 @@ public class MechRespawn : MonoBehaviour
 
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         gameObject.GetComponentInChildren<Rigidbody2D>().angularVelocity = 0;
-        gameObject.transform.rotation = Quaternion.identity;
-        gameObject.transform.position = spawnPoint;
+        gameObject.transform.SetPositionAndRotation(spawnPoint, Quaternion.identity);
     }
 
     public void SetSpawnPoint(Vector3 spawnPoint)

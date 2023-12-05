@@ -7,7 +7,7 @@ public abstract class Module : MonoBehaviour
     public GameObject mech;
     public GameObject mechManager;
     public enum Type {ENERGY_MODULE, SHIELD_MODULE, GYROSCOPE_MODULE, MOVEMENT_MODULE, CANNON_MODULE};
-    [SerializeField] public Type type;
+    public Type type;
 
     [SerializeField]
     private float energyConsumption = 5;
@@ -18,7 +18,7 @@ public abstract class Module : MonoBehaviour
     [SerializeField]
     private float activeEnergyConsumptionMultiplier = 1.0f;
 
-    private MechMainEnergy mechEnergy;
+    protected MechMainEnergy mechEnergy;
 
     [SerializeField]
     protected bool lowEnergyMode = false;
