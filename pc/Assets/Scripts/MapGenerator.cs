@@ -1,5 +1,13 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
+public enum MapElementsEncoding
+{
+    NONE = 0,
+    TRAP = 1,
+    DESTRUCTIBLE_WALL = 2,
+    INDESTRUCTIBLE_WALL = 3
+}
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField]
@@ -15,24 +23,6 @@ public class MapGenerator : MonoBehaviour
     private GameObject floorPrefab;
 
     [SerializeField]
-    private GameObject destructibleWallPrefab;
-
-    [SerializeField]
-    private float destructibleWallSpawnChance;
-
-    [SerializeField]
-    private GameObject trapTilePrefab;
-
-    [SerializeField]
-    private float trapTileSpawnChance;
-
-    [SerializeField]
-    private GameObject impassableObstaclePrefab;
-
-    [SerializeField]
-    private float impassableObstacleSpawnChance;
-
-    [SerializeField]
     private GameObject mech1;
 
     [SerializeField]
@@ -43,6 +33,20 @@ public class MapGenerator : MonoBehaviour
 
     [SerializeField]
     private int obstaclesSpawnColRestriction;
+
+    [SerializeField]
+    private int chunkSize;
+
+    [SerializeField]
+    private GameObject trapPrefab;
+
+    [SerializeField]
+    private GameObject indestructibleWallPrefab;
+
+    [SerializeField]
+    private GameObject destructibleWallPrefab;
+
+    private ChunkGenerator chunkGenerator;
 
     private int[,] mapMatrix;
 
@@ -59,8 +63,11 @@ public class MapGenerator : MonoBehaviour
         spawnPoint2 = (1, 1);
         mapMatrix[spawnPoint1.Item1, spawnPoint1.Item2] = 10;//Set spawnpoints 
         mapMatrix[spawnPoint2.Item1, spawnPoint2.Item2] = 10;
+        chunkSize = CalculateChunkSize(mapWidth, mapHeight);
+        chunkGenerator = GetComponent<ChunkGenerator>();
         GenerateWalls();
         GenerateFloor();
+        PutObstaclesIntoMapMatrix();
         GenerateObstacles();
         MovePlayersToSpawnPoints();
     }
@@ -98,19 +105,6 @@ public class MapGenerator : MonoBehaviour
         return mapMatrix;
     }
 
-    private void GenerateObstacles()
-    {
-        for (int row = obstaclesSpawnRowRestriction; row < mapWidth - obstaclesSpawnRowRestriction; row++)
-        {
-            for (int col = obstaclesSpawnColRestriction; col < mapHeight - obstaclesSpawnColRestriction; col++)
-            {
-                if (mapMatrix[row, col] == 0)
-                {
-                    TryToGenerateObstacle(row, col);
-                }
-            }
-        }
-    }
 
     public void MovePlayersToSpawnPoints()
     {
@@ -118,27 +112,64 @@ public class MapGenerator : MonoBehaviour
         mech2.transform.position = new Vector3(spawnPoint2.Item1, spawnPoint2.Item2);
     }
 
-    private void TryToGenerateObstacle(int x, int y)
+    private int CalculateChunkSize(int a, int b)
     {
-        float spawnChance = Random.Range(0f, 1f);
-        GameObject obstacleToSpawn = null;
-        if(spawnChance < trapTileSpawnChance) 
+        while (b != 0)
         {
-            obstacleToSpawn = trapTilePrefab;
+            int temp = b;
+            b = a % b;
+            a = temp;
         }
-        else if(spawnChance < (destructibleWallSpawnChance + trapTileSpawnChance))
-        {
-            obstacleToSpawn = destructibleWallPrefab;
-        }
-        
-        else if (spawnChance < (destructibleWallSpawnChance + impassableObstacleSpawnChance + trapTileSpawnChance))
-        {
-            obstacleToSpawn = impassableObstaclePrefab;
-        }
+        return a;
+    }
 
-        if(obstacleToSpawn != null)
+    private void PutObstaclesIntoMapMatrix()
+    {
+        ChunkGenerator trapChunkGenerator = new ChunkGenerator(0.1f, 0.02f, 0.05f);
+        ChunkGenerator destructibleWallChunkGenerator = new ChunkGenerator(0.05f, 0.02f, 0.1f);
+        ChunkGenerator indestructibleWallGenerator = new ChunkGenerator(0.05f, 0.05f, 0.1f);
+        ChunkGenerator[] generators = new ChunkGenerator[] { trapChunkGenerator, destructibleWallChunkGenerator, indestructibleWallGenerator };
+
+        for (int x = 0;  x < mapWidth; x += chunkSize){
+            for(int y = 0; y < mapHeight; y += chunkSize)
+            {
+                ChunkGenerator chunkGenerator = generators[Random.Range(0, 3)];
+                for(int x1 = x; x1 < x + chunkSize; x1++)
+                {
+                    for(int y1 = y; y1 < y + chunkSize; y1++)
+                    {
+                        mapMatrix[x1, y1] = (int)chunkGenerator.SpawnObstacle();
+                        Debug.Log("X: " + x1 + " Y: " + y1 + "Value: " + mapMatrix[x1,y1]);
+                    }
+                }
+            }
+        }
+    }
+
+    public void GenerateObstacles()
+    {
+        for (int x = 0; x < mapWidth; x ++)
         {
-            Instantiate(obstacleToSpawn, new Vector3(x, y), Quaternion.identity);
+            for (int y = 0; y < mapHeight; y ++)
+            {
+                MapElementsEncoding value = (MapElementsEncoding) mapMatrix[x,y];
+                if(value == MapElementsEncoding.NONE)
+                {
+                    continue;
+                }
+                else if(value == MapElementsEncoding.TRAP)
+                {
+                    Instantiate(trapPrefab, new Vector3(x, y), Quaternion.identity);//.transform.SetParent(gameObject.transform);
+                }
+                else if (value == MapElementsEncoding.DESTRUCTIBLE_WALL)
+                {
+                    Instantiate(destructibleWallPrefab, new Vector3(x, y), Quaternion.identity);//.transform.SetParent(gameObject.transform);
+                }
+                else if (value == MapElementsEncoding.INDESTRUCTIBLE_WALL)
+                {
+                    Instantiate(indestructibleWallPrefab, new Vector3(x, y), Quaternion.identity);//.transform.SetParent(gameObject.transform);
+                }
+            }
         }
     }
 }

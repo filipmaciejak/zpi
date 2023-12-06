@@ -105,6 +105,16 @@ public class Player : MonoBehaviour
                         };
                         ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
                     }
+                    else if(usedModule.type == Module.Type.ENERGY_MODULE)
+                    {
+
+                        ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, new Dictionary<string, string>());
+                    }
+                    else if (usedModule.type == Module.Type.SHIELD_MODULE)
+                    {
+
+                        ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, new Dictionary<string, string>());
+                    }
                 }
             }
         );

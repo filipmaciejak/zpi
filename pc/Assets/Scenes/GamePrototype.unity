@@ -2552,11 +2552,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1033950334920968098, guid: b88ea54460993bc47b4efe836d93e172, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.41
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 1033950334920968098, guid: b88ea54460993bc47b4efe836d93e172, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.48
+      value: 1.41
       objectReference: {fileID: 0}
     - target: {fileID: 1033950334920968098, guid: b88ea54460993bc47b4efe836d93e172, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4801,20 +4801,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db53a52dab4b0c4ea46e8b205c9dcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 5
-  mapHeight: 5
+  mapWidth: 12
+  mapHeight: 18
   wallPrefab: {fileID: 2209545580675590641, guid: d84b91c092cbfb14fa8ebdd18103d80e, type: 3}
   floorPrefab: {fileID: 490170791979012748, guid: 30ea7c8b872fee84285abee35a7cf2fd, type: 3}
-  destructibleWallPrefab: {fileID: 8583810453850939839, guid: c5a18bb58d1a37c46a6230a728820b35, type: 3}
-  destructibleWallSpawnChance: 0.05
-  trapTilePrefab: {fileID: 252985571924369960, guid: 97667188aab018c47ba1555ad287f186, type: 3}
-  trapTileSpawnChance: 0.05
-  impassableObstaclePrefab: {fileID: 7705433732340329099, guid: 7d131e82f6ae4274cb33ccb2fa1dae3b, type: 3}
-  impassableObstacleSpawnChance: 0.02
   mech1: {fileID: 1712100641}
   mech2: {fileID: 1429421079}
   obstaclesSpawnRowRestriction: 2
   obstaclesSpawnColRestriction: 2
+  chunkSize: 0
+  trapPrefab: {fileID: 252985571924369960, guid: 97667188aab018c47ba1555ad287f186, type: 3}
+  indestructibleWallPrefab: {fileID: 2209545580675590641, guid: d84b91c092cbfb14fa8ebdd18103d80e, type: 3}
+  destructibleWallPrefab: {fileID: 8583810453850939839, guid: c5a18bb58d1a37c46a6230a728820b35, type: 3}
 --- !u!1001 &1684476954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5538,11 +5536,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5684549723949766940, guid: 0c22b8a607b420f449139475124c345c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.37278748
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5684549723949766940, guid: 0c22b8a607b420f449139475124c345c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.66921043
+      value: -0.66
       objectReference: {fileID: 0}
     - target: {fileID: 5684549723949766940, guid: 0c22b8a607b420f449139475124c345c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5604,11 +5602,11 @@ PrefabInstance:
       objectReference: {fileID: 1969167512}
     - target: {fileID: 5740675996954131668, guid: 0c3fc6d62fbeceb46a8f039d5b6cb735, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3160439
+      value: -1.42
       objectReference: {fileID: 0}
     - target: {fileID: 5740675996954131668, guid: 0c3fc6d62fbeceb46a8f039d5b6cb735, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4625549
+      value: -2.06
       objectReference: {fileID: 0}
     - target: {fileID: 5740675996954131668, guid: 0c3fc6d62fbeceb46a8f039d5b6cb735, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5670,11 +5668,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1586446073424550815, guid: 8d27476d8ac9ec64a90cd92f92b04a2b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.39
+      value: -0.62
       objectReference: {fileID: 0}
     - target: {fileID: 1586446073424550815, guid: 8d27476d8ac9ec64a90cd92f92b04a2b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.75
+      value: -0.71
       objectReference: {fileID: 0}
     - target: {fileID: 1586446073424550815, guid: 8d27476d8ac9ec64a90cd92f92b04a2b, type: 3}
       propertyPath: m_LocalPosition.z
