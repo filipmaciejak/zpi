@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem.EnhancedTouch;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
@@ -7,7 +8,11 @@ public class Button : MonoBehaviour
 {
     public event Action<string> StartedPress;
     public event Action<string> EndedPress;
+
+    public Sprite unpressedSprite;
+    public Sprite pressedSprite;
     
+    private Image _buttonImage;
     
     private TouchHelper _touchHelper;
 
@@ -21,6 +26,7 @@ public class Button : MonoBehaviour
     {
         _touchHelper = GetComponentInParent<TouchHelper>();
         _thisRectTransform = GetComponent<RectTransform>();
+	_buttonImage = GetComponent<Image>();
     }
 
     private void OnEnable()
@@ -49,6 +55,7 @@ public class Button : MonoBehaviour
         _buttonFinger = finger;
 
         IsPressed = true;
+	_buttonImage.sprite = pressedSprite;
         StartedPress?.Invoke(this.name);
     }
 
@@ -76,6 +83,7 @@ public class Button : MonoBehaviour
 
         _buttonFinger = null;
         IsPressed = false;
+	_buttonImage.sprite = unpressedSprite;
         EndedPress?.Invoke(this.name);
     }
 

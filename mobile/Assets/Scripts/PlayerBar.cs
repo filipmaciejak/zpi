@@ -13,12 +13,12 @@ public class PlayerBar : MonoBehaviour
     private Dictionary<int, Color> _playerColorMapping;
     
     private ClientManager _clientManager;
-    private Image _barImage;
+    public Image IndicatorImage;
     
     public void Awake()
     {
         _clientManager = GameManager.Instance.clientManager;
-        _barImage = GetComponent<Image>();
+        IndicatorImage = GetComponent<Image>();
         
         // an unfortunate way to serialize colors in the unity editor
         _playerColorMapping = new Dictionary<int, Color>
@@ -33,6 +33,6 @@ public class PlayerBar : MonoBehaviour
 
     public void Start()
     {
-        _barImage.color = _playerColorMapping[_clientManager.playerId];
+        IndicatorImage.color = _playerColorMapping[_clientManager.playerId];
     }
 }
