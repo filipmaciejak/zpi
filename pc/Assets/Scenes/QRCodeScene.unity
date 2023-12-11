@@ -626,7 +626,7 @@ GameObject:
   - component: {fileID: 644171536}
   - component: {fileID: 644171535}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Ip Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1221,7 +1221,7 @@ GameObject:
   - component: {fileID: 1241841187}
   - component: {fileID: 1241841186}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Player Counter Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1456,7 +1456,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawImage: {fileID: 763968129}
-  textLabel: {fileID: 644171535}
+  textLabelIp: {fileID: 644171535}
+  textLabelNumberOfConnections: {fileID: 1241841186}
   buttonNext: {fileID: 2089471757}
   buttonPrevious: {fileID: 1012974048}
   buttonRefresh: {fileID: 334714696}
