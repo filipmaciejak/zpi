@@ -81,18 +81,18 @@ public class Player : MonoBehaviour
                         MovementModule movementModule = (MovementModule)usedModule;
                         Dictionary<string, string> dict = new Dictionary<string, string>
                         {
-                            { "steering_pos", movementModule.GetRotationSliderPosition().ToString() }, // TODO: Add steering pos
-                            { "speed_pos", movementModule.GetSpeedLeverPosition().ToString() } // TODO: Add speed pos
+                            { "steering_pos", movementModule.GetRotationSliderPosition().ToString() },
+                            { "speed_pos", movementModule.GetSpeedLeverPosition().ToString() }
                         };
                         ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
                     } else if (usedModule.type == Module.Type.CANNON_MODULE) {
                         ShootingModule cannonModule = (ShootingModule)usedModule;
                         Dictionary<string, string> dict = new Dictionary<string, string>
                         {
-                            { "fire_cooldown", "3.0" }, // TODO: Add fire_cooldown
-                            { "ammo", "5" }, // TODO: Add ammo
-                            { "chamber_open", cannonModule.IsCannonClosed().ToString() }, // TODO: Add chamber_open
-                            { "chamber_loaded", cannonModule.IsCannonLoaded().ToString() } // TODO: Add chamber_loaded
+                            { "fire_cooldown", "3.0" },
+                            { "ammo", "5" },
+                            { "chamber_open", cannonModule.IsCannonClosed().ToString() },
+                            { "chamber_loaded", cannonModule.IsCannonLoaded().ToString() }
                         };
                         ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
                     }
