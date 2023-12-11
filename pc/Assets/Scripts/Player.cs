@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _id = 0;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask moduleLayer;
+    [SerializeField] private LayerMask crewmateLayer;
     public Module usedModule { get; private set; } = null;
     private float moveInput = 0f;
 
@@ -48,7 +49,18 @@ public class Player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapBox(groundCheck.position, new Vector2(0.38f, 0.01f), 0f, groundLayer);
+        bool standingOnGround = Physics2D.OverlapBox(groundCheck.position, new Vector2(0.38f, 0.01f), 0f, groundLayer);
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheck.position, new Vector2(0.38f, 0.01f), 0f, crewmateLayer);
+        bool standingOnCrewmate = false;
+        foreach (Collider2D collider in colliders) {
+            if (collider.gameObject != gameObject) {
+                standingOnCrewmate = true;
+                break;
+            }
+        }
+
+        return standingOnGround || standingOnCrewmate;
     }
 
     void Start()

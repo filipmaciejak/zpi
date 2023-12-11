@@ -205,11 +205,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamId: 0
   _id: 0
-  moveForce: 15
-  jumpForce: 12.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   moduleLayer:
     serializedVersion: 2
     m_Bits: 128
+  crewmateLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  maxSpeed: 2
+  moveForce: 15
