@@ -23,6 +23,8 @@ enum MessageEvent
 
 public class ServerManager : MonoBehaviour
 {
+    public static ServerManager Instance;
+
     public NetworkDriver m_Driver;
     private NativeList<NetworkConnection> m_Connections;
 
@@ -31,6 +33,8 @@ public class ServerManager : MonoBehaviour
     const ushort SERVER_PORT = 9000;
     const int MAX_CONNECTIONS = 4;
 
+    private int currentConnections;
+
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -38,6 +42,13 @@ public class ServerManager : MonoBehaviour
 	
     void Start()
     {
+        if(Instance != this && Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        Instance = this;
+
+        currentConnections = 0;
         var settings = new NetworkSettings();
         settings.WithNetworkConfigParameters(disconnectTimeoutMS: DISCONNECT_TIMEOUT, heartbeatTimeoutMS: HEARTBEAT_TIMEOUT_MS);
         m_Driver = NetworkDriver.Create(new WebSocketNetworkInterface(), settings);
@@ -101,6 +112,7 @@ public class ServerManager : MonoBehaviour
                 {
                     m_Connections[i] = c;
                     Debug.Log("Accepted a connection");
+                    currentConnections++;
                     break;
                 }
             }
@@ -127,6 +139,7 @@ public class ServerManager : MonoBehaviour
                     //TO DO: zatrzymaj grę i czekaj na połączenie
                     Debug.Log("Client disconnected from server");
                     m_Connections[i] = default(NetworkConnection);
+                    currentConnections--;
                 }
             }
         }
@@ -339,4 +352,8 @@ public class ServerManager : MonoBehaviour
         buffer.Dispose();
     }
 
+    public int NumberOfConnectedPlayers()
+    {
+        return currentConnections;
+    }
 }

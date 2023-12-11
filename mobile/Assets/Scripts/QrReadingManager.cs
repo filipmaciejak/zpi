@@ -50,6 +50,7 @@ public class QrReadingManager : MonoBehaviour
                 SceneManager.LoadScene("MovementScene");
             }
             PopUpPanel.SetActive(false);
+            CameraHandler.StartScanning();
             TimerStartSeconds = -1;
         }
     }
