@@ -4749,6 +4749,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4178757202914381391, guid: 8917f9593256ddf4cbf8485b2ebe9b2b, type: 3}
   m_PrefabInstance: {fileID: 1204552695}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1204552697 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7198866000397019555, guid: 8917f9593256ddf4cbf8485b2ebe9b2b, type: 3}
+  m_PrefabInstance: {fileID: 1204552695}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5cab2944062b34aaacb8261e4115b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1273925839
 GameObject:
   m_ObjectHideFlags: 0
@@ -4978,6 +4989,10 @@ PrefabInstance:
       propertyPath: mechManager
       value: 
       objectReference: {fileID: 585501317}
+    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
+      propertyPath: cannonModule
+      value: 
+      objectReference: {fileID: 1204552697}
     - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
       propertyPath: shootingModule
       value: 

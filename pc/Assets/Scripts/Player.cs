@@ -69,7 +69,9 @@ public class Player : MonoBehaviour
     {
         try
         {
+            Debug.Log(ModuleEventManager.instance.idsToRequest[teamId].Count);
             _id = ModuleEventManager.instance.idsToRequest[teamId][indexOfPlayerIdInTeam];
+            Debug.Log("Id set: " + _id);
         }catch(ArgumentOutOfRangeException)
         {
             Debug.Log("Not all players connected, choosing id 3 for crewmates lacking players");
