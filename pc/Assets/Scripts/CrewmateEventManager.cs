@@ -29,7 +29,7 @@ public class CrewmateEventManager : MonoBehaviour
     {
         onCrewmateMoveInputUpdate.AddListener(
             (id, inputX, inputY) => {
-                Debug.Log("CrewmateEventManager: onCrewmateMoveInputUpdate<" + id + ", " + inputX + ", " + inputY + ">");
+                Debug.Log("CrewmateEventManager: onCrewmateMoveInputUpdate<" + id + ", ...>");
             }
         );
 

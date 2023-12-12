@@ -214,5 +214,8 @@ MonoBehaviour:
   crewmateLayer:
     serializedVersion: 2
     m_Bits: 8
+  ladderLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   maxSpeed: 2
   moveForce: 15
