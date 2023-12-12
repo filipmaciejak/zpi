@@ -8,7 +8,7 @@ public class StartGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(3);
         }
     }
 }
