@@ -15,7 +15,7 @@ public class GyroscopeModuleManager : MonoBehaviour
 
     private ClientManager _clientManager;
 
-    private Texture2D fullBarTexture;
+    public Texture2D fullBarTexture;
     private float calibrationValue;
     private float maxDistanceFromTarget;
     private float forceFactor;
@@ -29,7 +29,6 @@ public class GyroscopeModuleManager : MonoBehaviour
     void Start()
     {
         InputSystem.EnableDevice(AttitudeSensor.current);
-        fullBarTexture = Resources.Load("FullCalibrationBar") as Texture2D;
         calibrationValue = 0.0f;
         maxDistanceFromTarget = 4f;
         forceFactor = 10.0f;
@@ -67,7 +66,7 @@ public class GyroscopeModuleManager : MonoBehaviour
                         $"Distance\n{aim.GetComponent<Transform>().localPosition.magnitude}");
 
         calibrationValue = (maxDistanceFromTarget - aim.GetComponent<Transform>().localPosition.magnitude) / maxDistanceFromTarget;
-        calibrationBar.sprite = Sprite.Create(fullBarTexture, new Rect(0, 0, fullBarTexture.width, fullBarTexture.height * calibrationValue), new Vector2(0.5f, fullBarTexture.height / (2 * fullBarTexture.height * calibrationValue)));
+        calibrationBar.sprite = Sprite.Create(fullBarTexture, new Rect(0, 0, fullBarTexture.width, fullBarTexture.height * calibrationValue), new Vector2(0.5f, fullBarTexture.height / (2 * fullBarTexture.height * calibrationValue)), 1);
     }
 
     private void FixedUpdate()

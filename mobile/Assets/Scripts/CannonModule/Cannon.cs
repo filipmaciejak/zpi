@@ -11,6 +11,9 @@ namespace CannonModule
         public event Action<bool> ChamberOpened;
         public event Action<bool> ChamberLoaded;
         
+        public Sprite unloadedSprite;
+        public Sprite loadedSprite;
+        
         public GameObject chamber;
         private RectTransform _chamberRT;
         public GameObject chamberCover;
@@ -62,9 +65,9 @@ namespace CannonModule
         {
             this.loaded = loaded;
             if(loaded)
-                chamber.GetComponent<Image>().color = Color.green;
+                chamber.GetComponent<Image>().sprite = loadedSprite;
             else
-                chamber.GetComponent<Image>().color = Color.red;
+                chamber.GetComponent<Image>().sprite = unloadedSprite;
             ChamberLoaded?.Invoke(this.loaded); 
         }
         
