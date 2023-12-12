@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 1ea7c64249dd3a74ba41045f8ebead1a
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/QRCodeScene.unity
     guid: 14a0cd586023fe641afae6188d95e19a
+  - enabled: 1
+    path: Assets/Scenes/TeamSelector.unity
+    guid: 1fca04e1c803aa945ab12ecb3bc0cb2b
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/GamePrototype.unity
     guid: eb04565881c354949abc153eacccf391
