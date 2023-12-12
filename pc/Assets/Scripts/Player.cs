@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     private float verticalInput = 0f;
 
     private bool isClimbing = false;
+    private float maxClimbHeight = 0f;
+    private static float HORIZONTAL_SLOWDOWN_WHILE_CLIMBING = 0.3f;
 
     public float maxSpeed = 2f;
     public float moveForce = 10f;
@@ -165,7 +167,11 @@ public class Player : MonoBehaviour
         if (inputX == 0f) {
             desiredVelocityX = 0f;
         } else {
-            desiredVelocityX = inputX * maxSpeed;
+            if (isClimbing) {
+                desiredVelocityX = inputX * maxSpeed * HORIZONTAL_SLOWDOWN_WHILE_CLIMBING;
+            } else {
+                desiredVelocityX = inputX * maxSpeed;
+            }
         }
 
         float velocityChangeX = desiredVelocityX - rb.velocity.x;
@@ -185,6 +191,13 @@ public class Player : MonoBehaviour
             float velocityChangeY = desiredVelocityY - rb.velocity.y;
             float forceY = moveForce * rb.mass * velocityChangeY;
             rb.AddForce(Vector2.up * forceY, ForceMode2D.Force);
+
+            if (transform.position.y >= maxClimbHeight - 0.1f) {
+                transform.position = new Vector3(transform.position.x, maxClimbHeight - 0.1f, transform.position.z);
+                if (inputY > 0f) {
+                    rb.velocity = new Vector2(rb.velocity.x, 0f);
+                }
+            }
         }
 
         if (isClimbing) {
@@ -211,7 +224,11 @@ public class Player : MonoBehaviour
     public bool IsOnLadder()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero, 0f, ladderLayer);
-        return hit.collider != null;
+        bool isOnLadder = hit.collider != null;
+        if (isOnLadder) {
+            maxClimbHeight = hit.collider.bounds.max.y;
+        }
+        return isOnLadder;
     }
 
     public void JumpStart()
