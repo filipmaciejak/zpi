@@ -27,6 +27,7 @@ public class ModuleEventManager : MonoBehaviour
     public UnityEvent<int> onCannonModuleFired;
 
     public Dictionary<int, int> teamIds;
+    public List<List<int>> idsToRequest; //idsToRequest[teamId][index]
 
 
     void Awake()
@@ -52,6 +53,10 @@ public class ModuleEventManager : MonoBehaviour
         onCannonModuleFired = new UnityEvent<int>();
 
         teamIds = new Dictionary<int, int>();
+
+        idsToRequest = new List<List<int>>();
+        idsToRequest.Add(new List<int>());
+        idsToRequest.Add(new List<int>());
     }
 
     void Start()

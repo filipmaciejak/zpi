@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int teamId;
+    public int indexOfPlayerIdInTeam;
 
-    [SerializeField] private int _id = 0;
+    private int _id = 0;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask moduleLayer;
     [SerializeField] private LayerMask crewmateLayer;
@@ -65,8 +67,21 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        try
+        {
+            _id = ModuleEventManager.instance.idsToRequest[teamId][indexOfPlayerIdInTeam];
+        }catch(ArgumentOutOfRangeException)
+        {
+            Debug.Log("Not all players connected, choosing id 3 for crewmates lacking players");
+            _id = 3;
+        }
+        try
+        {
+            ModuleEventManager.instance.teamIds.Add(_id, teamId);
+        }
+        catch (ArgumentException) { }
+        
 
-        ModuleEventManager.instance.teamIds.Add(_id, teamId);
         groundCheck = transform.Find("GroundCheck");
         rb = GetComponent<Rigidbody2D>();
 

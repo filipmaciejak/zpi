@@ -63,11 +63,11 @@ public class TeamSelectorManager : MonoBehaviour
     {
         if(_readyPlayers == MAX_PLAYERS)
         {
-            for(int teamId=0; teamId < _teams.Count; teamId++)
+            for(int teamId = 0; teamId < _teams.Count; teamId++)
             {
                 foreach(var playerId in _teams[teamId])
                 {
-                    ModuleEventManager.instance.teamIds.Add(playerId, teamId);
+                    ModuleEventManager.instance.idsToRequest[teamId].Add(playerId);
                 }
             }
             SceneManager.LoadScene("GameScene");
