@@ -82,6 +82,8 @@ public class Player : MonoBehaviour
     {
 
         color = crewmateColors[_id];
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = color;
 
         ModuleEventManager.instance.teamIds.Add(_id, teamId);
         groundCheck = transform.Find("GroundCheck");
