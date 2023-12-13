@@ -13,7 +13,7 @@ public class ShieldModuleManager : MonoBehaviour
     public SpriteRenderer batterySprite;
     public Button button;
 
-    private Texture2D fullBatteryTexture;
+    public Texture2D fullBatteryTexture;
 
     private ClientManager _clientManager;
     
@@ -29,12 +29,11 @@ public class ShieldModuleManager : MonoBehaviour
 
     public void Awake()
     {
-        _clientManager = GameManager.Instance.clientManager;
+        //_clientManager = GameManager.Instance.clientManager;
     }
     void Start()
     {
         InputSystem.EnableDevice(AttitudeSensor.current);
-        fullBatteryTexture = Resources.Load("ShieldBattery") as Texture2D;
     }
 
     public void OnEnable()
@@ -66,8 +65,18 @@ public class ShieldModuleManager : MonoBehaviour
             currentEnergyInCell -= maxEnergyInCell;
             SendMinigameSuccess();
         }
+        
+        Rect newSpriteRect;
+        Vector2 newPivot;
+	if(currentEnergyInCell == 0) {
+	    newSpriteRect = new Rect(0,0,fullBatteryTexture.width, 0);
+	    newPivot = new Vector2(0.5f, fullBatteryTexture.height / (2 * 1));
+	} else {
+	    newSpriteRect = new Rect(0,0,fullBatteryTexture.width, fullBatteryTexture.height * currentEnergyInCell / maxEnergyInCell);
+	    newPivot = new Vector2(0.5f, fullBatteryTexture.height / (2 * fullBatteryTexture.height * currentEnergyInCell / maxEnergyInCell));
+	}
 
-        batterySprite.sprite = Sprite.Create(fullBatteryTexture, new Rect(0,0,fullBatteryTexture.width, fullBatteryTexture.height * currentEnergyInCell / maxEnergyInCell), new Vector2(0.5f, fullBatteryTexture.height / (2 * fullBatteryTexture.height * currentEnergyInCell / maxEnergyInCell)));
+        batterySprite.sprite = Sprite.Create(fullBatteryTexture, newSpriteRect, newPivot, 1);
 
         text.SetText( $"Attitude\nX={attitude.x:#0.00} Y={attitude.y:#0.00} Z={attitude.z:#0.00}\n\n" +
                       $"Result\n{currentEnergyInCell}");

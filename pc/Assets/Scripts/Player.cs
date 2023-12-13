@@ -12,8 +12,23 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask moduleLayer;
     [SerializeField] private LayerMask crewmateLayer;
+    [SerializeField] private LayerMask ladderLayer;
+
+    public static Color[] crewmateColors = {
+        new Color(1f, 0f, 0f),
+        new Color(0f, 0f, 1f),
+        new Color(0f, 1f, 0f),
+        new Color(1f, 1f, 0f)
+    };
+    public Color color;
+
     public Module usedModule { get; private set; } = null;
     private float moveInput = 0f;
+    private float verticalInput = 0f;
+
+    private bool isClimbing = false;
+    private float maxClimbHeight = 0f;
+    private static float HORIZONTAL_SLOWDOWN_WHILE_CLIMBING = 0.3f;
 
     public float maxSpeed = 2f;
     public float moveForce = 10f;
@@ -62,7 +77,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        return standingOnGround || standingOnCrewmate;
+        return standingOnGround || standingOnCrewmate || isClimbing;
     }
 
     void Start()
@@ -83,6 +98,9 @@ public class Player : MonoBehaviour
         }
         catch (ArgumentException) { }
         
+        color = crewmateColors[_id];
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = color;
 
         groundCheck = transform.Find("GroundCheck");
         rb = GetComponent<Rigidbody2D>();
@@ -142,6 +160,7 @@ public class Player : MonoBehaviour
             (id, inputX, inputY) => {
                 if (id != _id) return;
                 UpdateMoveInput(inputX);
+                UpdateVerticalInput(inputY);
             }
         );
 
@@ -163,20 +182,56 @@ public class Player : MonoBehaviour
         if (timeOfLastJump + jumpBuffering > Time.time && timeOfLastGrounded + coyoteTime > Time.time) {
             Jump();
         }
-        
-        float input = inputTranslation(moveInput);
-        float desiredVelocity;
-        if (input == 0f) {
-            desiredVelocity = 0f;
+
+        if (IsOnLadder()) {
+            if (Mathf.Abs(verticalInput) > 0.1f) {
+                isClimbing = true;
+            }
         } else {
-            desiredVelocity = input * maxSpeed;
+            isClimbing = false;
+        }
+        
+        float inputX = inputTranslation(moveInput);
+        float desiredVelocityX;
+        if (inputX == 0f) {
+            desiredVelocityX = 0f;
+        } else {
+            if (isClimbing) {
+                desiredVelocityX = inputX * maxSpeed * HORIZONTAL_SLOWDOWN_WHILE_CLIMBING;
+            } else {
+                desiredVelocityX = inputX * maxSpeed;
+            }
         }
 
-        float velocityChange = desiredVelocity - rb.velocity.x;
-        float force = moveForce * rb.mass * velocityChange;
-        rb.AddForce(Vector2.right * force, ForceMode2D.Force);
+        float velocityChangeX = desiredVelocityX - rb.velocity.x;
+        float forceX = moveForce * rb.mass * velocityChangeX;
+        rb.AddForce(Vector2.right * forceX, ForceMode2D.Force);
+        
+        if (isClimbing)
+        {
+            float inputY = inputTranslation(verticalInput);
+            float desiredVelocityY;
+            if (inputY == 0f) {
+                desiredVelocityY = 0f;
+            } else {
+                desiredVelocityY = inputY * maxSpeed;
+            }
 
-        if (rb.velocity.y > 0 && !quickFall) {
+            float velocityChangeY = desiredVelocityY - rb.velocity.y;
+            float forceY = moveForce * rb.mass * velocityChangeY;
+            rb.AddForce(Vector2.up * forceY, ForceMode2D.Force);
+
+            if (transform.position.y >= maxClimbHeight - 0.1f) {
+                transform.position = new Vector3(transform.position.x, maxClimbHeight - 0.1f, transform.position.z);
+                if (inputY > 0f) {
+                    rb.velocity = new Vector2(rb.velocity.x, 0f);
+                }
+            }
+        }
+
+        if (isClimbing) {
+            rb.gravityScale = 0f;
+        } else if (rb.velocity.y > 0 && !quickFall) {
             rb.gravityScale = gravityScaleUp;
         } else {
             rb.gravityScale = gravityScaleDown;
@@ -189,6 +244,22 @@ public class Player : MonoBehaviour
         moveInput = input;
     }
 
+    public void UpdateVerticalInput(float input)
+    {
+        if (usedModule != null) return;
+        verticalInput = input;
+    }
+
+    public bool IsOnLadder()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero, 0f, ladderLayer);
+        bool isOnLadder = hit.collider != null;
+        if (isOnLadder) {
+            maxClimbHeight = hit.collider.bounds.max.y;
+        }
+        return isOnLadder;
+    }
+
     public void JumpStart()
     {
         timeOfLastJump = Time.time;
@@ -198,6 +269,7 @@ public class Player : MonoBehaviour
     {
         if (usedModule != null) return;
         quickFall = false;
+        isClimbing = false;
         rb.gravityScale = gravityScaleUp;
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * jumpVelocity * rb.mass, ForceMode2D.Impulse);
