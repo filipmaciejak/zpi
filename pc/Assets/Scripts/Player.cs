@@ -152,6 +152,22 @@ public class Player : MonoBehaviour
                         };
                         ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
                     }
+                    else if(usedModule.type == Module.Type.ENERGY_MODULE)
+                    {
+                        EnergyRechargingModule energyRechargingModule = (EnergyRechargingModule)usedModule;
+                        Dictionary<string, string> dict = new Dictionary<string, string>
+                        {
+                        };
+                        ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
+                    }
+                    else if(usedModule.type == Module.Type.SHIELD_MODULE)
+                    {
+                        ShieldChargingModule shieldChargingModule = (ShieldChargingModule)usedModule;
+                        Dictionary<string, string> dict = new Dictionary<string, string>
+                        {
+                        };
+                        ModuleEventManager.instance.onModuleEntered.Invoke(_id, usedModule.type, dict);
+                    }
                 }
             }
         );
