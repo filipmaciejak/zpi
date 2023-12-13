@@ -29,7 +29,7 @@ public class ShieldModuleManager : MonoBehaviour
 
     public void Awake()
     {
-        //_clientManager = GameManager.Instance.clientManager;
+        _clientManager = GameManager.Instance.clientManager;
     }
     void Start()
     {

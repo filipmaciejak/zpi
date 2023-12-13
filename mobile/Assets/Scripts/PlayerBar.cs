@@ -18,7 +18,6 @@ public class PlayerBar : MonoBehaviour
     public void Awake()
     {
         _clientManager = GameManager.Instance.clientManager;
-        IndicatorImage = GetComponent<Image>();
         
         // an unfortunate way to serialize colors in the unity editor
         _playerColorMapping = new Dictionary<int, Color>
