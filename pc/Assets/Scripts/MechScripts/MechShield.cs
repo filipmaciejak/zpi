@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ public class MechShield : MonoBehaviour
 
     private void Start()
     {
-        shieldBar.SetStatBarLevel(currentShield);
+        //shieldBar.SetStatBarLevel(currentShield);
     }
     public int GetMaxShield() { return  maxShield; }
 }
