@@ -11,6 +11,15 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask moduleLayer;
     [SerializeField] private LayerMask crewmateLayer;
     [SerializeField] private LayerMask ladderLayer;
+
+    public static Color[] crewmateColors = {
+        new Color(1f, 0f, 0f),
+        new Color(0f, 0f, 1f),
+        new Color(0f, 1f, 0f),
+        new Color(1f, 1f, 0f)
+    };
+    public Color color;
+
     public Module usedModule { get; private set; } = null;
     private float moveInput = 0f;
     private float verticalInput = 0f;
@@ -71,6 +80,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+
+        color = crewmateColors[_id];
 
         ModuleEventManager.instance.teamIds.Add(_id, teamId);
         groundCheck = transform.Find("GroundCheck");
