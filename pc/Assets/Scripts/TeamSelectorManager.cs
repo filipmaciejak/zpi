@@ -61,14 +61,15 @@ public class TeamSelectorManager : MonoBehaviour
     
     private void OnDestroy()
     {
-        //odkomentowac gdy testowanie z mniejsza iloscia graczy
-        /*for (int teamId = 0; teamId < _teams.Count; teamId++)
+        // only for testing
+        if (_readyPlayers == MAX_PLAYERS) { return; }
+        for (int teamId = 0; teamId < _teams.Count; teamId++)
         {
             foreach (var playerId in _teams[teamId])
             {
                 ModuleEventManager.instance.idsToRequest[teamId].Add(playerId);
             }
-        }*/
+        }
     }
 
     private void Update()
