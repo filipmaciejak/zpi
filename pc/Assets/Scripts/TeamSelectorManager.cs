@@ -83,7 +83,7 @@ public class TeamSelectorManager : MonoBehaviour
                     ModuleEventManager.instance.idsToRequest[teamId].Add(playerId);
                 }
             }
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("GamePrototype");
         }
     }
 }

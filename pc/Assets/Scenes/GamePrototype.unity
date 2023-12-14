@@ -1086,11 +1086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1033950334920968098, guid: b88ea54460993bc47b4efe836d93e172, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.527
+      value: 4.91
       objectReference: {fileID: 0}
     - target: {fileID: 1033950334920968098, guid: b88ea54460993bc47b4efe836d93e172, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.503
+      value: -2.24
       objectReference: {fileID: 0}
     - target: {fileID: 1033950334920968098, guid: b88ea54460993bc47b4efe836d93e172, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5034,7 +5034,7 @@ PrefabInstance:
     - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
       propertyPath: mechBody
       value: 
-      objectReference: {fileID: 1712100642}
+      objectReference: {fileID: 263600488261755895}
     - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
       propertyPath: maxCooldown
       value: 5
@@ -5270,37 +5270,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 241747295}
     m_Modifications:
     - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: mechLives
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: onMechDeath.m_PersistentCalls.m_Calls.Array.size
+      propertyPath: teamId
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: onMechDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 534248535845332062, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1773487882933682444, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+    - target: {fileID: 1891810038634443158, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 029b421bcf86c5b4598fdc5def76c0cc, type: 3}
-    - target: {fileID: 2622091626685060550, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.733
-      objectReference: {fileID: 0}
-    - target: {fileID: 2622091626685060550, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.513
-      objectReference: {fileID: 0}
-    - target: {fileID: 2667729656357632413, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 3bda293c51ce34247a9f5f44ce869559, type: 3}
     - target: {fileID: 2906065420061869173, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.505
@@ -5309,64 +5285,7 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -3.595
       objectReference: {fileID: 0}
-    - target: {fileID: 4131691009422969128, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: teamId
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7052256437403833633, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_Name
-      value: Mech (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -8.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821230470402625684, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1915707561188242722, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -5558,7 +5477,7 @@ MonoBehaviour:
   mech1: {fileID: 1712100641}
   mech2: {fileID: 1429421079}
   maxRoundTime: 600
-  startingLives: 1
+  startingLives: 2
 --- !u!1 &1969167512
 GameObject:
   m_ObjectHideFlags: 0
@@ -5684,54 +5603,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 241747295}
     m_Modifications:
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: teamId
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: mechLives
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: onMechDeath.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: onMechDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: onMechDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: onMechDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: onMechDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_name
-      objectReference: {fileID: 0}
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: onMechDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: onMechDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1891810038634443158, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 029b421bcf86c5b4598fdc5def76c0cc, type: 3}
     - target: {fileID: 2905353724893490806, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: shieldBar
       value: 
       objectReference: {fileID: 118456828}
-    - target: {fileID: 2905353724893490806, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: currentShield
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2906065420061869173, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.5
@@ -5772,10 +5647,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5361191010749952258, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
-      propertyPath: currentHealth
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 6441016660748247210, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_Name
       value: Mech2
@@ -5785,6 +5656,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+--- !u!50 &263600488261755895 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5006313287869491217, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+  m_PrefabInstance: {fileID: 263600488261755894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2756544367600810690
 PrefabInstance:
   m_ObjectHideFlags: 0
