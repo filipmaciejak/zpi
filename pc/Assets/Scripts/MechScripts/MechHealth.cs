@@ -14,6 +14,10 @@ public class MechHealth : MonoBehaviour
     [SerializeField]
     private StatBarBehaviour healthSlider;
 
+    public void Start()
+    {
+        healthSlider.SetStatBarLevel(currentHealth);
+    }
     public void SetHealth(int health)
     {
         currentHealth = health;
