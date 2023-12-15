@@ -63,6 +63,8 @@ public class MapGenerator : MonoBehaviour
         GenerateFloor();
         GenerateObstacles();
         MovePlayersToSpawnPoints();
+        mech1.GetComponent<MechRespawn>().SetSpawnPoint(new Vector3(spawnPoint1.Item1, spawnPoint1.Item2));
+        mech2.GetComponent<MechRespawn>().SetSpawnPoint(new Vector3(spawnPoint2.Item1, spawnPoint2.Item2));
     }
 
     private void GenerateWalls()

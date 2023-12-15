@@ -6036,17 +6036,25 @@ PrefabInstance:
       propertyPath: teamId
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: mechLives
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: hullBreakDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1891810038634443158, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 3bda293c51ce34247a9f5f44ce869559, type: 3}
     - target: {fileID: 2906065420061869173, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.505
+      value: -1.59
       objectReference: {fileID: 0}
     - target: {fileID: 2906065420061869173, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.595
+      value: -2.33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6242,6 +6250,7 @@ MonoBehaviour:
   mech2: {fileID: 1429421079}
   maxRoundTime: 600
   startingLives: 2
+  gameEndStateObject: {fileID: 11400000, guid: 7ed45ef704deb8149aa2f25c6b180bfe, type: 2}
 --- !u!1 &1969167512
 GameObject:
   m_ObjectHideFlags: 0
@@ -6367,17 +6376,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 241747295}
     m_Modifications:
+    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: mechLives
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 91054748790607293, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
+      propertyPath: hullBreakDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2905353724893490806, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: shieldBar
       value: 
       objectReference: {fileID: 118456828}
     - target: {fileID: 2906065420061869173, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.5
+      value: -1.22
       objectReference: {fileID: 0}
     - target: {fileID: 2906065420061869173, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.3099976
+      value: 2.32
       objectReference: {fileID: 0}
     - target: {fileID: 2906065420061869173, guid: 2265d0d5bca995b47a062008b05f8553, type: 3}
       propertyPath: m_LocalPosition.z
