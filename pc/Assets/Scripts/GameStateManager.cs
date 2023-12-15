@@ -17,9 +17,12 @@ public class GameStateManager : MonoBehaviour
 
     static GameStateManager instance;
 
+    public GameObject overlay;
+
     private void Awake()
     {
         instance = this;
+        overlay.SetActive(false);
     }
     void Update()
     {
@@ -40,12 +43,18 @@ public class GameStateManager : MonoBehaviour
 
     public void StopGame()
     {
+        Debug.Log("Game stopped");
         Time.timeScale = 0;
+        overlay.SetActive(true);
+        isGameStopped = true;
     }
 
     public void ContinueGame()
     {
+        Debug.Log("Game continued");
         Time.timeScale = 1;
+        overlay.SetActive(false);
+        isGameStopped = false;
     }
 
     public void EndGame()
