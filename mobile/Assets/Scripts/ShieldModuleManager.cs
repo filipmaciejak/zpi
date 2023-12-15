@@ -21,11 +21,11 @@ public class ShieldModuleManager : MonoBehaviour
     private float maxAngle = 360.0f;
 
     private float angularMargin = 20f;
-    private float angularRequirement = 5f;
+    private float angularRequirement = 2.5f;
     private float previousAngularZ = 0.0f;
 
     private float currentEnergyInCell = 0.0f;
-    private float maxEnergyInCell = 6.0f;
+    private float maxEnergyInCell = 4.0f;
 
     public void Awake()
     {
