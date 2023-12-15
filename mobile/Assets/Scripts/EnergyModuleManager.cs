@@ -22,11 +22,11 @@ public class EnergyModuleManager : MonoBehaviour
 
     private float angularMargin = 20f;
     private float accelerationMargin = 0.2f;
-    private float accelerationReqirement = 0.4f;
-    private float accelerationCeiling = 2.0f;
+    private float accelerationReqirement = 0.115f;
+    private float accelerationCeiling = 5.0f;
 
     private float currentEnergyInCell = 0.0f;
-    private float maxEnergyInCell = 6.0f;
+    private float maxEnergyInCell = 4.0f;
 
     public void Awake()
     {
@@ -52,7 +52,7 @@ public class EnergyModuleManager : MonoBehaviour
     void Update()
     {
         Vector3 acceleration = LinearAccelerationSensor.current.acceleration.ReadValue();
-        Vector3 attitude = AttitudeSensor.current.attitude.ReadValue().eulerAngles; 
+        Vector3 attitude = AttitudeSensor.current.attitude.ReadValue().eulerAngles;
         
         if ((attitude.x < minAngle + angularMargin || attitude.x > maxAngle - angularMargin) &&
             (attitude.y < minAngle + angularMargin || attitude.y > maxAngle - angularMargin))
