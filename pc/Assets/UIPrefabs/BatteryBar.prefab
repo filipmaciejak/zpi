@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 1167166765490641139}
   - component: {fileID: 1169768751412084159}
   - component: {fileID: 6137677423936701135}
+  - component: {fileID: 352711481550780463}
   m_Layer: 5
   m_Name: BatteryBar
   m_TagString: Untagged
@@ -174,6 +175,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6390974881695063000}
   m_CullTransparentMesh: 1
+--- !u!114 &352711481550780463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390974881695063000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7706f672cd383a4e998fa74719a6809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyBar: {fileID: 1169768751412084159}
+  mechEnergy: {fileID: 0}
 --- !u!1 &7604447008507026888
 GameObject:
   m_ObjectHideFlags: 0

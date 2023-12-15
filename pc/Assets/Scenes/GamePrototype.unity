@@ -7751,6 +7751,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1815601548}
     m_Modifications:
+    - target: {fileID: 352711481550780463, guid: a5e6db83654a80841ac31d589999850c, type: 3}
+      propertyPath: mechEnergy
+      value: 
+      objectReference: {fileID: 1712100643}
     - target: {fileID: 1167166765490641139, guid: a5e6db83654a80841ac31d589999850c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7850,46 +7854,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6390974881695063000, guid: a5e6db83654a80841ac31d589999850c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4390285145356939107}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5e6db83654a80841ac31d589999850c, type: 3}
 --- !u!224 &4390285145356939104 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1167166765490641139, guid: a5e6db83654a80841ac31d589999850c, type: 3}
   m_PrefabInstance: {fileID: 4390285145356939103}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4390285145356939105 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6390974881695063000, guid: a5e6db83654a80841ac31d589999850c, type: 3}
-  m_PrefabInstance: {fileID: 4390285145356939103}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4390285145356939106 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1169768751412084159, guid: a5e6db83654a80841ac31d589999850c, type: 3}
-  m_PrefabInstance: {fileID: 4390285145356939103}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4390285145356939105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4390285145356939107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4390285145356939105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7706f672cd383a4e998fa74719a6809, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  energyBar: {fileID: 4390285145356939106}
-  mechEnergy: {fileID: 1712100643}
 --- !u!1001 &7023409560711540373
 PrefabInstance:
   m_ObjectHideFlags: 0
