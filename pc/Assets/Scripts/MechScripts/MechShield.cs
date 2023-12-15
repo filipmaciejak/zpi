@@ -21,7 +21,7 @@ public class MechShield : MonoBehaviour
 
     private void Start()
     {
-        //shieldBar.SetStatBarLevel(currentShield);
+        shieldBar.SetStatBarLevel(currentShield);
     }
     public int GetMaxShield() { return  maxShield; }
 }

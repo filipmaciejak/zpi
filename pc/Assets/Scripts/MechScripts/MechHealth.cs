@@ -17,7 +17,7 @@ public class MechHealth : MonoBehaviour
     public void SetHealth(int health)
     {
         currentHealth = health;
-        //healthSlider.SetStatBarLevel(health);
+        healthSlider.SetStatBarLevel(health);
     }
     public int GetCurrentHealth() { return currentHealth; }
 
