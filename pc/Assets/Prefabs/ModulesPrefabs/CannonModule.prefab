@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8862d81fdbfbd1e4caba58c3d396605c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 663a19b0799e26348b0614017cf248ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -153,7 +153,6 @@ MonoBehaviour:
   lowEnergyModeMulltiplier: 0.5
   isBeingUsed: 0
   isShooting: 0
-  rotationMultiplier: 0
+  rotationSpeedMultiplier: 2
+  rotationSpeed: 0
   direction: 0
-  baseRotationSpeed: 30
-  maxRotationSpeed: 100

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8862d81fdbfbd1e4caba58c3d396605c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c72de24d4da84e84b93940480c20468a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -152,10 +152,11 @@ MonoBehaviour:
   lowEnergyMode: 0
   lowEnergyModeMulltiplier: 0.5
   isBeingUsed: 0
-  gyroscopeDecalibration: 0
+  gyroscopeCalibration: 1
+  gyroscopeDecalibrationStep: 0.05
   decalibrationMultiplier: 0
   minCooldown: 2
   maxCooldown: 10
-  coordinatesShiftDistance: 0.1
-  shootingModule: {fileID: 0}
+  destabilizationCooldown: 5
+  cannonModule: {fileID: 0}
   mechBody: {fileID: 0}
