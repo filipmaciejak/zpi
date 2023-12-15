@@ -1,0 +1,149 @@
+\doxysection{Movement\+Module Class Reference}
+\hypertarget{class_movement_module}{}\label{class_movement_module}\index{MovementModule@{MovementModule}}
+Inheritance diagram for Movement\+Module\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_movement_module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_movement_module_a7ace5266d8d42caf53a59f49aaef52c1}{Apply\+Step\+Force}} ()
+\item 
+void \mbox{\hyperlink{class_movement_module_a0766055383639b757fbbfd8bca2288e4}{Change\+Step}} (float input)
+\item 
+float \mbox{\hyperlink{class_movement_module_a850b3c6878eb533db96ae2724286c879}{Get\+Speed\+Lever\+Position}} ()
+\item 
+float \mbox{\hyperlink{class_movement_module_aa7aff0c7d8504cb32bc84ad47d6d1acc}{Get\+Rotation\+Slider\+Position}} ()
+\item 
+void \mbox{\hyperlink{class_movement_module_ab30b1ec9f7bbc5798758f33b703e32b1}{Rotate}} ()
+\item 
+void \mbox{\hyperlink{class_movement_module_ae9116c3a20ea57672a15d590b92d7e1a}{Change\+Rotation\+Multiplier}} (float rotation\+Multiplier)
+\item 
+override void \mbox{\hyperlink{class_movement_module_a6c26339a2aa52fead70d3ad23ce2dede}{Perform}} ()
+\item 
+override void \mbox{\hyperlink{class_movement_module_a3593c1e345bce0c4c400c3041e0a5e2f}{Set\+Energy\+Behaviour}} (bool is\+Low\+Energy)
+\item 
+float \mbox{\hyperlink{class_movement_module_a1ec0a7f2660d12b929bb8cc9c8705ed4}{Get\+Rotation\+Speed}} ()
+\item 
+float \mbox{\hyperlink{class_movement_module_afdd1d2e260df782cbeb12dc595d73552}{Get\+Step\+Cooldown}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_module}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_module_adb5d394896f45fa94fc7127d8864cb2a}{Perform}} ()
+\item 
+bool \mbox{\hyperlink{class_module_aea9b34bdd60c1a3f19bb3389f99214cc}{Is\+Being\+Used}} ()
+\item 
+void \mbox{\hyperlink{class_module_a68a34cf20c497e1b781357b503ab7b29}{Start}} ()
+\item 
+void \mbox{\hyperlink{class_module_ad8d43788884131c4d65f777519771dc2}{Consume\+Energy}} ()
+\item 
+void \mbox{\hyperlink{class_module_a4ed7682ae98088c3430cb3a3968d6cc9}{Set\+Energy\+Behaviour}} (bool is\+Low\+Energy)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_module}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccd}{Type}} \{ \newline
+\mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdaea201e58ea6cf23c648e7ba456f4cc4e}{ENERGY\+\_\+\+MODULE}}
+, \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdae48735fa4ea827727182449d81048f96}{SHIELD\+\_\+\+MODULE}}
+, \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdaf4b6e7299f1316d56c5d890948c4cb17}{GYROSCOPE\+\_\+\+MODULE}}
+, \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccda63518e34ab2ea46a9deabe273bfdca9b}{MOVEMENT\+\_\+\+MODULE}}
+, \newline
+\mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccda1acd6576f79b2fa49fd294deb9800d90}{CANNON\+\_\+\+MODULE}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_module}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+Game\+Object \mbox{\hyperlink{class_module_ad65eab00342d7a4fa1b54cc902e0f6ab}{mech}}
+\item 
+Game\+Object \mbox{\hyperlink{class_module_a5bcb8e7fd144c75747e5a908842a807f}{mech\+Manager}}
+\item 
+\mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccd}{Type}} \mbox{\hyperlink{class_module_a4a4a22ffe7b36fbcf53737d8b80063b8}{type}}
+\item 
+bool \mbox{\hyperlink{class_module_a4818a4126834c0f546b52d1b46d99c26}{is\+Being\+Used}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_module}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_mech_main_energy}{Mech\+Main\+Energy}} \mbox{\hyperlink{class_module_a2dea87549d97a4865be1df55c2a86caf}{mech\+Energy}}
+\item 
+bool \mbox{\hyperlink{class_module_ae1b1daf58d645e213e3d88e1770017a2}{low\+Energy\+Mode}} = false
+\item 
+float \mbox{\hyperlink{class_module_a6793eb9bf7cf5cfd89335e6a593e51ff}{low\+Energy\+Mode\+Mulltiplier}} = .\+5f
+\item 
+int \mbox{\hyperlink{class_module_a1c8b6bdb2e8f1b78429d019bf89c769c}{mech\+Id}}
+\item 
+\mbox{\hyperlink{class_module_event_manager}{Module\+Event\+Manager}} \mbox{\hyperlink{class_module_a4acbde321d6c35853025ec48a5d8dfbc}{module\+Event\+Manager}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_movement_module_a7ace5266d8d42caf53a59f49aaef52c1}\label{class_movement_module_a7ace5266d8d42caf53a59f49aaef52c1} 
+\index{MovementModule@{MovementModule}!ApplyStepForce@{ApplyStepForce}}
+\index{ApplyStepForce@{ApplyStepForce}!MovementModule@{MovementModule}}
+\doxysubsubsection{\texorpdfstring{ApplyStepForce()}{ApplyStepForce()}}
+{\footnotesize\ttfamily void Movement\+Module.\+Apply\+Step\+Force (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_movement_module_ae9116c3a20ea57672a15d590b92d7e1a}\label{class_movement_module_ae9116c3a20ea57672a15d590b92d7e1a} 
+\index{MovementModule@{MovementModule}!ChangeRotationMultiplier@{ChangeRotationMultiplier}}
+\index{ChangeRotationMultiplier@{ChangeRotationMultiplier}!MovementModule@{MovementModule}}
+\doxysubsubsection{\texorpdfstring{ChangeRotationMultiplier()}{ChangeRotationMultiplier()}}
+{\footnotesize\ttfamily void Movement\+Module.\+Change\+Rotation\+Multiplier (\begin{DoxyParamCaption}\item[{float}]{rotation\+Multiplier }\end{DoxyParamCaption})}
+
+\Hypertarget{class_movement_module_a0766055383639b757fbbfd8bca2288e4}\label{class_movement_module_a0766055383639b757fbbfd8bca2288e4} 
+\index{MovementModule@{MovementModule}!ChangeStep@{ChangeStep}}
+\index{ChangeStep@{ChangeStep}!MovementModule@{MovementModule}}
+\doxysubsubsection{\texorpdfstring{ChangeStep()}{ChangeStep()}}
+{\footnotesize\ttfamily void Movement\+Module.\+Change\+Step (\begin{DoxyParamCaption}\item[{float}]{input }\end{DoxyParamCaption})}
+
+\Hypertarget{class_movement_module_aa7aff0c7d8504cb32bc84ad47d6d1acc}\label{class_movement_module_aa7aff0c7d8504cb32bc84ad47d6d1acc} 
+\index{MovementModule@{MovementModule}!GetRotationSliderPosition@{GetRotationSliderPosition}}
+\index{GetRotationSliderPosition@{GetRotationSliderPosition}!MovementModule@{MovementModule}}
+\doxysubsubsection{\texorpdfstring{GetRotationSliderPosition()}{GetRotationSliderPosition()}}
+{\footnotesize\ttfamily float Movement\+Module.\+Get\+Rotation\+Slider\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_movement_module_a1ec0a7f2660d12b929bb8cc9c8705ed4}\label{class_movement_module_a1ec0a7f2660d12b929bb8cc9c8705ed4} 
+\index{MovementModule@{MovementModule}!GetRotationSpeed@{GetRotationSpeed}}
+\index{GetRotationSpeed@{GetRotationSpeed}!MovementModule@{MovementModule}}
+\doxysubsubsection{\texorpdfstring{GetRotationSpeed()}{GetRotationSpeed()}}
+{\footnotesize\ttfamily float Movement\+Module.\+Get\+Rotation\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_movement_module_a850b3c6878eb533db96ae2724286c879}\label{class_movement_module_a850b3c6878eb533db96ae2724286c879} 
+\index{MovementModule@{MovementModule}!GetSpeedLeverPosition@{GetSpeedLeverPosition}}
+\index{GetSpeedLeverPosition@{GetSpeedLeverPosition}!MovementModule@{MovementModule}}
+\doxysubsubsection{\texorpdfstring{GetSpeedLeverPosition()}{GetSpeedLeverPosition()}}
+{\footnotesize\ttfamily float Movement\+Module.\+Get\+Speed\+Lever\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_movement_module_afdd1d2e260df782cbeb12dc595d73552}\label{class_movement_module_afdd1d2e260df782cbeb12dc595d73552} 
+\index{MovementModule@{MovementModule}!GetStepCooldown@{GetStepCooldown}}
+\index{GetStepCooldown@{GetStepCooldown}!MovementModule@{MovementModule}}
+\doxysubsubsection{\texorpdfstring{GetStepCooldown()}{GetStepCooldown()}}
+{\footnotesize\ttfamily float Movement\+Module.\+Get\+Step\+Cooldown (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_movement_module_a6c26339a2aa52fead70d3ad23ce2dede}\label{class_movement_module_a6c26339a2aa52fead70d3ad23ce2dede} 
+\index{MovementModule@{MovementModule}!Perform@{Perform}}
+\index{Perform@{Perform}!MovementModule@{MovementModule}}
+\doxysubsubsection{\texorpdfstring{Perform()}{Perform()}}
+{\footnotesize\ttfamily override void Movement\+Module.\+Perform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_movement_module_ab30b1ec9f7bbc5798758f33b703e32b1}\label{class_movement_module_ab30b1ec9f7bbc5798758f33b703e32b1} 
+\index{MovementModule@{MovementModule}!Rotate@{Rotate}}
+\index{Rotate@{Rotate}!MovementModule@{MovementModule}}
+\doxysubsubsection{\texorpdfstring{Rotate()}{Rotate()}}
+{\footnotesize\ttfamily void Movement\+Module.\+Rotate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_movement_module_a3593c1e345bce0c4c400c3041e0a5e2f}\label{class_movement_module_a3593c1e345bce0c4c400c3041e0a5e2f} 
+\index{MovementModule@{MovementModule}!SetEnergyBehaviour@{SetEnergyBehaviour}}
+\index{SetEnergyBehaviour@{SetEnergyBehaviour}!MovementModule@{MovementModule}}
+\doxysubsubsection{\texorpdfstring{SetEnergyBehaviour()}{SetEnergyBehaviour()}}
+{\footnotesize\ttfamily override void Movement\+Module.\+Set\+Energy\+Behaviour (\begin{DoxyParamCaption}\item[{bool}]{is\+Low\+Energy }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Scripts/\+Modules\+Scripts/\mbox{\hyperlink{_movement_module_8cs}{Movement\+Module.\+cs}}\end{DoxyCompactItemize}

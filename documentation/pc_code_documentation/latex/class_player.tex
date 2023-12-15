@@ -1,0 +1,220 @@
+\doxysection{Player Class Reference}
+\hypertarget{class_player}{}\label{class_player}\index{Player@{Player}}
+Inheritance diagram for Player\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_player}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_player_aa13f3c419091b9faacac7ee3998af2e8}{Update\+Move\+Input}} (float input)
+\item 
+void \mbox{\hyperlink{class_player_aa33343ce99578e13c6ad89383a8abe42}{Update\+Vertical\+Input}} (float input)
+\item 
+bool \mbox{\hyperlink{class_player_aa8e0cb370771acf515860459b3253a11}{Is\+On\+Ladder}} ()
+\item 
+void \mbox{\hyperlink{class_player_ac19e00e62db1a56f41725c1f61c95fe8}{Jump\+Start}} ()
+\item 
+void \mbox{\hyperlink{class_player_a689d6b007b09f694a246fe806bef7d5f}{Jump}} ()
+\item 
+void \mbox{\hyperlink{class_player_a85480c830519827fafb43fc3f3a6f9bb}{Jump\+End}} ()
+\item 
+bool \mbox{\hyperlink{class_player_a862787dd532cdda4c1d1adb70cfae274}{Interact}} ()
+\item 
+void \mbox{\hyperlink{class_player_aa711071e163c9fd41cc211a2c1dd0c61}{Finish\+Interaction}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_player_a07b4ac9f3d9d49009686369ef9fbe658}{team\+Id}}
+\item 
+int \mbox{\hyperlink{class_player_a20bc55269068f17fd82a8dd9b6be2ddd}{index\+Of\+Player\+Id\+In\+Team}}
+\item 
+Color \mbox{\hyperlink{class_player_a22df5a5ea606cb668449da8d24afbafc}{color}}
+\item 
+float \mbox{\hyperlink{class_player_aeb49f43f1ede71106350b2480c38c2d1}{max\+Speed}} = 2f
+\item 
+float \mbox{\hyperlink{class_player_ac5ed2d9e2899df52d182410eaf6db0be}{move\+Force}} = 10f
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static Color\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_player_a7ca4dcaba765178d86a263932baec78d}{crewmate\+Colors}}
+\item 
+static float \mbox{\hyperlink{class_player_a08c2f0cdb8bd6aadd9639b7edbe6a5be}{time\+To\+Apex}} = 4f
+\item 
+static float \mbox{\hyperlink{class_player_a3dd78f500bb66b1ffeb0439a2f8e549d}{time\+Of\+Falling}} = 2f
+\item 
+static float \mbox{\hyperlink{class_player_a771880f572d491f8cca66a2da42ca27d}{jump\+Height}} = 20f
+\item 
+static float \mbox{\hyperlink{class_player_a76f8c7c3122b6478ef9e72490b2000e3}{jump\+Buffering}} = 0.\+1f
+\item 
+static float \mbox{\hyperlink{class_player_a0ff7b63b9c4164c6c15072e3e6ee1575}{coyote\+Time}} = 0.\+1f
+\item 
+static float \mbox{\hyperlink{class_player_a06d6258f58bec301a97098e5aa960b69}{dead\+Zone}} = 0.\+1f
+\item 
+static float \mbox{\hyperlink{class_player_adba1be169099b6258adee7a351da1fa6}{max\+Zone}} = 0.\+4f
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_module}{Module}} \mbox{\hyperlink{class_player_ac913ae1b85fef893591d8bc01f44262f}{used\+Module}} = null\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_aa711071e163c9fd41cc211a2c1dd0c61}\label{class_player_aa711071e163c9fd41cc211a2c1dd0c61} 
+\index{Player@{Player}!FinishInteraction@{FinishInteraction}}
+\index{FinishInteraction@{FinishInteraction}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{FinishInteraction()}{FinishInteraction()}}
+{\footnotesize\ttfamily void Player.\+Finish\+Interaction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_a862787dd532cdda4c1d1adb70cfae274}\label{class_player_a862787dd532cdda4c1d1adb70cfae274} 
+\index{Player@{Player}!Interact@{Interact}}
+\index{Interact@{Interact}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Interact()}{Interact()}}
+{\footnotesize\ttfamily bool Player.\+Interact (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_aa8e0cb370771acf515860459b3253a11}\label{class_player_aa8e0cb370771acf515860459b3253a11} 
+\index{Player@{Player}!IsOnLadder@{IsOnLadder}}
+\index{IsOnLadder@{IsOnLadder}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{IsOnLadder()}{IsOnLadder()}}
+{\footnotesize\ttfamily bool Player.\+Is\+On\+Ladder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_a689d6b007b09f694a246fe806bef7d5f}\label{class_player_a689d6b007b09f694a246fe806bef7d5f} 
+\index{Player@{Player}!Jump@{Jump}}
+\index{Jump@{Jump}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Jump()}{Jump()}}
+{\footnotesize\ttfamily void Player.\+Jump (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_a85480c830519827fafb43fc3f3a6f9bb}\label{class_player_a85480c830519827fafb43fc3f3a6f9bb} 
+\index{Player@{Player}!JumpEnd@{JumpEnd}}
+\index{JumpEnd@{JumpEnd}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{JumpEnd()}{JumpEnd()}}
+{\footnotesize\ttfamily void Player.\+Jump\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_ac19e00e62db1a56f41725c1f61c95fe8}\label{class_player_ac19e00e62db1a56f41725c1f61c95fe8} 
+\index{Player@{Player}!JumpStart@{JumpStart}}
+\index{JumpStart@{JumpStart}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{JumpStart()}{JumpStart()}}
+{\footnotesize\ttfamily void Player.\+Jump\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_aa13f3c419091b9faacac7ee3998af2e8}\label{class_player_aa13f3c419091b9faacac7ee3998af2e8} 
+\index{Player@{Player}!UpdateMoveInput@{UpdateMoveInput}}
+\index{UpdateMoveInput@{UpdateMoveInput}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{UpdateMoveInput()}{UpdateMoveInput()}}
+{\footnotesize\ttfamily void Player.\+Update\+Move\+Input (\begin{DoxyParamCaption}\item[{float}]{input }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_aa33343ce99578e13c6ad89383a8abe42}\label{class_player_aa33343ce99578e13c6ad89383a8abe42} 
+\index{Player@{Player}!UpdateVerticalInput@{UpdateVerticalInput}}
+\index{UpdateVerticalInput@{UpdateVerticalInput}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{UpdateVerticalInput()}{UpdateVerticalInput()}}
+{\footnotesize\ttfamily void Player.\+Update\+Vertical\+Input (\begin{DoxyParamCaption}\item[{float}]{input }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_player_a22df5a5ea606cb668449da8d24afbafc}\label{class_player_a22df5a5ea606cb668449da8d24afbafc} 
+\index{Player@{Player}!color@{color}}
+\index{color@{color}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily Color Player.\+color}
+
+\Hypertarget{class_player_a0ff7b63b9c4164c6c15072e3e6ee1575}\label{class_player_a0ff7b63b9c4164c6c15072e3e6ee1575} 
+\index{Player@{Player}!coyoteTime@{coyoteTime}}
+\index{coyoteTime@{coyoteTime}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{coyoteTime}{coyoteTime}}
+{\footnotesize\ttfamily float Player.\+coyote\+Time = 0.\+1f\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_player_a7ca4dcaba765178d86a263932baec78d}\label{class_player_a7ca4dcaba765178d86a263932baec78d} 
+\index{Player@{Player}!crewmateColors@{crewmateColors}}
+\index{crewmateColors@{crewmateColors}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{crewmateColors}{crewmateColors}}
+{\footnotesize\ttfamily Color \mbox{[}$\,$\mbox{]} Player.\+crewmate\+Colors\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Color(1f,\ 0f,\ 0f),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Color(0f,\ 0f,\ 1f),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Color(0f,\ 1f,\ 0f),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Color(1f,\ 1f,\ 0f)}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_player_a06d6258f58bec301a97098e5aa960b69}\label{class_player_a06d6258f58bec301a97098e5aa960b69} 
+\index{Player@{Player}!deadZone@{deadZone}}
+\index{deadZone@{deadZone}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{deadZone}{deadZone}}
+{\footnotesize\ttfamily float Player.\+dead\+Zone = 0.\+1f\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_player_a20bc55269068f17fd82a8dd9b6be2ddd}\label{class_player_a20bc55269068f17fd82a8dd9b6be2ddd} 
+\index{Player@{Player}!indexOfPlayerIdInTeam@{indexOfPlayerIdInTeam}}
+\index{indexOfPlayerIdInTeam@{indexOfPlayerIdInTeam}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{indexOfPlayerIdInTeam}{indexOfPlayerIdInTeam}}
+{\footnotesize\ttfamily int Player.\+index\+Of\+Player\+Id\+In\+Team}
+
+\Hypertarget{class_player_a76f8c7c3122b6478ef9e72490b2000e3}\label{class_player_a76f8c7c3122b6478ef9e72490b2000e3} 
+\index{Player@{Player}!jumpBuffering@{jumpBuffering}}
+\index{jumpBuffering@{jumpBuffering}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{jumpBuffering}{jumpBuffering}}
+{\footnotesize\ttfamily float Player.\+jump\+Buffering = 0.\+1f\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_player_a771880f572d491f8cca66a2da42ca27d}\label{class_player_a771880f572d491f8cca66a2da42ca27d} 
+\index{Player@{Player}!jumpHeight@{jumpHeight}}
+\index{jumpHeight@{jumpHeight}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{jumpHeight}{jumpHeight}}
+{\footnotesize\ttfamily float Player.\+jump\+Height = 20f\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_player_aeb49f43f1ede71106350b2480c38c2d1}\label{class_player_aeb49f43f1ede71106350b2480c38c2d1} 
+\index{Player@{Player}!maxSpeed@{maxSpeed}}
+\index{maxSpeed@{maxSpeed}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{maxSpeed}{maxSpeed}}
+{\footnotesize\ttfamily float Player.\+max\+Speed = 2f}
+
+\Hypertarget{class_player_adba1be169099b6258adee7a351da1fa6}\label{class_player_adba1be169099b6258adee7a351da1fa6} 
+\index{Player@{Player}!maxZone@{maxZone}}
+\index{maxZone@{maxZone}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{maxZone}{maxZone}}
+{\footnotesize\ttfamily float Player.\+max\+Zone = 0.\+4f\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_player_ac5ed2d9e2899df52d182410eaf6db0be}\label{class_player_ac5ed2d9e2899df52d182410eaf6db0be} 
+\index{Player@{Player}!moveForce@{moveForce}}
+\index{moveForce@{moveForce}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{moveForce}{moveForce}}
+{\footnotesize\ttfamily float Player.\+move\+Force = 10f}
+
+\Hypertarget{class_player_a07b4ac9f3d9d49009686369ef9fbe658}\label{class_player_a07b4ac9f3d9d49009686369ef9fbe658} 
+\index{Player@{Player}!teamId@{teamId}}
+\index{teamId@{teamId}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{teamId}{teamId}}
+{\footnotesize\ttfamily int Player.\+team\+Id}
+
+\Hypertarget{class_player_a3dd78f500bb66b1ffeb0439a2f8e549d}\label{class_player_a3dd78f500bb66b1ffeb0439a2f8e549d} 
+\index{Player@{Player}!timeOfFalling@{timeOfFalling}}
+\index{timeOfFalling@{timeOfFalling}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{timeOfFalling}{timeOfFalling}}
+{\footnotesize\ttfamily float Player.\+time\+Of\+Falling = 2f\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_player_a08c2f0cdb8bd6aadd9639b7edbe6a5be}\label{class_player_a08c2f0cdb8bd6aadd9639b7edbe6a5be} 
+\index{Player@{Player}!timeToApex@{timeToApex}}
+\index{timeToApex@{timeToApex}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{timeToApex}{timeToApex}}
+{\footnotesize\ttfamily float Player.\+time\+To\+Apex = 4f\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_player_ac913ae1b85fef893591d8bc01f44262f}\label{class_player_ac913ae1b85fef893591d8bc01f44262f} 
+\index{Player@{Player}!usedModule@{usedModule}}
+\index{usedModule@{usedModule}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{usedModule}{usedModule}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_module}{Module}} Player.\+used\+Module = null\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Scripts/\mbox{\hyperlink{_player_8cs}{Player.\+cs}}\end{DoxyCompactItemize}

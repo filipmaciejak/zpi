@@ -1,0 +1,183 @@
+\doxysection{Module Class Reference}
+\hypertarget{class_module}{}\label{class_module}\index{Module@{Module}}
+Inheritance diagram for Module\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.666667cm]{class_module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccd}{Type}} \{ \newline
+\mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdaea201e58ea6cf23c648e7ba456f4cc4e}{ENERGY\+\_\+\+MODULE}}
+, \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdae48735fa4ea827727182449d81048f96}{SHIELD\+\_\+\+MODULE}}
+, \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdaf4b6e7299f1316d56c5d890948c4cb17}{GYROSCOPE\+\_\+\+MODULE}}
+, \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccda63518e34ab2ea46a9deabe273bfdca9b}{MOVEMENT\+\_\+\+MODULE}}
+, \newline
+\mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccda1acd6576f79b2fa49fd294deb9800d90}{CANNON\+\_\+\+MODULE}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_module_adb5d394896f45fa94fc7127d8864cb2a}{Perform}} ()
+\item 
+bool \mbox{\hyperlink{class_module_aea9b34bdd60c1a3f19bb3389f99214cc}{Is\+Being\+Used}} ()
+\item 
+void \mbox{\hyperlink{class_module_a68a34cf20c497e1b781357b503ab7b29}{Start}} ()
+\item 
+void \mbox{\hyperlink{class_module_ad8d43788884131c4d65f777519771dc2}{Consume\+Energy}} ()
+\item 
+void \mbox{\hyperlink{class_module_a4ed7682ae98088c3430cb3a3968d6cc9}{Set\+Energy\+Behaviour}} (bool is\+Low\+Energy)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Game\+Object \mbox{\hyperlink{class_module_ad65eab00342d7a4fa1b54cc902e0f6ab}{mech}}
+\item 
+Game\+Object \mbox{\hyperlink{class_module_a5bcb8e7fd144c75747e5a908842a807f}{mech\+Manager}}
+\item 
+\mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccd}{Type}} \mbox{\hyperlink{class_module_a4a4a22ffe7b36fbcf53737d8b80063b8}{type}}
+\item 
+bool \mbox{\hyperlink{class_module_a4818a4126834c0f546b52d1b46d99c26}{is\+Being\+Used}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_mech_main_energy}{Mech\+Main\+Energy}} \mbox{\hyperlink{class_module_a2dea87549d97a4865be1df55c2a86caf}{mech\+Energy}}
+\item 
+bool \mbox{\hyperlink{class_module_ae1b1daf58d645e213e3d88e1770017a2}{low\+Energy\+Mode}} = false
+\item 
+float \mbox{\hyperlink{class_module_a6793eb9bf7cf5cfd89335e6a593e51ff}{low\+Energy\+Mode\+Mulltiplier}} = .\+5f
+\item 
+int \mbox{\hyperlink{class_module_a1c8b6bdb2e8f1b78429d019bf89c769c}{mech\+Id}}
+\item 
+\mbox{\hyperlink{class_module_event_manager}{Module\+Event\+Manager}} \mbox{\hyperlink{class_module_a4acbde321d6c35853025ec48a5d8dfbc}{module\+Event\+Manager}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccd}\label{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccd} 
+\index{Module@{Module}!Type@{Type}}
+\index{Type@{Type}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccd}{Module.\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ENERGY\_MODULE@{ENERGY\_MODULE}!Module@{Module}}\index{Module@{Module}!ENERGY\_MODULE@{ENERGY\_MODULE}}}\Hypertarget{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdaea201e58ea6cf23c648e7ba456f4cc4e}\label{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdaea201e58ea6cf23c648e7ba456f4cc4e} 
+ENERGY\+\_\+\+MODULE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SHIELD\_MODULE@{SHIELD\_MODULE}!Module@{Module}}\index{Module@{Module}!SHIELD\_MODULE@{SHIELD\_MODULE}}}\Hypertarget{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdae48735fa4ea827727182449d81048f96}\label{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdae48735fa4ea827727182449d81048f96} 
+SHIELD\+\_\+\+MODULE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GYROSCOPE\_MODULE@{GYROSCOPE\_MODULE}!Module@{Module}}\index{Module@{Module}!GYROSCOPE\_MODULE@{GYROSCOPE\_MODULE}}}\Hypertarget{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdaf4b6e7299f1316d56c5d890948c4cb17}\label{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdaf4b6e7299f1316d56c5d890948c4cb17} 
+GYROSCOPE\+\_\+\+MODULE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOVEMENT\_MODULE@{MOVEMENT\_MODULE}!Module@{Module}}\index{Module@{Module}!MOVEMENT\_MODULE@{MOVEMENT\_MODULE}}}\Hypertarget{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccda63518e34ab2ea46a9deabe273bfdca9b}\label{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccda63518e34ab2ea46a9deabe273bfdca9b} 
+MOVEMENT\+\_\+\+MODULE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CANNON\_MODULE@{CANNON\_MODULE}!Module@{Module}}\index{Module@{Module}!CANNON\_MODULE@{CANNON\_MODULE}}}\Hypertarget{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccda1acd6576f79b2fa49fd294deb9800d90}\label{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccda1acd6576f79b2fa49fd294deb9800d90} 
+CANNON\+\_\+\+MODULE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_module_ad8d43788884131c4d65f777519771dc2}\label{class_module_ad8d43788884131c4d65f777519771dc2} 
+\index{Module@{Module}!ConsumeEnergy@{ConsumeEnergy}}
+\index{ConsumeEnergy@{ConsumeEnergy}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{ConsumeEnergy()}{ConsumeEnergy()}}
+{\footnotesize\ttfamily void Module.\+Consume\+Energy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_aea9b34bdd60c1a3f19bb3389f99214cc}\label{class_module_aea9b34bdd60c1a3f19bb3389f99214cc} 
+\index{Module@{Module}!IsBeingUsed@{IsBeingUsed}}
+\index{IsBeingUsed@{IsBeingUsed}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{IsBeingUsed()}{IsBeingUsed()}}
+{\footnotesize\ttfamily bool Module.\+Is\+Being\+Used (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_adb5d394896f45fa94fc7127d8864cb2a}\label{class_module_adb5d394896f45fa94fc7127d8864cb2a} 
+\index{Module@{Module}!Perform@{Perform}}
+\index{Perform@{Perform}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Perform()}{Perform()}}
+{\footnotesize\ttfamily void Module.\+Perform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+\Hypertarget{class_module_a4ed7682ae98088c3430cb3a3968d6cc9}\label{class_module_a4ed7682ae98088c3430cb3a3968d6cc9} 
+\index{Module@{Module}!SetEnergyBehaviour@{SetEnergyBehaviour}}
+\index{SetEnergyBehaviour@{SetEnergyBehaviour}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{SetEnergyBehaviour()}{SetEnergyBehaviour()}}
+{\footnotesize\ttfamily void Module.\+Set\+Energy\+Behaviour (\begin{DoxyParamCaption}\item[{bool}]{is\+Low\+Energy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+\Hypertarget{class_module_a68a34cf20c497e1b781357b503ab7b29}\label{class_module_a68a34cf20c497e1b781357b503ab7b29} 
+\index{Module@{Module}!Start@{Start}}
+\index{Start@{Start}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily void Module.\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_module_a4818a4126834c0f546b52d1b46d99c26}\label{class_module_a4818a4126834c0f546b52d1b46d99c26} 
+\index{Module@{Module}!isBeingUsed@{isBeingUsed}}
+\index{isBeingUsed@{isBeingUsed}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{isBeingUsed}{isBeingUsed}}
+{\footnotesize\ttfamily bool Module.\+is\+Being\+Used = false}
+
+\Hypertarget{class_module_ae1b1daf58d645e213e3d88e1770017a2}\label{class_module_ae1b1daf58d645e213e3d88e1770017a2} 
+\index{Module@{Module}!lowEnergyMode@{lowEnergyMode}}
+\index{lowEnergyMode@{lowEnergyMode}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{lowEnergyMode}{lowEnergyMode}}
+{\footnotesize\ttfamily bool Module.\+low\+Energy\+Mode = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_module_a6793eb9bf7cf5cfd89335e6a593e51ff}\label{class_module_a6793eb9bf7cf5cfd89335e6a593e51ff} 
+\index{Module@{Module}!lowEnergyModeMulltiplier@{lowEnergyModeMulltiplier}}
+\index{lowEnergyModeMulltiplier@{lowEnergyModeMulltiplier}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{lowEnergyModeMulltiplier}{lowEnergyModeMulltiplier}}
+{\footnotesize\ttfamily float Module.\+low\+Energy\+Mode\+Mulltiplier = .\+5f\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_module_ad65eab00342d7a4fa1b54cc902e0f6ab}\label{class_module_ad65eab00342d7a4fa1b54cc902e0f6ab} 
+\index{Module@{Module}!mech@{mech}}
+\index{mech@{mech}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{mech}{mech}}
+{\footnotesize\ttfamily Game\+Object Module.\+mech}
+
+\Hypertarget{class_module_a2dea87549d97a4865be1df55c2a86caf}\label{class_module_a2dea87549d97a4865be1df55c2a86caf} 
+\index{Module@{Module}!mechEnergy@{mechEnergy}}
+\index{mechEnergy@{mechEnergy}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{mechEnergy}{mechEnergy}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_mech_main_energy}{Mech\+Main\+Energy}} Module.\+mech\+Energy\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_module_a1c8b6bdb2e8f1b78429d019bf89c769c}\label{class_module_a1c8b6bdb2e8f1b78429d019bf89c769c} 
+\index{Module@{Module}!mechId@{mechId}}
+\index{mechId@{mechId}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{mechId}{mechId}}
+{\footnotesize\ttfamily int Module.\+mech\+Id\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_module_a5bcb8e7fd144c75747e5a908842a807f}\label{class_module_a5bcb8e7fd144c75747e5a908842a807f} 
+\index{Module@{Module}!mechManager@{mechManager}}
+\index{mechManager@{mechManager}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{mechManager}{mechManager}}
+{\footnotesize\ttfamily Game\+Object Module.\+mech\+Manager}
+
+\Hypertarget{class_module_a4acbde321d6c35853025ec48a5d8dfbc}\label{class_module_a4acbde321d6c35853025ec48a5d8dfbc} 
+\index{Module@{Module}!moduleEventManager@{moduleEventManager}}
+\index{moduleEventManager@{moduleEventManager}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{moduleEventManager}{moduleEventManager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_module_event_manager}{Module\+Event\+Manager}} Module.\+module\+Event\+Manager\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_module_a4a4a22ffe7b36fbcf53737d8b80063b8}\label{class_module_a4a4a22ffe7b36fbcf53737d8b80063b8} 
+\index{Module@{Module}!type@{type}}
+\index{type@{type}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccd}{Type}} Module.\+type}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Scripts/\mbox{\hyperlink{_module_8cs}{Module.\+cs}}\end{DoxyCompactItemize}

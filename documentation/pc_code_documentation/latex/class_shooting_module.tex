@@ -1,0 +1,133 @@
+\doxysection{Shooting\+Module Class Reference}
+\hypertarget{class_shooting_module}{}\label{class_shooting_module}\index{ShootingModule@{ShootingModule}}
+Inheritance diagram for Shooting\+Module\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_shooting_module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_shooting_module_ad27768d2a6f86be38cca2f38c5874d6a}{Rotate}} ()
+\item 
+void \mbox{\hyperlink{class_shooting_module_a9177928fce52ad1c4a77a70a07d19575}{Shoot}} ()
+\item 
+void \mbox{\hyperlink{class_shooting_module_a37d1f739a50cffe182c491842fe3d2f5}{Change\+Rotation\+Multiplier}} (float input)
+\item 
+float \mbox{\hyperlink{class_shooting_module_a0e7c3db7a2e077392a68b18f36b6b5cc}{Get\+Rotation\+Multiplier}} ()
+\item 
+override void \mbox{\hyperlink{class_shooting_module_a175d7ab90bb130335a96d2b9b340aca3}{Perform}} ()
+\item 
+override void \mbox{\hyperlink{class_shooting_module_a6c6eccb3a3febeeac08564276f7b3d71}{Set\+Energy\+Behaviour}} (bool is\+Low\+Energy)
+\item 
+bool \mbox{\hyperlink{class_shooting_module_a2f71a9a4e8385c358e0d148efb050ab7}{Is\+Cannon\+Loaded}} ()
+\item 
+bool \mbox{\hyperlink{class_shooting_module_ab8e580464a475d822e6558cf3fea37eb}{Is\+Cannon\+Closed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_module}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_module_adb5d394896f45fa94fc7127d8864cb2a}{Perform}} ()
+\item 
+bool \mbox{\hyperlink{class_module_aea9b34bdd60c1a3f19bb3389f99214cc}{Is\+Being\+Used}} ()
+\item 
+void \mbox{\hyperlink{class_module_a68a34cf20c497e1b781357b503ab7b29}{Start}} ()
+\item 
+void \mbox{\hyperlink{class_module_ad8d43788884131c4d65f777519771dc2}{Consume\+Energy}} ()
+\item 
+void \mbox{\hyperlink{class_module_a4ed7682ae98088c3430cb3a3968d6cc9}{Set\+Energy\+Behaviour}} (bool is\+Low\+Energy)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_module}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccd}{Type}} \{ \newline
+\mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdaea201e58ea6cf23c648e7ba456f4cc4e}{ENERGY\+\_\+\+MODULE}}
+, \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdae48735fa4ea827727182449d81048f96}{SHIELD\+\_\+\+MODULE}}
+, \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccdaf4b6e7299f1316d56c5d890948c4cb17}{GYROSCOPE\+\_\+\+MODULE}}
+, \mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccda63518e34ab2ea46a9deabe273bfdca9b}{MOVEMENT\+\_\+\+MODULE}}
+, \newline
+\mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccda1acd6576f79b2fa49fd294deb9800d90}{CANNON\+\_\+\+MODULE}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_module}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+Game\+Object \mbox{\hyperlink{class_module_ad65eab00342d7a4fa1b54cc902e0f6ab}{mech}}
+\item 
+Game\+Object \mbox{\hyperlink{class_module_a5bcb8e7fd144c75747e5a908842a807f}{mech\+Manager}}
+\item 
+\mbox{\hyperlink{class_module_aa9bdbe3fbb5096298ed3a404fb0d2ccd}{Type}} \mbox{\hyperlink{class_module_a4a4a22ffe7b36fbcf53737d8b80063b8}{type}}
+\item 
+bool \mbox{\hyperlink{class_module_a4818a4126834c0f546b52d1b46d99c26}{is\+Being\+Used}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_module}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_mech_main_energy}{Mech\+Main\+Energy}} \mbox{\hyperlink{class_module_a2dea87549d97a4865be1df55c2a86caf}{mech\+Energy}}
+\item 
+bool \mbox{\hyperlink{class_module_ae1b1daf58d645e213e3d88e1770017a2}{low\+Energy\+Mode}} = false
+\item 
+float \mbox{\hyperlink{class_module_a6793eb9bf7cf5cfd89335e6a593e51ff}{low\+Energy\+Mode\+Mulltiplier}} = .\+5f
+\item 
+int \mbox{\hyperlink{class_module_a1c8b6bdb2e8f1b78429d019bf89c769c}{mech\+Id}}
+\item 
+\mbox{\hyperlink{class_module_event_manager}{Module\+Event\+Manager}} \mbox{\hyperlink{class_module_a4acbde321d6c35853025ec48a5d8dfbc}{module\+Event\+Manager}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_shooting_module_a37d1f739a50cffe182c491842fe3d2f5}\label{class_shooting_module_a37d1f739a50cffe182c491842fe3d2f5} 
+\index{ShootingModule@{ShootingModule}!ChangeRotationMultiplier@{ChangeRotationMultiplier}}
+\index{ChangeRotationMultiplier@{ChangeRotationMultiplier}!ShootingModule@{ShootingModule}}
+\doxysubsubsection{\texorpdfstring{ChangeRotationMultiplier()}{ChangeRotationMultiplier()}}
+{\footnotesize\ttfamily void Shooting\+Module.\+Change\+Rotation\+Multiplier (\begin{DoxyParamCaption}\item[{float}]{input }\end{DoxyParamCaption})}
+
+\Hypertarget{class_shooting_module_a0e7c3db7a2e077392a68b18f36b6b5cc}\label{class_shooting_module_a0e7c3db7a2e077392a68b18f36b6b5cc} 
+\index{ShootingModule@{ShootingModule}!GetRotationMultiplier@{GetRotationMultiplier}}
+\index{GetRotationMultiplier@{GetRotationMultiplier}!ShootingModule@{ShootingModule}}
+\doxysubsubsection{\texorpdfstring{GetRotationMultiplier()}{GetRotationMultiplier()}}
+{\footnotesize\ttfamily float Shooting\+Module.\+Get\+Rotation\+Multiplier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_shooting_module_ab8e580464a475d822e6558cf3fea37eb}\label{class_shooting_module_ab8e580464a475d822e6558cf3fea37eb} 
+\index{ShootingModule@{ShootingModule}!IsCannonClosed@{IsCannonClosed}}
+\index{IsCannonClosed@{IsCannonClosed}!ShootingModule@{ShootingModule}}
+\doxysubsubsection{\texorpdfstring{IsCannonClosed()}{IsCannonClosed()}}
+{\footnotesize\ttfamily bool Shooting\+Module.\+Is\+Cannon\+Closed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_shooting_module_a2f71a9a4e8385c358e0d148efb050ab7}\label{class_shooting_module_a2f71a9a4e8385c358e0d148efb050ab7} 
+\index{ShootingModule@{ShootingModule}!IsCannonLoaded@{IsCannonLoaded}}
+\index{IsCannonLoaded@{IsCannonLoaded}!ShootingModule@{ShootingModule}}
+\doxysubsubsection{\texorpdfstring{IsCannonLoaded()}{IsCannonLoaded()}}
+{\footnotesize\ttfamily bool Shooting\+Module.\+Is\+Cannon\+Loaded (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_shooting_module_a175d7ab90bb130335a96d2b9b340aca3}\label{class_shooting_module_a175d7ab90bb130335a96d2b9b340aca3} 
+\index{ShootingModule@{ShootingModule}!Perform@{Perform}}
+\index{Perform@{Perform}!ShootingModule@{ShootingModule}}
+\doxysubsubsection{\texorpdfstring{Perform()}{Perform()}}
+{\footnotesize\ttfamily override void Shooting\+Module.\+Perform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_shooting_module_ad27768d2a6f86be38cca2f38c5874d6a}\label{class_shooting_module_ad27768d2a6f86be38cca2f38c5874d6a} 
+\index{ShootingModule@{ShootingModule}!Rotate@{Rotate}}
+\index{Rotate@{Rotate}!ShootingModule@{ShootingModule}}
+\doxysubsubsection{\texorpdfstring{Rotate()}{Rotate()}}
+{\footnotesize\ttfamily void Shooting\+Module.\+Rotate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_shooting_module_a6c6eccb3a3febeeac08564276f7b3d71}\label{class_shooting_module_a6c6eccb3a3febeeac08564276f7b3d71} 
+\index{ShootingModule@{ShootingModule}!SetEnergyBehaviour@{SetEnergyBehaviour}}
+\index{SetEnergyBehaviour@{SetEnergyBehaviour}!ShootingModule@{ShootingModule}}
+\doxysubsubsection{\texorpdfstring{SetEnergyBehaviour()}{SetEnergyBehaviour()}}
+{\footnotesize\ttfamily override void Shooting\+Module.\+Set\+Energy\+Behaviour (\begin{DoxyParamCaption}\item[{bool}]{is\+Low\+Energy }\end{DoxyParamCaption})}
+
+\Hypertarget{class_shooting_module_a9177928fce52ad1c4a77a70a07d19575}\label{class_shooting_module_a9177928fce52ad1c4a77a70a07d19575} 
+\index{ShootingModule@{ShootingModule}!Shoot@{Shoot}}
+\index{Shoot@{Shoot}!ShootingModule@{ShootingModule}}
+\doxysubsubsection{\texorpdfstring{Shoot()}{Shoot()}}
+{\footnotesize\ttfamily void Shooting\+Module.\+Shoot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Scripts/\+Modules\+Scripts/\mbox{\hyperlink{_shooting_module_8cs}{Shooting\+Module.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,103 @@
+\doxysection{Client\+Manager Class Reference}
+\hypertarget{class_client_manager}{}\label{class_client_manager}\index{ClientManager@{ClientManager}}
+Inheritance diagram for Client\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_client_manager}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_client_manager_afd186d099312116401a9a5ac8b438252}{On\+Destroy}} ()
+\item 
+void \mbox{\hyperlink{class_client_manager_a866d5a634d2d5c137e7d04c16cd97f0f}{Send\+Client\+Message}} (byte\mbox{[}$\,$\mbox{]} message)
+\item 
+void \mbox{\hyperlink{class_client_manager_a54832e1829bc01b48a49f158ff7d9ca7}{Send\+Dict}} (Dictionary$<$ string, string $>$ dict)
+\item 
+void \mbox{\hyperlink{class_client_manager_afcf1e832d3e71e09be58f760b981c1ed}{Connect\+To\+Ip}} (string ip\+Address)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_client_manager_a808357f29f08b5da5935b00a9be61009}{player\+Id}} = -\/1
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ Dictionary$<$ string, string $>$ $>$ \mbox{\hyperlink{class_client_manager_a4bf958f09762eb30a6d20fcda26a4980}{Start\+Minigame}}
+\item 
+Action$<$ Dictionary$<$ string, string $>$ $>$ \mbox{\hyperlink{class_client_manager_a1d0634dec11baaccda108c521b1b8eda}{Update\+Minigame}}
+\item 
+Action \mbox{\hyperlink{class_client_manager_ad43ff55f624c8125b398fba90b0ca45b}{Connect}}
+\item 
+Action \mbox{\hyperlink{class_client_manager_afabd28a956925a144054df5514e143f2}{Disconnect}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_client_manager_afcf1e832d3e71e09be58f760b981c1ed}\label{class_client_manager_afcf1e832d3e71e09be58f760b981c1ed} 
+\index{ClientManager@{ClientManager}!ConnectToIp@{ConnectToIp}}
+\index{ConnectToIp@{ConnectToIp}!ClientManager@{ClientManager}}
+\doxysubsubsection{\texorpdfstring{ConnectToIp()}{ConnectToIp()}}
+{\footnotesize\ttfamily void Client\+Manager.\+Connect\+To\+Ip (\begin{DoxyParamCaption}\item[{string}]{ip\+Address }\end{DoxyParamCaption})}
+
+\Hypertarget{class_client_manager_afd186d099312116401a9a5ac8b438252}\label{class_client_manager_afd186d099312116401a9a5ac8b438252} 
+\index{ClientManager@{ClientManager}!OnDestroy@{OnDestroy}}
+\index{OnDestroy@{OnDestroy}!ClientManager@{ClientManager}}
+\doxysubsubsection{\texorpdfstring{OnDestroy()}{OnDestroy()}}
+{\footnotesize\ttfamily void Client\+Manager.\+On\+Destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_client_manager_a866d5a634d2d5c137e7d04c16cd97f0f}\label{class_client_manager_a866d5a634d2d5c137e7d04c16cd97f0f} 
+\index{ClientManager@{ClientManager}!SendClientMessage@{SendClientMessage}}
+\index{SendClientMessage@{SendClientMessage}!ClientManager@{ClientManager}}
+\doxysubsubsection{\texorpdfstring{SendClientMessage()}{SendClientMessage()}}
+{\footnotesize\ttfamily void Client\+Manager.\+Send\+Client\+Message (\begin{DoxyParamCaption}\item[{byte\mbox{[}$\,$\mbox{]}}]{message }\end{DoxyParamCaption})}
+
+\Hypertarget{class_client_manager_a54832e1829bc01b48a49f158ff7d9ca7}\label{class_client_manager_a54832e1829bc01b48a49f158ff7d9ca7} 
+\index{ClientManager@{ClientManager}!SendDict@{SendDict}}
+\index{SendDict@{SendDict}!ClientManager@{ClientManager}}
+\doxysubsubsection{\texorpdfstring{SendDict()}{SendDict()}}
+{\footnotesize\ttfamily void Client\+Manager.\+Send\+Dict (\begin{DoxyParamCaption}\item[{Dictionary$<$ string, string $>$}]{dict }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_client_manager_a808357f29f08b5da5935b00a9be61009}\label{class_client_manager_a808357f29f08b5da5935b00a9be61009} 
+\index{ClientManager@{ClientManager}!playerId@{playerId}}
+\index{playerId@{playerId}!ClientManager@{ClientManager}}
+\doxysubsubsection{\texorpdfstring{playerId}{playerId}}
+{\footnotesize\ttfamily int Client\+Manager.\+player\+Id = -\/1}
+
+
+
+\doxysubsection{Event Documentation}
+\Hypertarget{class_client_manager_ad43ff55f624c8125b398fba90b0ca45b}\label{class_client_manager_ad43ff55f624c8125b398fba90b0ca45b} 
+\index{ClientManager@{ClientManager}!Connect@{Connect}}
+\index{Connect@{Connect}!ClientManager@{ClientManager}}
+\doxysubsubsection{\texorpdfstring{Connect}{Connect}}
+{\footnotesize\ttfamily Action Client\+Manager.\+Connect}
+
+\Hypertarget{class_client_manager_afabd28a956925a144054df5514e143f2}\label{class_client_manager_afabd28a956925a144054df5514e143f2} 
+\index{ClientManager@{ClientManager}!Disconnect@{Disconnect}}
+\index{Disconnect@{Disconnect}!ClientManager@{ClientManager}}
+\doxysubsubsection{\texorpdfstring{Disconnect}{Disconnect}}
+{\footnotesize\ttfamily Action Client\+Manager.\+Disconnect}
+
+\Hypertarget{class_client_manager_a4bf958f09762eb30a6d20fcda26a4980}\label{class_client_manager_a4bf958f09762eb30a6d20fcda26a4980} 
+\index{ClientManager@{ClientManager}!StartMinigame@{StartMinigame}}
+\index{StartMinigame@{StartMinigame}!ClientManager@{ClientManager}}
+\doxysubsubsection{\texorpdfstring{StartMinigame}{StartMinigame}}
+{\footnotesize\ttfamily Action$<$Dictionary$<$string, string$>$ $>$ Client\+Manager.\+Start\+Minigame}
+
+\Hypertarget{class_client_manager_a1d0634dec11baaccda108c521b1b8eda}\label{class_client_manager_a1d0634dec11baaccda108c521b1b8eda} 
+\index{ClientManager@{ClientManager}!UpdateMinigame@{UpdateMinigame}}
+\index{UpdateMinigame@{UpdateMinigame}!ClientManager@{ClientManager}}
+\doxysubsubsection{\texorpdfstring{UpdateMinigame}{UpdateMinigame}}
+{\footnotesize\ttfamily Action$<$Dictionary$<$string, string$>$ $>$ Client\+Manager.\+Update\+Minigame}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/kamil/zpi/mobile/\+Assets/\+Scripts/\mbox{\hyperlink{_unity_transport_client_manager_8cs}{Unity\+Transport\+Client\+Manager.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,85 @@
+\doxysection{Mech\+State Class Reference}
+\hypertarget{class_mech_state}{}\label{class_mech_state}\index{MechState@{MechState}}
+Inheritance diagram for Mech\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_mech_state}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_mech_state_a0fafe358725f29032d562fe07f7fc7d3}{Get\+Damaged}} (int damage)
+\item 
+void \mbox{\hyperlink{class_mech_state_a1fd83df8b67959b22a108d879e8fc66f}{Die}} ()
+\item 
+void \mbox{\hyperlink{class_mech_state_aa61a8368639578b884610c7b5bcf1e1f}{Track\+Recent\+Damage}} (int damage)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Unity\+Event$<$ int $>$ \mbox{\hyperlink{class_mech_state_a3816af49490c37f4045a639be9278dfb}{on\+Mech\+Death}}
+\item 
+Unity\+Event$<$ int $>$ \mbox{\hyperlink{class_mech_state_a85512f8f718fdd3b324661702304a675}{on\+Hull\+Breach}}
+\item 
+int \mbox{\hyperlink{class_mech_state_afe2879b59ce2f2c1f098da57224f92dc}{team\+Id}}
+\item 
+int \mbox{\hyperlink{class_mech_state_af18b723b52d9c3278062bee63e6e5824}{mech\+Lives}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_mech_state_a1fd83df8b67959b22a108d879e8fc66f}\label{class_mech_state_a1fd83df8b67959b22a108d879e8fc66f} 
+\index{MechState@{MechState}!Die@{Die}}
+\index{Die@{Die}!MechState@{MechState}}
+\doxysubsubsection{\texorpdfstring{Die()}{Die()}}
+{\footnotesize\ttfamily void Mech\+State.\+Die (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_mech_state_a0fafe358725f29032d562fe07f7fc7d3}\label{class_mech_state_a0fafe358725f29032d562fe07f7fc7d3} 
+\index{MechState@{MechState}!GetDamaged@{GetDamaged}}
+\index{GetDamaged@{GetDamaged}!MechState@{MechState}}
+\doxysubsubsection{\texorpdfstring{GetDamaged()}{GetDamaged()}}
+{\footnotesize\ttfamily void Mech\+State.\+Get\+Damaged (\begin{DoxyParamCaption}\item[{int}]{damage }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interface_i_damagable_afd4296e4c1e1915b6fc6cef00598c043}{IDamagable}}.
+
+\Hypertarget{class_mech_state_aa61a8368639578b884610c7b5bcf1e1f}\label{class_mech_state_aa61a8368639578b884610c7b5bcf1e1f} 
+\index{MechState@{MechState}!TrackRecentDamage@{TrackRecentDamage}}
+\index{TrackRecentDamage@{TrackRecentDamage}!MechState@{MechState}}
+\doxysubsubsection{\texorpdfstring{TrackRecentDamage()}{TrackRecentDamage()}}
+{\footnotesize\ttfamily void Mech\+State.\+Track\+Recent\+Damage (\begin{DoxyParamCaption}\item[{int}]{damage }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_mech_state_af18b723b52d9c3278062bee63e6e5824}\label{class_mech_state_af18b723b52d9c3278062bee63e6e5824} 
+\index{MechState@{MechState}!mechLives@{mechLives}}
+\index{mechLives@{mechLives}!MechState@{MechState}}
+\doxysubsubsection{\texorpdfstring{mechLives}{mechLives}}
+{\footnotesize\ttfamily int Mech\+State.\+mech\+Lives}
+
+\Hypertarget{class_mech_state_a85512f8f718fdd3b324661702304a675}\label{class_mech_state_a85512f8f718fdd3b324661702304a675} 
+\index{MechState@{MechState}!onHullBreach@{onHullBreach}}
+\index{onHullBreach@{onHullBreach}!MechState@{MechState}}
+\doxysubsubsection{\texorpdfstring{onHullBreach}{onHullBreach}}
+{\footnotesize\ttfamily Unity\+Event$<$int$>$ Mech\+State.\+on\+Hull\+Breach}
+
+\Hypertarget{class_mech_state_a3816af49490c37f4045a639be9278dfb}\label{class_mech_state_a3816af49490c37f4045a639be9278dfb} 
+\index{MechState@{MechState}!onMechDeath@{onMechDeath}}
+\index{onMechDeath@{onMechDeath}!MechState@{MechState}}
+\doxysubsubsection{\texorpdfstring{onMechDeath}{onMechDeath}}
+{\footnotesize\ttfamily Unity\+Event$<$int$>$ Mech\+State.\+on\+Mech\+Death}
+
+\Hypertarget{class_mech_state_afe2879b59ce2f2c1f098da57224f92dc}\label{class_mech_state_afe2879b59ce2f2c1f098da57224f92dc} 
+\index{MechState@{MechState}!teamId@{teamId}}
+\index{teamId@{teamId}!MechState@{MechState}}
+\doxysubsubsection{\texorpdfstring{teamId}{teamId}}
+{\footnotesize\ttfamily int Mech\+State.\+team\+Id}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Scripts/\+Mech\+Scripts/\mbox{\hyperlink{_mech_state_8cs}{Mech\+State.\+cs}}\end{DoxyCompactItemize}
