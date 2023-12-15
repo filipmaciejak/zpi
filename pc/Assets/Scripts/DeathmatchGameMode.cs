@@ -6,6 +6,8 @@ public class DeathmatchGameMode : GameMode
 {
     [SerializeField]
     private int startingLives;
+
+    public GameEndStateObject gameEndStateObject;
     
     void Start()
     {
@@ -35,6 +37,16 @@ public class DeathmatchGameMode : GameMode
         }
         else
         {
+            if (mechId == 0)
+            {
+                Debug.Log("Team 2 wins");
+                gameEndStateObject.gameResult = GameEndStateObject.GameResult.TEAM_2_WIN;
+            }
+            else
+            {
+                Debug.Log("Team 1 wins");
+                gameEndStateObject.gameResult = GameEndStateObject.GameResult.TEAM_1_WIN;
+            }
             GameStateManager.Instance().EndGame();
         }
     }
