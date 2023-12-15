@@ -13,7 +13,8 @@ public class LeaveGameButton : MonoBehaviour
     void OnLeaveClicked()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
-        GameObject eventManager = GameObject.Find("EventManager");
-        Destroy(eventManager);
+        Destroy(GameObject.Find("EventManager"));
+        Destroy(GameObject.Find("ServerManager"));
+        Time.timeScale = 1;
     }
 }
