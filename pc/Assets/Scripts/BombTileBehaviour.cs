@@ -13,10 +13,20 @@ public class BombTileBehaviour: MonoBehaviour
     {
         if (explosionRange > 0)
         {
-            Collider2D[] explosionRadius = Physics2D.OverlapBoxAll(transform.position, new Vector2(explosionRange, explosionRange), 0f, LayerMask.GetMask("Ground"));
+            Collider2D[] explosionRadius = Physics2D.OverlapBoxAll(transform.position, new Vector2(explosionRange, explosionRange), 0f);
             for(int i = 0; i < explosionRadius.Length; i++)
             {
-                (explosionRadius[i].gameObject.GetComponent(typeof(IDamagable)) as IDamagable)?.GetDamaged(damage);
+                IDamagable damagedObject = explosionRadius[i].gameObject.GetComponent(typeof(IDamagable)) as IDamagable;
+
+                if (damagedObject == null)
+                {
+                    Transform parent = explosionRadius[i].gameObject.transform.parent;
+                    if (parent != null)
+                    {
+                        damagedObject = parent.GetComponent(typeof(IDamagable)) as IDamagable;
+                    }
+                }
+                damagedObject?.GetDamaged(damage);
             }
         }
     }

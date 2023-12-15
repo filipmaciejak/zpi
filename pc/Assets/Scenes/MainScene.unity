@@ -301,7 +301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &134635046
 RectTransform:
   m_ObjectHideFlags: 0
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 225173567}
   - component: {fileID: 225173566}
   m_Layer: 11
-  m_Name: Static Sprite (1)
+  m_Name: Ladder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2258,7 +2258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8180824593716559679, guid: b88ea54460993bc47b4efe836d93e172, type: 3}
       propertyPath: m_Name
-      value: Crewmate (1)
+      value: Crewmate2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4184,7 +4184,7 @@ GameObject:
   - component: {fileID: 1019504402}
   - component: {fileID: 1019504401}
   m_Layer: 11
-  m_Name: Static Sprite (2)
+  m_Name: Ladder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6448,10 +6448,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GyroscopeModule (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1418721511030324943, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4321152146030807149, guid: eae00e33c133f19499639cfce8f82605, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.6300125
@@ -6501,10 +6497,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 263600488261755895}
     - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: maxCooldown
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
       propertyPath: mechManager
       value: 
       objectReference: {fileID: 585501317}
@@ -6512,22 +6504,6 @@ PrefabInstance:
       propertyPath: cannonModule
       value: 
       objectReference: {fileID: 1816329757}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: shootingModule
-      value: 
-      objectReference: {fileID: 1816329757}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: gyroscopeCalibration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: decalibrationMultiplier
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: destabilizationCooldown
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6582,20 +6558,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db53a52dab4b0c4ea46e8b205c9dcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 5
-  mapHeight: 5
+  mapWidth: 24
+  mapHeight: 20
   wallPrefab: {fileID: 2209545580675590641, guid: d84b91c092cbfb14fa8ebdd18103d80e, type: 3}
   floorPrefab: {fileID: 490170791979012748, guid: 30ea7c8b872fee84285abee35a7cf2fd, type: 3}
   destructibleWallPrefab: {fileID: 8583810453850939839, guid: c5a18bb58d1a37c46a6230a728820b35, type: 3}
-  destructibleWallSpawnChance: 0.05
+  destructibleWallSpawnChance: 0.08
   trapTilePrefab: {fileID: 252985571924369960, guid: 97667188aab018c47ba1555ad287f186, type: 3}
-  trapTileSpawnChance: 0.05
+  trapTileSpawnChance: 0.08
   impassableObstaclePrefab: {fileID: 7705433732340329099, guid: 7d131e82f6ae4274cb33ccb2fa1dae3b, type: 3}
   impassableObstacleSpawnChance: 0.02
   mech1: {fileID: 1712100641}
   mech2: {fileID: 1429421079}
-  obstaclesSpawnRowRestriction: 2
-  obstaclesSpawnColRestriction: 2
+  obstaclesSpawnRowRestriction: 3
+  obstaclesSpawnColRestriction: 3
 --- !u!1 &1690735273
 GameObject:
   m_ObjectHideFlags: 0
@@ -7514,10 +7490,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GyroscopeModule
       objectReference: {fileID: 0}
-    - target: {fileID: 1418721511030324943, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4321152146030807149, guid: eae00e33c133f19499639cfce8f82605, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.77
@@ -7559,41 +7531,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: mech
-      value: 
-      objectReference: {fileID: 1712100641}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
       propertyPath: mechBody
       value: 
       objectReference: {fileID: 1712100642}
     - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: maxCooldown
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: mechManager
-      value: 
-      objectReference: {fileID: 1969167512}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
       propertyPath: cannonModule
       value: 
       objectReference: {fileID: 94806013}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: shootingModule
-      value: 
-      objectReference: {fileID: 94806013}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: gyroscopeCalibration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: decalibrationMultiplier
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548695177492070189, guid: eae00e33c133f19499639cfce8f82605, type: 3}
-      propertyPath: destabilizationCooldown
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

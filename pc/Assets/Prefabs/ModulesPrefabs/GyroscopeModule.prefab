@@ -154,9 +154,9 @@ MonoBehaviour:
   isBeingUsed: 0
   gyroscopeCalibration: 1
   gyroscopeDecalibrationStep: 0.05
-  decalibrationMultiplier: 0
-  minCooldown: 2
-  maxCooldown: 10
-  destabilizationCooldown: 5
+  decalibrationMultiplier: 15
+  minCooldown: 1
+  maxCooldown: 3
+  destabilizationCooldown: 3
   cannonModule: {fileID: 0}
   mechBody: {fileID: 0}
