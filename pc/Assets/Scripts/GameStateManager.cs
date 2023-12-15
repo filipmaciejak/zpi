@@ -59,7 +59,7 @@ public class GameStateManager : MonoBehaviour
 
     public void EndGame()
     {
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public static GameStateManager Instance()

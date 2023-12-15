@@ -1,18 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LeaveGameButton : MonoBehaviour
+public class MainMenuButton : MonoBehaviour
 {
     void Awake()
     {
         Button button = GetComponent<Button>();
-        button.onClick.AddListener(OnLeaveClicked);
+        button.onClick.AddListener(OnMainMenuClicked);
     }
 
-    void OnLeaveClicked()
+    void OnMainMenuClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 4);
         Destroy(GameObject.Find("EventManager"));
         Destroy(GameObject.Find("ServerManager"));
         Time.timeScale = 1;
